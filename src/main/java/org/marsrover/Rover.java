@@ -10,11 +10,11 @@ public class Rover {
         this.coordonnees = coordonnees;
     }
 
-    public Integer getCoordonneesX() {
+    public int getCoordonneesX() {
         return coordonnees.getX();
     }
 
-    public Integer getCoordonneesY() {
+    public int getCoordonneesY() {
         return coordonnees.getY();
     }
 
@@ -54,38 +54,65 @@ public class Rover {
         return coordonnees;
     }
 
-    public Coordonnees avancer(Direction direction) {
-        switch (direction) {
-            case EAST :
+    private void avancer() {
+        switch (coordonnees.getDirection()) {
+            case EAST -> {
                 coordonnees.setX(coordonnees.getX() + 1);
                 this.coordonnees.setDirection(Direction.EAST);
-            case WEST :
+            }
+            case WEST -> {
                 coordonnees.setX(coordonnees.getX() - 1);
                 this.coordonnees.setDirection(Direction.WEST);
-            case NORTH :
+            }
+            case NORTH -> {
                 coordonnees.setY(coordonnees.getY() + 1);
                 this.coordonnees.setDirection(Direction.NORTH);
-            case SOUTH :
+            }
+            case SOUTH -> {
                 coordonnees.setY(coordonnees.getY() - 1);
                 this.coordonnees.setDirection(Direction.SOUTH);
+            }
         }
-        return coordonnees;
+//        return coordonnees;
     }
 
-    public Coordonnees reculer(Direction direction){
-        switch (direction) {
-            case EAST :
+    private void reculer(){
+        switch (coordonnees.getDirection()) {
+            case EAST -> {
                 coordonnees.setX(coordonnees.getX() - 1);
                 this.coordonnees.setDirection(Direction.EAST);
-            case WEST :
+            }
+            case WEST -> {
                 coordonnees.setX(coordonnees.getX() + 1);
                 this.coordonnees.setDirection(Direction.WEST);
-            case NORTH :
+            }
+            case NORTH -> {
                 coordonnees.setY(coordonnees.getY() - 1);
                 this.coordonnees.setDirection(Direction.NORTH);
-            case SOUTH :
+            }
+            case SOUTH -> {
                 coordonnees.setY(coordonnees.getY() + 1);
                 this.coordonnees.setDirection(Direction.SOUTH);
+            }
+        }
+//        return coordonnees;
+    }
+
+    public Coordonnees move (Direction direction) {
+        if (this.getCoordonneesDirection() == Direction.EAST && direction == Direction.WEST) {
+            reculer();
+        }
+        else if (this.getCoordonneesDirection() == Direction.WEST && direction == Direction.EAST) {
+            reculer();
+        }
+        else if (this.getCoordonneesDirection() == Direction.SOUTH && direction == Direction.NORTH) {
+            reculer();
+        }
+        else if (this.getCoordonneesDirection() == Direction.NORTH && direction == Direction.SOUTH) {
+            reculer();
+        }
+        else {
+            avancer();
         }
         return coordonnees;
     }
