@@ -2,103 +2,127 @@ package org.marsrover;
 
 import org.marsrover.enums.Direction;
 
+import java.beans.PropertyVetoException;
+
 public class Rover {
 
-    private Coordonnees coordonnees;
+    private Position position;
 
-    public Rover(Coordonnees coordonnees) {
-        this.coordonnees = coordonnees;
+    public Rover(Position position) {
+        this.position = position;
     }
 
     public int getCoordonneesX() {
-        return coordonnees.getX();
+        return position.getX();
     }
 
     public int getCoordonneesY() {
-        return coordonnees.getY();
+        return position.getY();
     }
 
     public Direction getCoordonneesDirection() {
-        return coordonnees.getDirection();
+        return position.getDirection();
     }
 
-    public Coordonnees tournerDroite() {
-        if (coordonnees.getDirection() == Direction.EAST) {
-            coordonnees.setDirection(Direction.SOUTH);
+    public Position tournerDroite() {
+        if (position.getDirection() == Direction.EAST) {
+            position.setDirection(Direction.SOUTH);
         }
-        else if (coordonnees.getDirection() == Direction.SOUTH) {
-            coordonnees.setDirection(Direction.WEST);
+        else if (position.getDirection() == Direction.SOUTH) {
+            position.setDirection(Direction.WEST);
         }
-        else if (coordonnees.getDirection() == Direction.WEST) {
-            coordonnees.setDirection(Direction.NORTH);
+        else if (position.getDirection() == Direction.WEST) {
+            position.setDirection(Direction.NORTH);
         }
-        else if (coordonnees.getDirection() == Direction.NORTH) {
-            coordonnees.setDirection(Direction.EAST);
+        else if (position.getDirection() == Direction.NORTH) {
+            position.setDirection(Direction.EAST);
         }
-        return coordonnees;
+        return position;
     }
 
-    public Coordonnees tournerGauche() {
-        if (coordonnees.getDirection() == Direction.EAST) {
-            coordonnees.setDirection(Direction.NORTH);
+    public Position tournerGauche() {
+        if (position.getDirection() == Direction.EAST) {
+            position.setDirection(Direction.NORTH);
         }
-        else if (coordonnees.getDirection() == Direction.SOUTH) {
-            coordonnees.setDirection(Direction.EAST);
+        else if (position.getDirection() == Direction.SOUTH) {
+            position.setDirection(Direction.EAST);
         }
-        else if (coordonnees.getDirection() == Direction.NORTH) {
-            coordonnees.setDirection(Direction.WEST);
+        else if (position.getDirection() == Direction.NORTH) {
+            position.setDirection(Direction.WEST);
         }
-        else if (coordonnees.getDirection() == Direction.WEST) {
-            coordonnees.setDirection(Direction.SOUTH);
+        else if (position.getDirection() == Direction.WEST) {
+            position.setDirection(Direction.SOUTH);
         }
-        return coordonnees;
+        return position;
     }
 
     private void avancer() {
-        switch (coordonnees.getDirection()) {
+        switch (position.getDirection()) {
             case EAST -> {
-                coordonnees.setX(coordonnees.getX() + 1);
-                this.coordonnees.setDirection(Direction.EAST);
+                position.setX(position.getX() + 1);
+                this.position.setDirection(Direction.EAST);
             }
             case WEST -> {
-                coordonnees.setX(coordonnees.getX() - 1);
-                this.coordonnees.setDirection(Direction.WEST);
+                position.setX(position.getX() - 1);
+                this.position.setDirection(Direction.WEST);
             }
             case NORTH -> {
-                coordonnees.setY(coordonnees.getY() + 1);
-                this.coordonnees.setDirection(Direction.NORTH);
+                position.setY(position.getY() + 1);
+                this.position.setDirection(Direction.NORTH);
             }
             case SOUTH -> {
-                coordonnees.setY(coordonnees.getY() - 1);
-                this.coordonnees.setDirection(Direction.SOUTH);
+                position.setY(position.getY() - 1);
+                this.position.setDirection(Direction.SOUTH);
             }
         }
-//        return coordonnees;
+        checkBorder();
+    }
+
+    private void checkBorder() {
+        if (this.getCoordonneesX() > position.getPlanete().getLongueur()) {
+            position.setX(1);
+        }
+        else if (this.getCoordonneesY() > position.getPlanete().getLargeur()) {
+            position.setY(1);
+        }
+        else if(this.getCoordonneesY() == 0) {
+            position.setY(position.getPlanete().getLargeur());
+        }
+        else if(this.getCoordonneesX() == 0) {
+            position.setX(position.getPlanete().getLongueur());
+        }
     }
 
     private void reculer(){
-        switch (coordonnees.getDirection()) {
+        switch (position.getDirection()) {
             case EAST -> {
-                coordonnees.setX(coordonnees.getX() - 1);
-                this.coordonnees.setDirection(Direction.EAST);
+                position.setX(position.getX() - 1);
+                this.position.setDirection(Direction.EAST);
             }
             case WEST -> {
-                coordonnees.setX(coordonnees.getX() + 1);
-                this.coordonnees.setDirection(Direction.WEST);
+                position.setX(position.getX() + 1);
+                this.position.setDirection(Direction.WEST);
             }
             case NORTH -> {
-                coordonnees.setY(coordonnees.getY() - 1);
-                this.coordonnees.setDirection(Direction.NORTH);
+                position.setY(position.getY() - 1);
+                this.position.setDirection(Direction.NORTH);
             }
             case SOUTH -> {
-                coordonnees.setY(coordonnees.getY() + 1);
-                this.coordonnees.setDirection(Direction.SOUTH);
+                position.setY(position.getY() + 1);
+                this.position.setDirection(Direction.SOUTH);
             }
         }
-//        return coordonnees;
+        checkBorder();
     }
 
-    public Coordonnees move (Direction direction) {
+//    public boolean canMove(Direction direction) {
+//        if (this.getCoordonneesDirection() == Direction.EAST && (direction == Direction.NORTH || direction == Direction.SOUTH)) {
+//            return false;
+//        }
+//        else if (this.getCoordonneesDirection() == Direction.
+//    }
+
+    public Position move (Direction direction) {
         if (this.getCoordonneesDirection() == Direction.EAST && direction == Direction.WEST) {
             reculer();
         }
@@ -114,7 +138,7 @@ public class Rover {
         else {
             avancer();
         }
-        return coordonnees;
+        return position;
     }
 
 }
