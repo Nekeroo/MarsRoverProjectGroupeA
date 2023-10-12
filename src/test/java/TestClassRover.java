@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import org.marsrover.Position;
-import org.marsrover.Planete;
+import org.marsrover.Planet;
 import org.marsrover.Rover;
 import org.marsrover.enums.Direction;
 
@@ -13,114 +13,114 @@ public class TestClassRover {
 
     @Before
     public void init() {
-        Planete planete = new Planete(5, 5, "Mars");
-        rover = new Rover(new Position(1, 2, Direction.NORTH, planete));
+        Planet planet = new Planet(5, 5, "Mars");
+        rover = new Rover(new Position(1, 2, Direction.NORTH, planet));
     }
 
     @Test
-    public void testTournerEast() {
-        rover.tournerDroite();
-        assertEquals(Direction.EAST, rover.getCoordonneesDirection());
+    public void testTurnEast() {
+        rover.turnRight();
+        assertEquals(Direction.EAST, rover.getCoordinatesDirection());
     }
 
     @Test
-    public void testTournerSouth() {
-        rover.tournerGauche();
-        assertEquals(Direction.WEST, rover.getCoordonneesDirection());
+    public void testTurnSouth() {
+        rover.turnLeft();
+        assertEquals(Direction.WEST, rover.getCoordinatesDirection());
     }
 
     @Test
-    public void testAvancerNorth() {
+    public void testMoveForwardNorth() {
         rover.move(Direction.NORTH);
-        assertEquals(3, rover.getCoordonneesY());
+        assertEquals(3, rover.getCoordinatesY());
     }
 
     @Test
-    public void testAvancerWest() {
-        rover.tournerGauche();
+    public void testMoveForwardWest() {
+        rover.turnLeft();
         rover.move(Direction.WEST);
-        assertEquals(Direction.WEST, rover.getCoordonneesDirection());
-        assertEquals(5, rover.getCoordonneesX());
-        assertEquals(2, rover.getCoordonneesY());
+        assertEquals(Direction.WEST, rover.getCoordinatesDirection());
+        assertEquals(5, rover.getCoordinatesX());
+        assertEquals(2, rover.getCoordinatesY());
     }
 
     @Test
-    public void testAvancerSouth(){
-        rover.tournerGauche();
-        rover.tournerGauche();
+    public void testMoveForwardSouth(){
+        rover.turnLeft();
+        rover.turnLeft();
         rover.move(Direction.SOUTH);
-        assertEquals(Direction.SOUTH, rover.getCoordonneesDirection());
-        assertEquals(1, rover.getCoordonneesY());
-        assertEquals(1, rover.getCoordonneesX());
+        assertEquals(Direction.SOUTH, rover.getCoordinatesDirection());
+        assertEquals(1, rover.getCoordinatesY());
+        assertEquals(1, rover.getCoordinatesX());
     }
 
     @Test
-    public void testReculer() {
+    public void testMoveBack() {
         rover.move(Direction.SOUTH);
-        assertEquals(Direction.NORTH, rover.getCoordonneesDirection());
-        assertEquals(1, rover.getCoordonneesY());
-        assertEquals(1, rover.getCoordonneesX());
+        assertEquals(Direction.NORTH, rover.getCoordinatesDirection());
+        assertEquals(1, rover.getCoordinatesY());
+        assertEquals(1, rover.getCoordinatesX());
     }
 
     @Test
-    public void testBordure1() {
+    public void testBorderNorth() {
         rover.move(Direction.NORTH);
         rover.move(Direction.NORTH);
         rover.move(Direction.NORTH);
         rover.move(Direction.NORTH);
-        assertEquals(1, rover.getCoordonneesY());
-        assertEquals(1, rover.getCoordonneesX());
-        assertEquals(Direction.NORTH, rover.getCoordonneesDirection());
+        assertEquals(1, rover.getCoordinatesY());
+        assertEquals(1, rover.getCoordinatesX());
+        assertEquals(Direction.NORTH, rover.getCoordinatesDirection());
     }
 
     @Test
-    public void testBordure2() {
-        rover.tournerDroite();
+    public void testBorderEast() {
+        rover.turnRight();
         rover.move(Direction.EAST);
         rover.move(Direction.EAST);
         rover.move(Direction.EAST);
         rover.move(Direction.EAST);
         rover.move(Direction.EAST);
-        assertEquals(1, rover.getCoordonneesX());
-        assertEquals(2, rover.getCoordonneesY());
-        assertEquals(Direction.EAST, rover.getCoordonneesDirection());
+        assertEquals(1, rover.getCoordinatesX());
+        assertEquals(2, rover.getCoordinatesY());
+        assertEquals(Direction.EAST, rover.getCoordinatesDirection());
     }
 
     @Test
-    public void testBordure3() {
-        rover.tournerGauche();
+    public void testBorderWest() {
+        rover.turnLeft();
         rover.move(Direction.WEST);
-        assertEquals(5, rover.getCoordonneesX());
-        assertEquals(2, rover.getCoordonneesY());
-        assertEquals(Direction.WEST, rover.getCoordonneesDirection());
+        assertEquals(5, rover.getCoordinatesX());
+        assertEquals(2, rover.getCoordinatesY());
+        assertEquals(Direction.WEST, rover.getCoordinatesDirection());
     }
 
     @Test
-    public void testBordure4(){
+    public void testBorderSouth(){
         rover.move(Direction.SOUTH);
         rover.move(Direction.SOUTH);
-        assertEquals(5, rover.getCoordonneesY());
-        assertEquals(1, rover.getCoordonneesX());
-        assertEquals(Direction.NORTH, rover.getCoordonneesDirection());
+        assertEquals(5, rover.getCoordinatesY());
+        assertEquals(1, rover.getCoordinatesX());
+        assertEquals(Direction.NORTH, rover.getCoordinatesDirection());
     }
 
     @Test
     public void testPath1() {
-        System.out.println("------ Départ Mission sur la Planète " + rover.getPosition().getPlanete().getName() + " ------");
-        System.out.println("Position départ " + rover.getCoordonneesX() + " " + rover.getCoordonneesY());
+        System.out.println("------ Départ Mission sur la Planète " + rover.getPosition().getPlanet().getName() + " ------");
+        System.out.println("Position départ " + rover.getCoordinatesX() + " " + rover.getCoordinatesY());
         rover.move(Direction.NORTH);
-        System.out.println("Position actuelle " + rover.getCoordonneesX() + " " + rover.getCoordonneesY());
-        rover.tournerDroite();
+        System.out.println("Position actuelle " + rover.getCoordinatesX() + " " + rover.getCoordinatesY());
+        rover.turnRight();
         rover.move(Direction.EAST);
         rover.move(Direction.EAST);
-        System.out.println("Position actuelle " + rover.getCoordonneesX() + " " + rover.getCoordonneesY());
-        rover.tournerDroite();
+        System.out.println("Position actuelle " + rover.getCoordinatesX() + " " + rover.getCoordinatesY());
+        rover.turnRight();
         rover.move(Direction.SOUTH);
         rover.move(Direction.SOUTH);
         rover.move(Direction.SOUTH);
-        System.out.println("Position actuelle " + rover.getCoordonneesX() + " " + rover.getCoordonneesY());
-        assertEquals(5, rover.getCoordonneesY());
-        assertEquals(3, rover.getCoordonneesX());
-        assertEquals(Direction.SOUTH, rover.getCoordonneesDirection());
+        System.out.println("Position actuelle " + rover.getCoordinatesX() + " " + rover.getCoordinatesY());
+        assertEquals(5, rover.getCoordinatesY());
+        assertEquals(3, rover.getCoordinatesX());
+        assertEquals(Direction.SOUTH, rover.getCoordinatesDirection());
     }
 }

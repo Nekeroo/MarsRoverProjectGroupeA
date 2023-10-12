@@ -1,8 +1,5 @@
 package org.marsrover;
-
 import org.marsrover.enums.Direction;
-
-import java.beans.PropertyVetoException;
 
 public class Rover {
 
@@ -12,15 +9,15 @@ public class Rover {
         this.position = position;
     }
 
-    public int getCoordonneesX() {
+    public int getCoordinatesX() {
         return position.getX();
     }
 
-    public int getCoordonneesY() {
+    public int getCoordinatesY() {
         return position.getY();
     }
 
-    public Direction getCoordonneesDirection() {
+    public Direction getCoordinatesDirection() {
         return position.getDirection();
     }
 
@@ -28,7 +25,7 @@ public class Rover {
         return position;
     }
 
-    public Position tournerDroite() {
+    public Position turnRight() {
         if (position.getDirection() == Direction.EAST) {
             position.setDirection(Direction.SOUTH);
         }
@@ -44,7 +41,7 @@ public class Rover {
         return position;
     }
 
-    public Position tournerGauche() {
+    public Position turnLeft() {
         if (position.getDirection() == Direction.EAST) {
             position.setDirection(Direction.NORTH);
         }
@@ -60,7 +57,7 @@ public class Rover {
         return position;
     }
 
-    private void avancer() {
+    private void moveForward() {
         switch (position.getDirection()) {
             case EAST -> {
                 position.setX(position.getX() + 1);
@@ -83,21 +80,21 @@ public class Rover {
     }
 
     private void checkBorder() {
-        if (this.getCoordonneesX() > position.getPlanete().getLongueur()) {
+        if (this.getCoordinatesX() > position.getPlanet().getHeight()) {
             position.setX(1);
         }
-        else if (this.getCoordonneesY() > position.getPlanete().getLargeur()) {
+        else if (this.getCoordinatesY() > position.getPlanet().getWidth()) {
             position.setY(1);
         }
-        else if(this.getCoordonneesY() == 0) {
-            position.setY(position.getPlanete().getLargeur());
+        else if(this.getCoordinatesY() == 0) {
+            position.setY(position.getPlanet().getWidth());
         }
-        else if(this.getCoordonneesX() == 0) {
-            position.setX(position.getPlanete().getLongueur());
+        else if(this.getCoordinatesX() == 0) {
+            position.setX(position.getPlanet().getHeight());
         }
     }
 
-    private void reculer(){
+    private void moveBack(){
         switch (position.getDirection()) {
             case EAST -> {
                 position.setX(position.getX() - 1);
@@ -120,27 +117,27 @@ public class Rover {
     }
 
 //    public boolean canMove(Direction direction) {
-//        if (this.getCoordonneesDirection() == Direction.EAST && (direction == Direction.NORTH || direction == Direction.SOUTH)) {
+//        if (this.getCoordinatesDirection() == Direction.EAST && (direction == Direction.NORTH || direction == Direction.SOUTH)) {
 //            return false;
 //        }
-//        else if (this.getCoordonneesDirection() == Direction.
+//        else if (this.getCoordinatesDirection() == Direction.
 //    }
 
     public Position move (Direction direction) {
-        if (this.getCoordonneesDirection() == Direction.EAST && direction == Direction.WEST) {
-            reculer();
+        if (this.getCoordinatesDirection() == Direction.EAST && direction == Direction.WEST) {
+            moveBack();
         }
-        else if (this.getCoordonneesDirection() == Direction.WEST && direction == Direction.EAST) {
-            reculer();
+        else if (this.getCoordinatesDirection() == Direction.WEST && direction == Direction.EAST) {
+            moveBack();
         }
-        else if (this.getCoordonneesDirection() == Direction.SOUTH && direction == Direction.NORTH) {
-            reculer();
+        else if (this.getCoordinatesDirection() == Direction.SOUTH && direction == Direction.NORTH) {
+            moveBack();
         }
-        else if (this.getCoordonneesDirection() == Direction.NORTH && direction == Direction.SOUTH) {
-            reculer();
+        else if (this.getCoordinatesDirection() == Direction.NORTH && direction == Direction.SOUTH) {
+            moveBack();
         }
         else {
-            avancer();
+            moveForward();
         }
         return position;
     }

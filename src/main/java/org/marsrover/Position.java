@@ -10,13 +10,13 @@ public class Position {
 
     private Direction direction;
 
-    private Planete planete;
+    private Planet planet;
 
-    public Position(int x, int y, Direction direction, Planete planete) {
+    public Position(int x, int y, Direction direction, Planet planet) {
         this.x = x;
         this.y = y;
         this.direction = direction;
-        this.planete = planete;
+        this.planet = planet;
     }
 
     public int getX() {
@@ -43,11 +43,11 @@ public class Position {
         this.direction = direction;
     }
 
-    public Planete getPlanete() {
-        return planete;
+    public Planet getPlanet() {
+        return planet;
     }
 
-    public void setPlanete(Planete planete) {
-        this.planete = planete;
+    public void setPlanet(Planet planet) {
+        this.planet = planet;
     }
 }
