@@ -24,6 +24,10 @@ public class Rover {
         return position.getDirection();
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
     public Position tournerDroite() {
         if (position.getDirection() == Direction.EAST) {
             position.setDirection(Direction.SOUTH);

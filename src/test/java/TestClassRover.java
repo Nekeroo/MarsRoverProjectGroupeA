@@ -13,7 +13,7 @@ public class TestClassRover {
 
     @Before
     public void init() {
-        Planete planete = new Planete(5, 5);
+        Planete planete = new Planete(5, 5, "Mars");
         rover = new Rover(new Position(1, 2, Direction.NORTH, planete));
     }
 
@@ -102,5 +102,25 @@ public class TestClassRover {
         assertEquals(5, rover.getCoordonneesY());
         assertEquals(1, rover.getCoordonneesX());
         assertEquals(Direction.NORTH, rover.getCoordonneesDirection());
+    }
+
+    @Test
+    public void testPath1() {
+        System.out.println("------ Départ Mission sur la Planète " + rover.getPosition().getPlanete().getName() + " ------");
+        System.out.println("Position départ " + rover.getCoordonneesX() + " " + rover.getCoordonneesY());
+        rover.move(Direction.NORTH);
+        System.out.println("Position actuelle " + rover.getCoordonneesX() + " " + rover.getCoordonneesY());
+        rover.tournerDroite();
+        rover.move(Direction.EAST);
+        rover.move(Direction.EAST);
+        System.out.println("Position actuelle " + rover.getCoordonneesX() + " " + rover.getCoordonneesY());
+        rover.tournerDroite();
+        rover.move(Direction.SOUTH);
+        rover.move(Direction.SOUTH);
+        rover.move(Direction.SOUTH);
+        System.out.println("Position actuelle " + rover.getCoordonneesX() + " " + rover.getCoordonneesY());
+        assertEquals(5, rover.getCoordonneesY());
+        assertEquals(3, rover.getCoordonneesX());
+        assertEquals(Direction.SOUTH, rover.getCoordonneesDirection());
     }
 }

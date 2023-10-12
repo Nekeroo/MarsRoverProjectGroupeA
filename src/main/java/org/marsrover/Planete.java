@@ -6,9 +6,12 @@ public class Planete {
 
     private int largeur;
 
-    public Planete(int longueur, int largeur) {
+    private String name;
+
+    public Planete(int longueur, int largeur, String name) {
         this.longueur = longueur;
         this.largeur = largeur;
+        this.name = name;
     }
 
     public int getLongueur() {
@@ -17,5 +20,9 @@ public class Planete {
 
     public int getLargeur() {
         return largeur;
+    }
+
+    public String getName() {
+        return name;
     }
 }
