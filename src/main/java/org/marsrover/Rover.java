@@ -9,18 +9,6 @@ public class Rover {
         this.position = position;
     }
 
-    public int getCoordinatesX() {
-        return position.getX();
-    }
-
-    public int getCoordinatesY() {
-        return position.getY();
-    }
-
-    public Direction getCoordinatesDirection() {
-        return position.getDirection();
-    }
-
     public Position getPosition() {
         return position;
     }
@@ -80,16 +68,16 @@ public class Rover {
     }
 
     private void checkBorder() {
-        if (this.getCoordinatesX() > position.getPlanet().getHeight()) {
+        if (this.position.getX() > position.getPlanet().getHeight()) {
             position.setX(1);
         }
-        else if (this.getCoordinatesY() > position.getPlanet().getWidth()) {
+        else if (this.position.getY() > position.getPlanet().getWidth()) {
             position.setY(1);
         }
-        else if(this.getCoordinatesY() == 0) {
+        else if(this.position.getY() == 0) {
             position.setY(position.getPlanet().getWidth());
         }
-        else if(this.getCoordinatesX() == 0) {
+        else if(this.position.getX() == 0) {
             position.setX(position.getPlanet().getHeight());
         }
     }
@@ -117,23 +105,23 @@ public class Rover {
     }
 
 //    public boolean canMove(Direction direction) {
-//        if (this.getCoordinatesDirection() == Direction.EAST && (direction == Direction.NORTH || direction == Direction.SOUTH)) {
+//        if (this.position.getDirection() == Direction.EAST && (direction == Direction.NORTH || direction == Direction.SOUTH)) {
 //            return false;
 //        }
-//        else if (this.getCoordinatesDirection() == Direction.
+//        else if (this.position.getDirection() == Direction.
 //    }
 
     public Position move (Direction direction) {
-        if (this.getCoordinatesDirection() == Direction.EAST && direction == Direction.WEST) {
+        if (this.position.getDirection() == Direction.EAST && direction == Direction.WEST) {
             moveBack();
         }
-        else if (this.getCoordinatesDirection() == Direction.WEST && direction == Direction.EAST) {
+        else if (this.position.getDirection() == Direction.WEST && direction == Direction.EAST) {
             moveBack();
         }
-        else if (this.getCoordinatesDirection() == Direction.SOUTH && direction == Direction.NORTH) {
+        else if (this.position.getDirection() == Direction.SOUTH && direction == Direction.NORTH) {
             moveBack();
         }
-        else if (this.getCoordinatesDirection() == Direction.NORTH && direction == Direction.SOUTH) {
+        else if (this.position.getDirection() == Direction.NORTH && direction == Direction.SOUTH) {
             moveBack();
         }
         else {
@@ -141,5 +129,6 @@ public class Rover {
         }
         return position;
     }
+
 
 }
