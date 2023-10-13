@@ -26,4 +26,10 @@ public class Planet {
         return name;
     }
 
+    public Position rendu(Rover rover) {
+        rover.getPosition().getCoordonnees().setX(rover.getPosition().getCoordonnees().getX() % this.width);
+        rover.getPosition().getCoordonnees().setY(rover.getPosition().getCoordonnees().getY() % this.height);
+        return rover.getPosition();
+    }
+
 }

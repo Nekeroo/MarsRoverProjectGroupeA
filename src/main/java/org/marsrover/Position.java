@@ -4,35 +4,17 @@ import org.marsrover.enums.Direction;
 
 public class Position {
 
-    private int x;
-
-    private int y;
+    private Coordonnees coordonnees;
 
     private Direction direction;
 
-    private Planet planet;
-
-    public Position(int x, int y, Direction direction, Planet planet) {
-        this.x = x;
-        this.y = y;
+    public Position(Coordonnees coordonnees, Direction direction) {
+        this.coordonnees = coordonnees;
         this.direction = direction;
-        this.planet = planet;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
+    public Coordonnees getCoordonnees() {
+        return coordonnees;
     }
 
     public Direction getDirection() {
@@ -41,13 +23,5 @@ public class Position {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
-    }
-
-    public Planet getPlanet() {
-        return planet;
-    }
-
-    public void setPlanet(Planet planet) {
-        this.planet = planet;
     }
 }
