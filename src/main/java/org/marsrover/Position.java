@@ -1,27 +1,22 @@
 package org.marsrover;
 
-import org.marsrover.enums.Direction;
-
 public class Position {
 
-    private Coordonnees coordonnees;
+    private Coordinates coordinates;
 
     private Direction direction;
 
-    public Position(Coordonnees coordonnees, Direction direction) {
-        this.coordonnees = coordonnees;
+    public Position(Coordinates coordinates, Direction direction)
+    {
+        this.coordinates = coordinates;
         this.direction = direction;
     }
 
-    public Coordonnees getCoordonnees() {
-        return coordonnees;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
     public Direction getDirection() {
         return direction;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
     }
 }

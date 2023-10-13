@@ -1,93 +1,64 @@
 package org.marsrover;
-import org.marsrover.enums.Direction;
+import org.marsrover.interfaces.IRover;
 
-public class Rover {
+public class Rover implements IRover {
 
     private Position position;
+    private Planet planet;
 
-    public Rover(Position position) {
-        this.position = position;
+    public Rover(Coordinates coordinates, Direction direction, Planet planet)
+    {
+        Coordinates coordinatesCanon = planet.Canonise(coordinates.getX(), coordinates.getY());
+        this.position = new Position(coordinatesCanon, direction);
+        this.planet = planet;
+        System.out.printf("Coordonnées : " + this.getCurrentCoordinates());
     }
 
-    public Position getPosition() {
+    @Override
+    public Position getCurrentPosition()
+    {
         return position;
     }
 
-    public Position turnRight() {
-        if (position.getDirection() == Direction.EAST) {
-            position.setDirection(Direction.SOUTH);
-        }
-        else if (position.getDirection() == Direction.SOUTH) {
-            position.setDirection(Direction.WEST);
-        }
-        else if (position.getDirection() == Direction.WEST) {
-            position.setDirection(Direction.NORTH);
-        }
-        else if (position.getDirection() == Direction.NORTH) {
-            position.setDirection(Direction.EAST);
-        }
-        return position;
+    @Override
+    public Direction getCurrentDirection()
+    {
+        return position.getDirection();
     }
 
-    public Position turnLeft() {
-        if (position.getDirection() == Direction.EAST) {
-            position.setDirection(Direction.NORTH);
-        }
-        else if (position.getDirection() == Direction.SOUTH) {
-            position.setDirection(Direction.EAST);
-        }
-        else if (position.getDirection() == Direction.NORTH) {
-            position.setDirection(Direction.WEST);
-        }
-        else if (position.getDirection() == Direction.WEST) {
-            position.setDirection(Direction.SOUTH);
-        }
-        return position;
+    @Override
+    public Coordinates getCurrentCoordinates()
+    {
+        return position.getCoordinates();
     }
 
-    public void moveForward() {
-        switch (position.getDirection()) {
-            case EAST -> {
-                position.getCoordonnees().setX(position.getCoordonnees().getX() + 1);
-                this.position.setDirection(Direction.EAST);
-            }
-            case WEST -> {
-                position.getCoordonnees().setX(position.getCoordonnees().getX() - 1);
-                this.position.setDirection(Direction.WEST);
-            }
-            case NORTH -> {
-                position.getCoordonnees().setY(position.getCoordonnees().getY() + 1);
-                this.position.setDirection(Direction.NORTH);
-            }
-            case SOUTH -> {
-                position.getCoordonnees().setY(position.getCoordonnees().getY() - 1);
-                this.position.setDirection(Direction.SOUTH);
-            }
-        }
+    @Override
+    public Rover turnRight()
+    {
+        return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextClockwise(), this.planet) ;
     }
 
-
-    public void moveBack(){
-        switch (position.getDirection()) {
-            case EAST -> {
-                position.getCoordonnees().setX(position.getCoordonnees().getX() - 1);
-                this.position.setDirection(Direction.EAST);
-            }
-            case WEST -> {
-                position.getCoordonnees().setX(position.getCoordonnees().getX() + 1);
-                this.position.setDirection(Direction.WEST);
-            }
-            case NORTH -> {
-                position.getCoordonnees().setY(position.getCoordonnees().getY() - 1);
-                this.position.setDirection(Direction.NORTH);
-            }
-            case SOUTH -> {
-                position.getCoordonnees().setY(position.getCoordonnees().getY() + 1);
-                this.position.setDirection(Direction.SOUTH);
-            }
-        }
+    @Override
+    public Rover turnLeft()
+    {
+        return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextCounterClockwise(), this.planet) ;
     }
 
+    @Override
+    public Rover moveForward()
+    {
+        int x = this.getCurrentCoordinates().getX() + this.getCurrentDirection().getVectorX();
+        int y = this.getCurrentCoordinates().getY() + this.getCurrentDirection().getVectorY();
+        Coordinates newCoordinates = new Coordinates(x, y);
+        return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
+    }
 
-
+    @Override
+    public Rover moveBack()
+    {
+        int x = this.getCurrentCoordinates().getX() - this.getCurrentDirection().getVectorX();
+        int y = this.getCurrentCoordinates().getY() - this.getCurrentDirection().getVectorY();
+        Coordinates newCoordinates = new Coordinates(x, y);
+        return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
+    }
 }

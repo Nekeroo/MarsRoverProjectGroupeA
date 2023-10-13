@@ -8,28 +8,19 @@ public class Planet {
 
     private String name;
 
-    public Planet(int height, int width, String name) {
+    public Planet(int height, int width, String name)
+    {
         this.height = height;
         this.width = width;
         this.name = name;
     }
 
-    public int getHeight() {
-        return height;
+    public Coordinates Canonise(int x, int y)
+    {
+        if (x < 0)
+            return new Coordinates(width-1, y%height);
+        else if (y < 0)
+            return new Coordinates(x%width, height-1);
+        return new Coordinates(x%width,y%height);
     }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Position rendu(Rover rover) {
-        rover.getPosition().getCoordonnees().setX(rover.getPosition().getCoordonnees().getX() % this.width);
-        rover.getPosition().getCoordonnees().setY(rover.getPosition().getCoordonnees().getY() % this.height);
-        return rover.getPosition();
-    }
-
 }
