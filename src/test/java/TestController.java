@@ -7,7 +7,6 @@ import org.marsrover.records.Coordinates;
 import org.marsrover.records.Obstacle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

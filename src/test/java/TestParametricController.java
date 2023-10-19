@@ -19,15 +19,15 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class TestParametricController {
 
-    private int xFinal;
+    private final int xFinal;
 
-    private int yFinal;
+    private final int yFinal;
 
-    private Direction directionFinal;
+    private final Direction directionFinal;
 
-    private List<String> sequenceCommands;
+    private final List<String> sequenceCommands;
 
-    private PlanetBase planet;
+    private final PlanetBase planet;
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {

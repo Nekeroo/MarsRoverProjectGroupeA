@@ -2,7 +2,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.marsrover.models.*;
 import org.marsrover.records.Coordinates;
-import org.marsrover.records.Obstacle;
 
 import static org.junit.Assert.assertEquals;
 

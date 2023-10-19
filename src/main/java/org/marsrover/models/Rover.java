@@ -4,6 +4,7 @@ import org.marsrover.abstrat_class.PlanetBase;
 import org.marsrover.records.Coordinates;
 import org.marsrover.records.Position;
 
+@SuppressWarnings("DuplicatedCode")
 public class Rover {
 
     private final Position position;
