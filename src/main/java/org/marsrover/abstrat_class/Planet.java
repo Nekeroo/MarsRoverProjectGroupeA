@@ -2,13 +2,13 @@ package org.marsrover.abstrat_class;
 
 import org.marsrover.records.Coordinates;
 
-public abstract class PlanetBase {
+public abstract class Planet {
 
     private final int height;
 
     private final int width;
 
-    protected PlanetBase(int height, int width){
+    protected Planet(int height, int width){
         this.height = height;
         this.width = width;
     }

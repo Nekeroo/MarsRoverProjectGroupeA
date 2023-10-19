@@ -1,15 +1,15 @@
 package utilities;
 
-import org.marsrover.abstrat_class.PlanetBase;
+import org.marsrover.abstrat_class.Planet;
 import org.marsrover.models.Direction;
-import org.marsrover.models.Planet;
+import org.marsrover.models.PlanetWithoutObstacles;
 import org.marsrover.models.Rover;
 import org.marsrover.records.Coordinates;
 
 public class RoverBuilder {
 
     private Direction direction = Direction.North;
-    private PlanetBase planet = new Planet(5, 5);
+    private Planet planet = new PlanetWithoutObstacles(5, 5);
     private Coordinates coordinates = new Coordinates(1,2);
 
     public RoverBuilder looking(Direction direction) {
@@ -22,8 +22,8 @@ public class RoverBuilder {
         return this;
     }
 
-    public RoverBuilder onPlanet(PlanetBase planetBase) {
-        this.planet = planetBase;
+    public RoverBuilder onPlanet(Planet planet) {
+        this.planet = planet;
         return this;
     }
 

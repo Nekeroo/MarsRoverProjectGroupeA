@@ -4,6 +4,7 @@ import org.marsrover.enums.RoverCommands;
 
 import java.util.List;
 
+// Service
 public class Controller {
     private Rover rover;
     
@@ -12,9 +13,9 @@ public class Controller {
             this.rover = rover;
     }
     
-    public Rover processSequence(List<String> sequence)
+    public Rover processSequence(List<String> sequenceOfStrings)
     {
-        List<RoverCommands> commands = RoverCommands.fromString(sequence);
+        List<RoverCommands> commands = RoverCommands.getCommandsFromStrings(sequenceOfStrings);
         for (RoverCommands command: commands)
         {
             if (rover.isObstacleInFront())

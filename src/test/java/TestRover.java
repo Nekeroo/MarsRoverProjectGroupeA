@@ -11,9 +11,9 @@ public class TestRover {
     @Before
     public void init()
     {
-        Planet planet = new Planet(5, 5);
+        PlanetWithoutObstacles planetWithoutObstacles = new PlanetWithoutObstacles(5, 5);
         rover = new RoverBuilder().looking(Direction.North)
-                        .onPlanet(planet)
+                        .onPlanet(planetWithoutObstacles)
                         .build();
     }
 
@@ -74,9 +74,9 @@ public class TestRover {
     @Test
     public void testPlanetOne()
     {
-        Planet planet = new Planet(1, 1);
+        PlanetWithoutObstacles planetWithoutObstacles = new PlanetWithoutObstacles(1, 1);
         rover = new RoverBuilder().looking(Direction.North)
-                        .onPlanet(planet)
+                        .onPlanet(planetWithoutObstacles)
                         .onThisPosition(0, 0)
                         .build();
         rover = rover.moveForward();

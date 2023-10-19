@@ -1,21 +1,22 @@
 package org.marsrover.models;
 
 import org.marsrover.abstrat_class.Decorator;
-import org.marsrover.abstrat_class.PlanetBase;
+import org.marsrover.abstrat_class.Planet;
 import org.marsrover.records.Obstacle;
 
 import java.util.List;
 
+// Entité
 public class PlanetWithObstacle extends Decorator {
 
     private final List<Obstacle> obstacles;
 
-    public PlanetWithObstacle(PlanetBase planetBase, List<Obstacle> obstacles) {
-        super(planetBase);
+    public PlanetWithObstacle(Planet planet, List<Obstacle> obstacles) {
+        super(planet);
         this.obstacles = obstacles;
     }
 
-    public boolean checkObstacle(int x, int y)
+    public boolean isObstaclesInFrontOfRover(int x, int y)
     {
         for (Obstacle obstacle : obstacles) {
             if (obstacle.coordinates().x() == x && obstacle.coordinates().y() == y)

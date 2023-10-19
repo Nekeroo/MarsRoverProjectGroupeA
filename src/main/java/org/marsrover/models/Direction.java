@@ -1,11 +1,12 @@
 package org.marsrover.models;
 
+// Objet Valeur
 public class Direction {
 
-    public static Direction North = new Direction("N", 0, 1);
-    public static Direction South = new Direction("S", 0, -1);
-    public static Direction East = new Direction("E", 1, 0);
-    public static Direction West = new Direction("W", -1, 0);
+    public static final  Direction North = new Direction("N", 0, 1);
+    public static final Direction South = new Direction("S", 0, -1);
+    public static final Direction East = new Direction("E", 1, 0);
+    public static final Direction West = new Direction("W", -1, 0);
     private final String name;
     private final int xVector;
     private final int yVector;
@@ -17,7 +18,7 @@ public class Direction {
         this.yVector = yVector;
     }
 
-    protected Direction getNextClockwise()
+    protected Direction getNextDirectionFromClockwise()
     {
         if (this.equals(North))
             return East;
@@ -28,9 +29,9 @@ public class Direction {
         return North;
     }
 
-    protected Direction getNextCounterClockwise()
+    protected Direction getNextDirectionCounterClockwise()
     {
-        return getNextClockwise().getNextClockwise().getNextClockwise();
+        return getNextDirectionFromClockwise().getNextDirectionFromClockwise().getNextDirectionFromClockwise();
     }
 
     protected int getVectorX()

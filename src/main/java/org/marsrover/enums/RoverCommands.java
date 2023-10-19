@@ -3,6 +3,7 @@ package org.marsrover.enums;
 import java.util.ArrayList;
 import java.util.List;
 
+// Objet Valeur
 public enum RoverCommands {
     Z("Z"),
     Q("Q"),
@@ -21,7 +22,7 @@ public enum RoverCommands {
         return command;
     }
 
-    public static List<RoverCommands> fromString(List<String> seqString)
+    public static List<RoverCommands> getCommandsFromStrings(List<String> seqString)
     {
         List<RoverCommands> sequence = new ArrayList<>();
         for (String command:seqString)

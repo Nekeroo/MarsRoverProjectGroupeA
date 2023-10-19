@@ -1,6 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.marsrover.abstrat_class.PlanetBase;
+import org.marsrover.abstrat_class.Planet;
 import org.marsrover.controllers.Controller;
 import org.marsrover.models.*;
 import org.marsrover.records.Coordinates;
@@ -16,12 +16,12 @@ public class TestController {
     private Controller controller;
     private Rover rover;
 
-    private PlanetBase planet;
+    private Planet planet;
 
     @Before
     public void init()
     {
-        planet = new Planet(5, 5);
+        planet = new PlanetWithoutObstacles(5, 5);
         rover =  new RoverBuilder().looking(Direction.North)
                         .onPlanet(planet)
                         .build();

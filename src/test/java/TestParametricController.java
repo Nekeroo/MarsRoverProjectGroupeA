@@ -1,10 +1,10 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.marsrover.abstrat_class.PlanetBase;
+import org.marsrover.abstrat_class.Planet;
 import org.marsrover.controllers.Controller;
 import org.marsrover.models.Direction;
-import org.marsrover.models.Planet;
+import org.marsrover.models.PlanetWithoutObstacles;
 import org.marsrover.models.PlanetWithObstacle;
 import org.marsrover.models.Rover;
 import org.marsrover.records.Coordinates;
@@ -28,7 +28,7 @@ public class TestParametricController {
 
     private final List<String> sequenceCommands;
 
-    private final PlanetBase planet;
+    private final Planet planet;
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
@@ -38,14 +38,14 @@ public class TestParametricController {
         List<String> list4 = Arrays.asList("D", "Z", "Z");
         // Rover part en x = 1 et y = 2
         return Arrays.asList(new Object[][]{
-                {1, 1, Direction.North, list1, new Planet(5, 5) },
-                {3, 2, Direction.East, list2, new Planet(5, 5)},
-                {0, 1, Direction.East, list3, new Planet(5, 5)},
-                {1, 2, Direction.East, list4, new PlanetWithObstacle(new Planet(5, 5), List.of(new Obstacle(new Coordinates(2, 2))))}
+                {1, 1, Direction.North, list1, new PlanetWithoutObstacles(5, 5) },
+                {3, 2, Direction.East, list2, new PlanetWithoutObstacles(5, 5)},
+                {0, 1, Direction.East, list3, new PlanetWithoutObstacles(5, 5)},
+                {1, 2, Direction.East, list4, new PlanetWithObstacle(new PlanetWithoutObstacles(5, 5), List.of(new Obstacle(new Coordinates(2, 2))))}
         });
     }
 
-    public TestParametricController(int xFinal, int yFinal, Direction directionFinal, List<String> sequenceCommands, PlanetBase planet) {
+    public TestParametricController(int xFinal, int yFinal, Direction directionFinal, List<String> sequenceCommands, Planet planet) {
         this.xFinal = xFinal;
         this.yFinal = yFinal;
         this.directionFinal = directionFinal;
