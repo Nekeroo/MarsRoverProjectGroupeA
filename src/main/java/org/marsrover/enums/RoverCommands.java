@@ -9,7 +9,7 @@ public enum RoverCommands {
     S("S"),
     D("D");
 
-    private String command;
+    private final String command;
 
     RoverCommands(String command)
     {

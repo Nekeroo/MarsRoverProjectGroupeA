@@ -26,9 +26,4 @@ public class Planet
     {
         return this.obstacle.coordinates().x() == x && this.obstacle.coordinates().y() == y;
     }
-
-    public Obstacle getObstacle()
-    {
-        return obstacle;
-    }
 }

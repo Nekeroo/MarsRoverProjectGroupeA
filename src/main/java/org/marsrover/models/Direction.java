@@ -6,9 +6,9 @@ public class Direction {
     public static Direction South = new Direction("S", 0, -1);
     public static Direction East = new Direction("E", 1, 0);
     public static Direction West = new Direction("W", -1, 0);
-    private String name;
-    private int xVector;
-    private int yVector;
+    private final String name;
+    private final int xVector;
+    private final int yVector;
 
     public Direction(String name, int xVector, int yVector)
     {

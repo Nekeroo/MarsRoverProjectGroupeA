@@ -7,12 +7,10 @@ import static org.junit.Assert.assertEquals;
 public class TestRover {
     private Rover rover;
 
-    private Planet planet;
-
     @Before
     public void init()
     {
-        planet = new Planet(5, 5, new Obstacle(new Coordinates(2,2)));
+        Planet planet = new Planet(5, 5, new Obstacle(new Coordinates(2, 2)));
         Coordinates coordinates = new Coordinates(1, 2);
         rover = new Rover(coordinates, Direction.North, planet);
     }
