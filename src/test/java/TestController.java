@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.marsrover.controllers.Controller;
 import org.marsrover.models.*;
+import org.marsrover.records.Coordinates;
+import org.marsrover.records.Obstacle;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.marsrover.models;
+package org.marsrover.records;
 
 public record Coordinates(int x, int y)
 {

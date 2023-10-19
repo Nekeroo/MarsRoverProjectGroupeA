@@ -1,5 +1,8 @@
 package org.marsrover.models;
 
+import org.marsrover.records.Coordinates;
+import org.marsrover.records.Position;
+
 public class Rover {
 
     private final Position position;
