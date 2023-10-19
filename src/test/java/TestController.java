@@ -23,6 +23,7 @@ public class TestController {
         controller = new Controller(rover);
     }
 
+
     @Test
     public void testSequenceNoObstacle()
     {
@@ -53,5 +54,53 @@ public class TestController {
         assertEquals(1, rover.getCurrentCoordinates().x());
         assertEquals(2, rover.getCurrentCoordinates().y());
         assertEquals(Direction.East, rover.getCurrentDirection());
+    }
+
+    @Test
+    public void testMoveForward()
+    {
+        List<String> sequence = new ArrayList<>();
+        sequence.add("Z");
+
+        rover = controller.processSequence(sequence);
+
+        assertEquals(1, rover.getCurrentCoordinates().x());
+        assertEquals(3, rover.getCurrentCoordinates().y());
+        assertEquals(Direction.North, rover.getCurrentDirection());
+    }
+
+    @Test
+    public void testMoveBack()
+    {
+        List<String> sequence = new ArrayList<>();
+        sequence.add("S");
+
+        rover = controller.processSequence(sequence);
+
+        assertEquals(1, rover.getCurrentCoordinates().x());
+        assertEquals(1, rover.getCurrentCoordinates().y());
+        assertEquals(Direction.North, rover.getCurrentDirection());
+    }
+
+    @Test
+    public void testTurnRight()
+    {
+        List<String> sequence = new ArrayList<>();
+        sequence.add("D");
+
+        rover = controller.processSequence(sequence);
+
+        assertEquals(Direction.East, rover.getCurrentDirection());
+    }
+
+    @Test
+    public void testTurnLeft()
+    {
+        List<String> sequence = new ArrayList<>();
+        sequence.add("Q");
+
+        rover = controller.processSequence(sequence);
+
+        assertEquals(Direction.West, rover.getCurrentDirection());
     }
 }
