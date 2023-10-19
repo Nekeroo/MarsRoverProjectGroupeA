@@ -1,6 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.marsrover.*;
+import org.marsrover.models.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,7 +12,7 @@ public class TestRover {
     @Before
     public void init()
     {
-        planet = new Planet(5, 5, "Mars");
+        planet = new Planet(5, 5, new Obstacle(new Coordinates(2,2)));
         Coordinates coordinates = new Coordinates(1, 2);
         rover = new Rover(coordinates, Direction.North, planet);
     }
@@ -21,8 +21,8 @@ public class TestRover {
     public void testMoveForward()
     {
         rover = rover.moveForward();
-        assertEquals(1, rover.getCurrentCoordinates().getX());
-        assertEquals(3, rover.getCurrentCoordinates().getY());
+        assertEquals(1, rover.getCurrentCoordinates().x());
+        assertEquals(3, rover.getCurrentCoordinates().y());
         assertEquals(Direction.North, rover.getCurrentDirection());
     }
 
@@ -30,8 +30,8 @@ public class TestRover {
     public void testMoveBack()
     {
         rover = rover.moveBack();
-        assertEquals(1, rover.getCurrentCoordinates().getX());
-        assertEquals(1, rover.getCurrentCoordinates().getY());
+        assertEquals(1, rover.getCurrentCoordinates().x());
+        assertEquals(1, rover.getCurrentCoordinates().y());
         assertEquals(Direction.North, rover.getCurrentDirection());
     }
 
@@ -55,8 +55,8 @@ public class TestRover {
         for (int i = 0; i < 2; i++){
             rover = rover.moveBack();
         }
-        assertEquals(1, rover.getCurrentCoordinates().getX());
-        assertEquals(0, rover.getCurrentCoordinates().getY());
+        assertEquals(1, rover.getCurrentCoordinates().x());
+        assertEquals(0, rover.getCurrentCoordinates().y());
         assertEquals(Direction.North, rover.getCurrentDirection());
     }
 
@@ -66,19 +66,19 @@ public class TestRover {
         for (int i = 0; i < 3; i++){
             rover = rover.moveBack();
         }
-        assertEquals(1, rover.getCurrentCoordinates().getX());
-        assertEquals(4, rover.getCurrentCoordinates().getY());
+        assertEquals(1, rover.getCurrentCoordinates().x());
+        assertEquals(4, rover.getCurrentCoordinates().y());
         assertEquals(Direction.North, rover.getCurrentDirection());
     }
 
     @Test
     public void testPlanetOne()
     {
-        Planet planet = new Planet(1, 1, "Test");
+        Planet planet = new Planet(1, 1, new Obstacle(new Coordinates(2,2)));
         rover = new Rover(new Coordinates(0, 0), rover.getCurrentDirection(), planet);
         rover = rover.moveForward();
-        assertEquals(0, rover.getCurrentCoordinates().getX());
-        assertEquals(0, rover.getCurrentCoordinates().getY());
+        assertEquals(0, rover.getCurrentCoordinates().x());
+        assertEquals(0, rover.getCurrentCoordinates().y());
         assertEquals(Direction.North, rover.getCurrentDirection());
     }
 }

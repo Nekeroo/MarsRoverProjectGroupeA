@@ -1,4 +1,4 @@
-package org.marsrover;
+package org.marsrover.models;
 
 public class Direction {
 
@@ -41,5 +41,11 @@ public class Direction {
     protected int getVectorY()
     {
         return this.yVector;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.name;
     }
 }
