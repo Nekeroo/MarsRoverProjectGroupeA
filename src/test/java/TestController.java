@@ -5,6 +5,7 @@ import org.marsrover.controllers.Controller;
 import org.marsrover.models.*;
 import org.marsrover.records.Coordinates;
 import org.marsrover.records.Obstacle;
+import utilities.RoverBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,9 @@ public class TestController {
     public void init()
     {
         planet = new Planet(5, 5);
-        Coordinates coordinates = new Coordinates(1, 2);
-        rover = new Rover(coordinates, Direction.North, planet);
+        rover =  new RoverBuilder().looking(Direction.North)
+                        .onPlanet(planet)
+                        .build();
         controller = new Controller(rover);
     }
 

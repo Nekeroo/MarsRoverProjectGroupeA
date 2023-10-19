@@ -48,12 +48,10 @@ public class Rover {
     {
         int x = this.getCurrentCoordinates().x() + this.getCurrentDirection().getVectorX();
         int y = this.getCurrentCoordinates().y() + this.getCurrentDirection().getVectorY();
-        if (planet instanceof PlanetWithObstacle planetWithObstacle) {
-            if (planetWithObstacle.checkObstacle(x, y)){
+        if (planet instanceof PlanetWithObstacle planetWithObstacle && planetWithObstacle.checkObstacle(x, y)) {
                 this.obstacleInFront = true;
                 System.out.println("Obstacle found");
                 return this;
-            }
         }
         Coordinates newCoordinates = new Coordinates(x, y);
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
@@ -63,12 +61,10 @@ public class Rover {
     {
         int x = this.getCurrentCoordinates().x() - this.getCurrentDirection().getVectorX();
         int y = this.getCurrentCoordinates().y() - this.getCurrentDirection().getVectorY();
-        if (planet instanceof PlanetWithObstacle planetWithObstacle) {
-            if (planetWithObstacle.checkObstacle(x, y)){
+        if (planet instanceof PlanetWithObstacle planetWithObstacle && planetWithObstacle.checkObstacle(x, y)) {
                 this.obstacleInFront = true;
                 System.out.println("Obstacle found");
                 return this;
-            }
         }
         Coordinates newCoordinates = new Coordinates(x, y);
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);

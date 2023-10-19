@@ -9,6 +9,7 @@ import org.marsrover.models.PlanetWithObstacle;
 import org.marsrover.models.Rover;
 import org.marsrover.records.Coordinates;
 import org.marsrover.records.Obstacle;
+import utilities.RoverBuilder;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -54,7 +55,7 @@ public class TestParametricController {
 
     @Test
     public void sequence() {
-        Rover rover = new Rover(new Coordinates(1, 2), Direction.North, planet);
+        Rover rover = new RoverBuilder().looking(Direction.North).onPlanet(planet).build();
         Controller controller = new Controller(rover);
 
         rover = controller.processSequence(sequenceCommands);

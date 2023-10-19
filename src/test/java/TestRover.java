@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import org.marsrover.models.*;
-import org.marsrover.records.Coordinates;
+import utilities.RoverBuilder;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,8 +12,9 @@ public class TestRover {
     public void init()
     {
         Planet planet = new Planet(5, 5);
-        Coordinates coordinates = new Coordinates(1, 2);
-        rover = new Rover(coordinates, Direction.North, planet);
+        rover = new RoverBuilder().looking(Direction.North)
+                        .onPlanet(planet)
+                        .build();
     }
 
     @Test
@@ -74,7 +75,10 @@ public class TestRover {
     public void testPlanetOne()
     {
         Planet planet = new Planet(1, 1);
-        rover = new Rover(new Coordinates(0, 0), rover.getCurrentDirection(), planet);
+        rover = new RoverBuilder().looking(Direction.North)
+                        .onPlanet(planet)
+                        .onThisPosition(0, 0)
+                        .build();
         rover = rover.moveForward();
         assertEquals(0, rover.getCurrentCoordinates().x());
         assertEquals(0, rover.getCurrentCoordinates().y());
