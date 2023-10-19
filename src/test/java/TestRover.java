@@ -12,7 +12,7 @@ public class TestRover {
     @Before
     public void init()
     {
-        Planet planet = new Planet(5, 5, new Obstacle(new Coordinates(2, 2)));
+        Planet planet = new Planet(5, 5);
         Coordinates coordinates = new Coordinates(1, 2);
         rover = new Rover(coordinates, Direction.North, planet);
     }
@@ -74,7 +74,7 @@ public class TestRover {
     @Test
     public void testPlanetOne()
     {
-        Planet planet = new Planet(1, 1, new Obstacle(new Coordinates(2,2)));
+        Planet planet = new Planet(1, 1);
         rover = new Rover(new Coordinates(0, 0), rover.getCurrentDirection(), planet);
         rover = rover.moveForward();
         assertEquals(0, rover.getCurrentCoordinates().x());

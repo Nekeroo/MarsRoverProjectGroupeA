@@ -1,18 +1,19 @@
 package org.marsrover.models;
 
+import org.marsrover.abstrat_class.PlanetBase;
 import org.marsrover.records.Coordinates;
 import org.marsrover.records.Position;
 
 public class Rover {
 
     private final Position position;
-    private final Planet planet;
+    private final PlanetBase planet;
 
     private boolean obstacleInFront = false;
 
-    public Rover(Coordinates coordinates, Direction direction, Planet planet)
+    public Rover(Coordinates coordinates, Direction direction, PlanetBase planet)
     {
-        Coordinates coordinatesCanon = planet.Canonise(coordinates.x(), coordinates.y());
+        Coordinates coordinatesCanon = planet.canonise(coordinates.x(), coordinates.y());
         this.position = new Position(coordinatesCanon, direction);
         this.planet = planet;
         System.out.printf("Coordonnées : " + this.getCurrentCoordinates());
@@ -46,11 +47,12 @@ public class Rover {
     {
         int x = this.getCurrentCoordinates().x() + this.getCurrentDirection().getVectorX();
         int y = this.getCurrentCoordinates().y() + this.getCurrentDirection().getVectorY();
-        if (planet.checkObstacle(x, y))
-        {
-            this.obstacleInFront = true;
-            System.out.println("Obstacle found");
-            return this;
+        if (planet instanceof PlanetWithObstacle planetWithObstacle) {
+            if (planetWithObstacle.checkObstacle(x, y)){
+                this.obstacleInFront = true;
+                System.out.println("Obstacle found");
+                return this;
+            }
         }
         Coordinates newCoordinates = new Coordinates(x, y);
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
@@ -60,11 +62,12 @@ public class Rover {
     {
         int x = this.getCurrentCoordinates().x() - this.getCurrentDirection().getVectorX();
         int y = this.getCurrentCoordinates().y() - this.getCurrentDirection().getVectorY();
-        if (planet.checkObstacle(x, y))
-        {
-            this.obstacleInFront = true;
-            System.out.println("Obstacle found");
-            return this;
+        if (planet instanceof PlanetWithObstacle planetWithObstacle) {
+            if (planetWithObstacle.checkObstacle(x, y)){
+                this.obstacleInFront = true;
+                System.out.println("Obstacle found");
+                return this;
+            }
         }
         Coordinates newCoordinates = new Coordinates(x, y);
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
