@@ -1,7 +1,9 @@
 package org.marsrover.enums;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.marsrover.models.Rover;
+
+import java.util.*;
+import java.util.function.Function;
 
 // Objet Valeur
 public enum RoverCommands
@@ -10,6 +12,8 @@ public enum RoverCommands
     Q("Q"),
     S("S"),
     D("D");
+
+    private Map<String, Function<Rover, Rover>> commandes = new HashMap<String, Function<Rover, Rover>>();
 
     private final String command;
 
@@ -23,7 +27,7 @@ public enum RoverCommands
         return command;
     }
 
-    public static List<RoverCommands> getCommandsFromStrings(List<String> seqString)
+    public static List<RoverCommands> getCommandsFromStrings(List<String> seqString) // TODO : indentations
     {
         List<RoverCommands> sequence = new ArrayList<>();
         for (String command:seqString)

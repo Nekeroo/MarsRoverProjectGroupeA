@@ -17,7 +17,7 @@ public class RoverController
             this.rover = rover;
     }
 
-    public Rover processSequence(List<String> sequenceOfStrings)
+    public Rover processSequence(List<String> sequenceOfStrings) // TODO : indentations
     {
         List<RoverCommands> commands = RoverCommands.getCommandsFromStrings(sequenceOfStrings);
         Coordinates coordinates;
@@ -37,7 +37,6 @@ public class RoverController
             {
                 break;
             }
-
         }
         return rover;
     }

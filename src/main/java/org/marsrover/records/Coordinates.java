@@ -23,7 +23,7 @@ public record Coordinates(int x, int y)
 
     public Coordinates moduloCoordinates(Coordinates coordinates, int height, int width) {
         int x = (((coordinates.x() % width) + width) % width);
-        int y = (((coordinates.y() % height) + height ) % height);
+        int y = (((coordinates.y() % height) + height) % height);
         return new Coordinates(x,y);
     }
 }

@@ -1,6 +1,6 @@
 package org.marsrover.records;
 
-public record Direction(String name, int xVector, int yVector)
+public record Direction(String name, int xVector, int yVector) // TODO : attributs ?
 {
     public static final Direction North = new Direction("N", 0, 1);
     public static final Direction South = new Direction("S", 0, -1);
