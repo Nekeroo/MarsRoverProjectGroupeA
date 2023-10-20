@@ -6,7 +6,6 @@ import org.marsrover.records.Direction;
 import org.marsrover.records.Position;
 
 // Objet Valeur
-@SuppressWarnings("DuplicatedCode")
 public final class Rover {
 
     private final Position position;
@@ -30,10 +29,6 @@ public final class Rover {
         return position.coordinates();
     }
 
-    public Planet getPlanet()
-    {
-        return planet;
-    }
     public Rover turnRight()
     {
         return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionFromClockwise(), this.planet) ;
