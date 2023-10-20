@@ -45,17 +45,25 @@ public final class Rover {
 
     public Rover moveForward()
     {
-        int x = this.getCurrentCoordinates().x() + this.getCurrentDirection().getVectorX();
-        int y = this.getCurrentCoordinates().y() + this.getCurrentDirection().getVectorY();
-        Coordinates newCoordinates = new Coordinates(x, y);
+
+        Coordinates coordinates = this.getCurrentCoordinates().addCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
+        if (planet.isObstaclesAt(coordinates)) {
+            System.out.println("Obstacle found");
+            return this;
+        }
+        Coordinates newCoordinates = new Coordinates(coordinates.x(), coordinates.y());
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
     public Rover moveBack()
     {
-        int x = this.getCurrentCoordinates().x() - this.getCurrentDirection().getVectorX();
-        int y = this.getCurrentCoordinates().y() - this.getCurrentDirection().getVectorY();
-        Coordinates newCoordinates = new Coordinates(x, y);
+        Coordinates coordinates = this.getCurrentCoordinates().subCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
+        if (planet.isObstaclesAt(coordinates)) {
+            System.out.println("Obstacle found");
+            return this;
+        }
+        Coordinates newCoordinates = new Coordinates(coordinates.x(), coordinates.y());
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
+
 }

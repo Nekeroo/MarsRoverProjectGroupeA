@@ -14,11 +14,11 @@ public abstract class Planet {
         this.width = width;
     }
 
-    public int getHeight() {
+    protected int getHeight() {
         return height;
     }
 
-    public int getWidth() {
+    protected int getWidth() {
         return width;
     }
 
@@ -30,7 +30,7 @@ public abstract class Planet {
         return new Coordinates(x % getWidth(), y % getHeight());
     }
 
-    public boolean isObstaclesAt(int x, int y, Direction direction) {
+    public boolean isObstaclesAt(Coordinates coordinates) {
         return false;
     }
 }

@@ -2,6 +2,7 @@ package org.marsrover.models;
 
 import org.marsrover.abstract_class.PlanetDecorator;
 import org.marsrover.abstract_class.Planet;
+import org.marsrover.records.Coordinates;
 import org.marsrover.records.Obstacle;
 
 import java.util.List;
@@ -17,12 +18,9 @@ public final class PlanetWithObstacle extends PlanetDecorator {
     }
 
     @Override
-    public boolean isObstaclesAt(int x, int y, Direction direction)
-    {
+    public boolean isObstaclesAt(Coordinates coordinates) {
         for (Obstacle obstacle : obstacles) {
-            int xFinal = x + direction.getVectorX();
-            int yFinal = y + direction.getVectorY();
-            if (xFinal == obstacle.coordinates().x() && yFinal == obstacle.coordinates().y())
+            if (obstacle.coordinates().x() == coordinates.x() && obstacle.coordinates().y() == coordinates.y())
                 return true;
         }
         return false;

@@ -1,8 +1,11 @@
 package org.marsrover.controllers;
 
+import org.marsrover.models.Direction;
 import org.marsrover.models.Rover;
 import org.marsrover.enums.RoverCommands;
+import org.marsrover.records.Coordinates;
 
+import java.util.Dictionary;
 import java.util.List;
 
 // Service
@@ -17,26 +20,24 @@ public class RoverController {
     public Rover processSequence(List<String> sequenceOfStrings)
     {
         List<RoverCommands> commands = RoverCommands.getCommandsFromStrings(sequenceOfStrings);
+        Coordinates coordinates;
+        Direction direction;
         for (RoverCommands command: commands)
         {
+            direction = rover.getCurrentDirection();
+            coordinates = rover.getCurrentCoordinates();
             switch (command) {
-                case Z -> {
-                    if (rover.getPlanet().isObstaclesAt(rover.getCurrentCoordinates().x(), rover.getCurrentCoordinates().y(), rover.getCurrentDirection())) {
-                        return rover;
-                    } else {
-                        rover = rover.moveForward();
-                    }
-                }
-                case S -> {
-                    if (rover.getPlanet().isObstaclesAt(rover.getCurrentCoordinates().x(), rover.getCurrentCoordinates().y(), rover.getCurrentDirection().getCounterDirection())) {
-                        return rover;
-                    } else {
-                        rover = rover.moveBack();
-                    }
-                }
+                case Z -> rover = rover.moveForward();
+                case S -> rover = rover.moveBack();
                 case D -> rover = rover.turnRight();
                 case Q -> rover = rover.turnLeft();
             }
+
+            if (rover.getCurrentCoordinates().equals(coordinates) && rover.getCurrentDirection().equals(direction))
+            {
+                break;
+            }
+
         }
         return rover;
     }

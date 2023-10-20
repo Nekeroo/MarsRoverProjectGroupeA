@@ -38,12 +38,12 @@ public final class Direction {
         return this.getNextDirectionFromClockwise().getNextDirectionFromClockwise();
     }
 
-    int getVectorX()
+    public int getVectorX()
     {
         return this.xVector;
     }
 
-    int getVectorY()
+    public int getVectorY()
     {
         return this.yVector;
     }
