@@ -34,6 +34,10 @@ public final class Direction {
         return getNextDirectionFromClockwise().getNextDirectionFromClockwise().getNextDirectionFromClockwise();
     }
 
+    public Direction getCounterDirection() {
+        return this.getNextDirectionFromClockwise().getNextDirectionFromClockwise();
+    }
+
     int getVectorX()
     {
         return this.xVector;

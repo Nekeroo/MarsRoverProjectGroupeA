@@ -16,7 +16,8 @@ public final class PlanetWithObstacle extends PlanetDecorator {
         this.obstacles = obstacles;
     }
 
-    public boolean isObstaclesInFrontOfRover(int x, int y, Direction direction)
+    @Override
+    public boolean isObstaclesAt(int x, int y, Direction direction)
     {
         for (Obstacle obstacle : obstacles) {
             int xFinal = x + direction.getVectorX();

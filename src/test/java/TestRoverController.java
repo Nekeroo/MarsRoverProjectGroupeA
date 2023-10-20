@@ -8,6 +8,7 @@ import org.marsrover.records.Obstacle;
 import utilities.RoverBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -112,5 +113,20 @@ public class TestRoverController {
         rover = roverController.processSequence(sequence);
 
         assertEquals(Direction.West, rover.getCurrentDirection());
+    }
+
+    @Test
+    public void testObstacleBackward() {
+        List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(1, 1)));
+
+        rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles));
+        RoverController roverControllerTest = new RoverController(rover);
+        List<String> sequence = List.of("S");
+
+        rover = roverControllerTest.processSequence(sequence);
+
+        assertEquals(1, rover.getCurrentCoordinates().x());
+        assertEquals(2, rover.getCurrentCoordinates().y());
+        assertEquals(Direction.North, rover.getCurrentDirection());
     }
 }

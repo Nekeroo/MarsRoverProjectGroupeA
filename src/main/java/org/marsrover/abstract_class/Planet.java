@@ -1,5 +1,6 @@
 package org.marsrover.abstract_class;
 
+import org.marsrover.models.Direction;
 import org.marsrover.records.Coordinates;
 
 public abstract class Planet {
@@ -27,5 +28,9 @@ public abstract class Planet {
         else if (y < 0)
             return new Coordinates(x % getWidth(), getHeight() - 1);
         return new Coordinates(x % getWidth(), y % getHeight());
+    }
+
+    public boolean isObstaclesAt(int x, int y, Direction direction) {
+        return false;
     }
 }

@@ -1,5 +1,5 @@
 package org.marsrover.controllers;
-import org.marsrover.models.PlanetWithObstacle;
+
 import org.marsrover.models.Rover;
 import org.marsrover.enums.RoverCommands;
 
@@ -19,18 +19,23 @@ public class RoverController {
         List<RoverCommands> commands = RoverCommands.getCommandsFromStrings(sequenceOfStrings);
         for (RoverCommands command: commands)
         {
-            if (rover.getPlanet() instanceof PlanetWithObstacle planetWithObstacle && planetWithObstacle.isObstaclesInFrontOfRover(rover.getCurrentCoordinates().x(), rover.getCurrentCoordinates().y(), rover.getCurrentDirection()))
-                break;
-            switch (command)
-            {
-                case Z ->
-                    rover = rover.moveForward();
-                case S ->
-                    rover = rover.moveBack();
-                case D ->
-                    rover = rover.turnRight();
-                case Q ->
-                    rover = rover.turnLeft();
+            switch (command) {
+                case Z -> {
+                    if (rover.getPlanet().isObstaclesAt(rover.getCurrentCoordinates().x(), rover.getCurrentCoordinates().y(), rover.getCurrentDirection())) {
+                        return rover;
+                    } else {
+                        rover = rover.moveForward();
+                    }
+                }
+                case S -> {
+                    if (rover.getPlanet().isObstaclesAt(rover.getCurrentCoordinates().x(), rover.getCurrentCoordinates().y(), rover.getCurrentDirection().getCounterDirection())) {
+                        return rover;
+                    } else {
+                        rover = rover.moveBack();
+                    }
+                }
+                case D -> rover = rover.turnRight();
+                case Q -> rover = rover.turnLeft();
             }
         }
         return rover;
