@@ -1,11 +1,11 @@
 package org.marsrover.records;
 
-public record Direction(String name, int xVector, int yVector)
+public record Direction(String name, Vector vector)
 {
-    public static final Direction North = new Direction("N", 0, 1);
-    public static final Direction South = new Direction("S", 0, -1);
-    public static final Direction East = new Direction("E", 1, 0);
-    public static final Direction West = new Direction("W", -1, 0);
+    public static final Direction North = new Direction("N", new Vector(0, 1));
+    public static final Direction South = new Direction("S", new Vector(0, -1));
+    public static final Direction East = new Direction("E", new Vector(1, 0));
+    public static final Direction West = new Direction("W", new Vector(-1, 0));
 
     public Direction getNextDirectionFromClockwise()
     {

@@ -10,14 +10,14 @@ public record Coordinates(int x, int y)
     }
 
     public Coordinates addCoordinates(Coordinates coordinates, Direction direction) {
-        int x = coordinates.x() + direction.xVector();
-        int y = coordinates.y() + direction.yVector();
+        int x = coordinates.x() + direction.vector().vectorX();
+        int y = coordinates.y() + direction.vector().vectorY();
         return new Coordinates(x,y);
     }
 
     public Coordinates subCoordinates(Coordinates coordinates, Direction direction) {
-        int x = coordinates.x() - direction.xVector();
-        int y = coordinates.y() - direction.yVector();
+        int x = coordinates.x() - direction.vector().vectorX();
+        int y = coordinates.y() - direction.vector().vectorY();
         return new Coordinates(x,y);
     }
 
