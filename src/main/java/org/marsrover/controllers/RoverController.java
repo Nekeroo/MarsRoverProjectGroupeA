@@ -1,14 +1,15 @@
 package org.marsrover.controllers;
+import org.marsrover.models.PlanetWithObstacle;
 import org.marsrover.models.Rover;
 import org.marsrover.enums.RoverCommands;
 
 import java.util.List;
 
 // Service
-public class Controller {
+public class RoverController {
     private Rover rover;
     
-    public Controller(Rover rover)
+    public RoverController(Rover rover)
     {
             this.rover = rover;
     }
@@ -18,7 +19,7 @@ public class Controller {
         List<RoverCommands> commands = RoverCommands.getCommandsFromStrings(sequenceOfStrings);
         for (RoverCommands command: commands)
         {
-            if (rover.isObstacleInFront())
+            if (rover.getPlanet() instanceof PlanetWithObstacle planetWithObstacle && planetWithObstacle.isObstaclesInFrontOfRover(rover.getCurrentCoordinates().x(), rover.getCurrentCoordinates().y(), rover.getCurrentDirection()))
                 break;
             switch (command)
             {

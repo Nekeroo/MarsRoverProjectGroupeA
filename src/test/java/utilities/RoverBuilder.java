@@ -1,6 +1,6 @@
 package utilities;
 
-import org.marsrover.abstrat_class.Planet;
+import org.marsrover.abstract_class.Planet;
 import org.marsrover.models.Direction;
 import org.marsrover.models.PlanetWithoutObstacles;
 import org.marsrover.models.Rover;

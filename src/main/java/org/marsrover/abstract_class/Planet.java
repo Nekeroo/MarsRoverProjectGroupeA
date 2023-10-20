@@ -1,4 +1,4 @@
-package org.marsrover.abstrat_class;
+package org.marsrover.abstract_class;
 
 import org.marsrover.records.Coordinates;
 

@@ -1,17 +1,15 @@
 package org.marsrover.models;
 
-import org.marsrover.abstrat_class.Planet;
+import org.marsrover.abstract_class.Planet;
 import org.marsrover.records.Coordinates;
 import org.marsrover.records.Position;
 
 // Objet Valeur
 @SuppressWarnings("DuplicatedCode")
-public class Rover {
+public final class Rover {
 
     private final Position position;
     private final Planet planet;
-
-    private boolean obstacleInFront = false;
 
     public Rover(Coordinates coordinates, Direction direction, Planet planet)
     {
@@ -31,9 +29,9 @@ public class Rover {
         return position.coordinates();
     }
 
-    public boolean isObstacleInFront()
+    public Planet getPlanet()
     {
-        return obstacleInFront;
+        return planet;
     }
     public Rover turnRight()
     {
@@ -49,11 +47,6 @@ public class Rover {
     {
         int x = this.getCurrentCoordinates().x() + this.getCurrentDirection().getVectorX();
         int y = this.getCurrentCoordinates().y() + this.getCurrentDirection().getVectorY();
-        if (planet instanceof PlanetWithObstacle planetWithObstacle && planetWithObstacle.isObstaclesInFrontOfRover(x, y)) {
-                this.obstacleInFront = true;
-                System.out.println("Obstacle found");
-                return this;
-        }
         Coordinates newCoordinates = new Coordinates(x, y);
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
@@ -62,11 +55,6 @@ public class Rover {
     {
         int x = this.getCurrentCoordinates().x() - this.getCurrentDirection().getVectorX();
         int y = this.getCurrentCoordinates().y() - this.getCurrentDirection().getVectorY();
-        if (planet instanceof PlanetWithObstacle planetWithObstacle && planetWithObstacle.isObstaclesInFrontOfRover(x, y)) {
-                this.obstacleInFront = true;
-                System.out.println("Obstacle found");
-                return this;
-        }
         Coordinates newCoordinates = new Coordinates(x, y);
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
     }

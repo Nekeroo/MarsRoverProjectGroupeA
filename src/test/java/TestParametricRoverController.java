@@ -1,8 +1,8 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.marsrover.abstrat_class.Planet;
-import org.marsrover.controllers.Controller;
+import org.marsrover.abstract_class.Planet;
+import org.marsrover.controllers.RoverController;
 import org.marsrover.models.Direction;
 import org.marsrover.models.PlanetWithoutObstacles;
 import org.marsrover.models.PlanetWithObstacle;
@@ -18,7 +18,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class TestParametricController {
+public class TestParametricRoverController {
 
     private final int xFinal;
 
@@ -45,7 +45,7 @@ public class TestParametricController {
         });
     }
 
-    public TestParametricController(int xFinal, int yFinal, Direction directionFinal, List<String> sequenceCommands, Planet planet) {
+    public TestParametricRoverController(int xFinal, int yFinal, Direction directionFinal, List<String> sequenceCommands, Planet planet) {
         this.xFinal = xFinal;
         this.yFinal = yFinal;
         this.directionFinal = directionFinal;
@@ -56,9 +56,9 @@ public class TestParametricController {
     @Test
     public void sequence() {
         Rover rover = new RoverBuilder().looking(Direction.North).onPlanet(planet).build();
-        Controller controller = new Controller(rover);
+        RoverController roverController = new RoverController(rover);
 
-        rover = controller.processSequence(sequenceCommands);
+        rover = roverController.processSequence(sequenceCommands);
 
         assertEquals(xFinal, rover.getCurrentCoordinates().x());
         assertEquals(yFinal, rover.getCurrentCoordinates().y());
