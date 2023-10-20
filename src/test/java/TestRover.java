@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import org.marsrover.models.*;
+import org.marsrover.records.Direction;
 import utilities.RoverBuilder;
 
 import static org.junit.Assert.assertEquals;

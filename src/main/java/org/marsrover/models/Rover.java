@@ -2,6 +2,7 @@ package org.marsrover.models;
 
 import org.marsrover.abstract_class.Planet;
 import org.marsrover.records.Coordinates;
+import org.marsrover.records.Direction;
 import org.marsrover.records.Position;
 
 // Objet Valeur

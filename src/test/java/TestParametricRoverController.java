@@ -3,11 +3,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.marsrover.abstract_class.Planet;
 import org.marsrover.controllers.RoverController;
-import org.marsrover.models.Direction;
 import org.marsrover.models.PlanetWithoutObstacles;
 import org.marsrover.models.PlanetWithObstacle;
 import org.marsrover.models.Rover;
 import org.marsrover.records.Coordinates;
+import org.marsrover.records.Direction;
 import org.marsrover.records.Obstacle;
 import utilities.RoverBuilder;
 

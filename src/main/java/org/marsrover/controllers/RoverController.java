@@ -1,11 +1,10 @@
 package org.marsrover.controllers;
 
-import org.marsrover.models.Direction;
 import org.marsrover.models.Rover;
 import org.marsrover.enums.RoverCommands;
 import org.marsrover.records.Coordinates;
+import org.marsrover.records.Direction;
 
-import java.util.Dictionary;
 import java.util.List;
 
 // Service

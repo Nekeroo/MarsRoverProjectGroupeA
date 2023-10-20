@@ -4,6 +4,7 @@ import org.marsrover.abstract_class.Planet;
 import org.marsrover.controllers.RoverController;
 import org.marsrover.models.*;
 import org.marsrover.records.Coordinates;
+import org.marsrover.records.Direction;
 import org.marsrover.records.Obstacle;
 import utilities.RoverBuilder;
 

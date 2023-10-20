@@ -1,6 +1,5 @@
 package org.marsrover.abstract_class;
 
-import org.marsrover.models.Direction;
 import org.marsrover.records.Coordinates;
 
 public abstract class Planet {

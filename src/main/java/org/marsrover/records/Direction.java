@@ -1,24 +1,13 @@
-package org.marsrover.models;
+package org.marsrover.records;
 
-// Objet Valeur
-public final class Direction {
+public record Direction(String name, int xVector, int yVector) {
 
-    public static final  Direction North = new Direction("N", 0, 1);
+    public static final Direction North = new Direction("N", 0, 1);
     public static final Direction South = new Direction("S", 0, -1);
     public static final Direction East = new Direction("E", 1, 0);
     public static final Direction West = new Direction("W", -1, 0);
-    private final String name;
-    private final int xVector;
-    private final int yVector;
 
-    public Direction(String name, int xVector, int yVector)
-    {
-        this.name = name;
-        this.xVector = xVector;
-        this.yVector = yVector;
-    }
-
-    Direction getNextDirectionFromClockwise()
+    public Direction getNextDirectionFromClockwise()
     {
         if (this.equals(North))
             return East;
@@ -29,7 +18,7 @@ public final class Direction {
         return North;
     }
 
-    Direction getNextDirectionCounterClockwise()
+    public Direction getNextDirectionCounterClockwise()
     {
         return getNextDirectionFromClockwise().getNextDirectionFromClockwise().getNextDirectionFromClockwise();
     }
@@ -38,19 +27,11 @@ public final class Direction {
         return this.getNextDirectionFromClockwise().getNextDirectionFromClockwise();
     }
 
-    public int getVectorX()
-    {
-        return this.xVector;
-    }
-
-    public int getVectorY()
-    {
-        return this.yVector;
-    }
-
     @Override
     public String toString()
     {
         return this.name;
     }
+
+
 }
