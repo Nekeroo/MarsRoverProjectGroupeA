@@ -6,7 +6,7 @@ import org.marsrover.records.Obstacle;
 
 import java.util.List;
 
-// Entité
+// Objet Valeur
 public class PlanetWithObstacle extends Decorator {
 
     private final List<Obstacle> obstacles;
