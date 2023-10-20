@@ -1,7 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 import org.marsrover.abstract_class.Planet;
-import org.marsrover.controllers.RoverController;
 import org.marsrover.models.*;
 import org.marsrover.records.Coordinates;
 import org.marsrover.records.Direction;
@@ -9,15 +8,13 @@ import org.marsrover.records.Obstacle;
 import utilities.RoverBuilder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.marsrover.controllers.RoverController.*;
 
-public class TestRoverController {
-    private RoverController roverController;
+public class TestRoverCommands {
     private Rover rover;
-
     private Planet planet;
 
     @Before
@@ -27,21 +24,20 @@ public class TestRoverController {
         rover =  new RoverBuilder().looking(Direction.North)
                         .onPlanet(planet)
                         .build();
-        roverController = new RoverController(rover);
     }
 
 
     @Test
     public void testSequenceNoObstacle()
     {
-        List<String> sequence = new ArrayList<>();
-        sequence.add("Z");
-        sequence.add("D");
-        sequence.add("S");
-        sequence.add("Q");
-        sequence.add("Z");
+        List<Character> sequence = new ArrayList<>();
+        sequence.add(MoveForwardCommand);
+        sequence.add(TurnRightCommand);
+        sequence.add(MoveBackCommand);
+        sequence.add(TurnLeftCommand);
+        sequence.add(MoveForwardCommand);
 
-        rover = roverController.processSequence(sequence);
+        rover = execute(rover, sequence);
 
         assertEquals(0, rover.getCurrentCoordinates().x());
         assertEquals(4, rover.getCurrentCoordinates().y());
@@ -54,14 +50,13 @@ public class TestRoverController {
         List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(2, 2)));
 
         rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles));
-        RoverController roverControllerTest = new RoverController(rover);
 
-        List<String> sequence = new ArrayList<>();
-        sequence.add("D");
-        sequence.add("Z");
-        sequence.add("Z");
+        List<Character> sequence = new ArrayList<>();
+        sequence.add(TurnRightCommand);
+        sequence.add(MoveForwardCommand);
+        sequence.add(MoveForwardCommand);
 
-        rover = roverControllerTest.processSequence(sequence);
+        rover = execute(rover, sequence);
 
         assertEquals(1, rover.getCurrentCoordinates().x());
         assertEquals(2, rover.getCurrentCoordinates().y());
@@ -71,10 +66,10 @@ public class TestRoverController {
     @Test
     public void testMoveForward()
     {
-        List<String> sequence = new ArrayList<>();
-        sequence.add("Z");
+        List<Character> sequence = new ArrayList<>();
+        sequence.add(MoveForwardCommand);
 
-        rover = roverController.processSequence(sequence);
+        rover = execute(rover, sequence);
 
         assertEquals(1, rover.getCurrentCoordinates().x());
         assertEquals(3, rover.getCurrentCoordinates().y());
@@ -84,10 +79,10 @@ public class TestRoverController {
     @Test
     public void testMoveBack()
     {
-        List<String> sequence = new ArrayList<>();
-        sequence.add("S");
+        List<Character> sequence = new ArrayList<>();
+        sequence.add(MoveBackCommand);
 
-        rover = roverController.processSequence(sequence);
+        rover = execute(rover, sequence);
 
         assertEquals(1, rover.getCurrentCoordinates().x());
         assertEquals(1, rover.getCurrentCoordinates().y());
@@ -97,10 +92,10 @@ public class TestRoverController {
     @Test
     public void testTurnRight()
     {
-        List<String> sequence = new ArrayList<>();
-        sequence.add("D");
+        List<Character> sequence = new ArrayList<>();
+        sequence.add(TurnRightCommand);
 
-        rover = roverController.processSequence(sequence);
+        rover = execute(rover, sequence);
 
         assertEquals(Direction.East, rover.getCurrentDirection());
     }
@@ -108,10 +103,10 @@ public class TestRoverController {
     @Test
     public void testTurnLeft()
     {
-        List<String> sequence = new ArrayList<>();
-        sequence.add("Q");
+        List<Character> sequence = new ArrayList<>();
+        sequence.add(TurnLeftCommand);
 
-        rover = roverController.processSequence(sequence);
+        rover = execute(rover, sequence);
 
         assertEquals(Direction.West, rover.getCurrentDirection());
     }
@@ -121,10 +116,10 @@ public class TestRoverController {
         List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(1, 1)));
 
         rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles));
-        RoverController roverControllerTest = new RoverController(rover);
-        List<String> sequence = List.of("S");
+        List<Character> sequence = new ArrayList<>();
+        sequence.add(MoveBackCommand);
 
-        rover = roverControllerTest.processSequence(sequence);
+        rover = execute(rover, sequence);
 
         assertEquals(1, rover.getCurrentCoordinates().x());
         assertEquals(2, rover.getCurrentCoordinates().y());

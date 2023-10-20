@@ -41,7 +41,6 @@ public final class Rover
 
     public Rover moveForward()
     {
-
         Coordinates coordinates = this.getCurrentCoordinates().addCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
         if (planet.isObstaclesAt(coordinates))
         {

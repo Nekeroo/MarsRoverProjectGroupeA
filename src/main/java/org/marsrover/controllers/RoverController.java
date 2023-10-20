@@ -1,43 +1,37 @@
 package org.marsrover.controllers;
 
 import org.marsrover.models.Rover;
-import org.marsrover.enums.RoverCommands;
-import org.marsrover.records.Coordinates;
-import org.marsrover.records.Direction;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
 // Service
-public class RoverController
+public final class RoverController
 {
-    private Rover rover;
+    public static final char MoveForwardCommand = 'A';
+    public static final char MoveBackCommand = 'R';
+    public static final char TurnRightCommand = 'D';
+    public static final char TurnLeftCommand = 'G';
 
-    public RoverController(Rover rover)
-    {
-            this.rover = rover;
+    private static final Map<Character, Function<Rover, Rover>> commands = new HashMap<>();
+
+    static {
+        commands.put(MoveForwardCommand, Rover::moveForward);
+        commands.put(MoveBackCommand, Rover::moveBack);
+        commands.put(TurnRightCommand, Rover::turnRight);
+        commands.put(TurnLeftCommand, Rover::turnLeft);
     }
 
-    public Rover processSequence(List<String> sequenceOfStrings) // TODO : indentations
-    {
-        List<RoverCommands> commands = RoverCommands.getCommandsFromStrings(sequenceOfStrings);
-        Coordinates coordinates;
-        Direction direction;
-        for (RoverCommands command: commands)
-        {
-            direction = rover.getCurrentDirection();
-            coordinates = rover.getCurrentCoordinates();
-            switch (command) {
-                case Z -> rover = rover.moveForward();
-                case S -> rover = rover.moveBack();
-                case D -> rover = rover.turnRight();
-                case Q -> rover = rover.turnLeft();
-            }
-
-            if (rover.getCurrentCoordinates().equals(coordinates) && rover.getCurrentDirection().equals(direction))
-            {
-                break;
-            }
+    public static Rover execute(Rover rover, List<Character> commandList) {
+        for (char command : commandList) {
+            rover = execute(rover, command);
         }
         return rover;
+    }
+
+    public static Rover execute(Rover rover, char command) {
+        return commands.get(command).apply(rover);
     }
 }

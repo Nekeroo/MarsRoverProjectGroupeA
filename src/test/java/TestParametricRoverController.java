@@ -2,9 +2,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.marsrover.abstract_class.Planet;
-import org.marsrover.controllers.RoverController;
-import org.marsrover.models.PlanetWithoutObstacles;
 import org.marsrover.models.PlanetWithObstacle;
+import org.marsrover.models.PlanetWithoutObstacles;
 import org.marsrover.models.Rover;
 import org.marsrover.records.Coordinates;
 import org.marsrover.records.Direction;
@@ -16,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.marsrover.controllers.RoverController.*;
 
 @RunWith(Parameterized.class)
 public class TestParametricRoverController {
@@ -26,16 +26,16 @@ public class TestParametricRoverController {
 
     private final Direction directionFinal;
 
-    private final List<String> sequenceCommands;
+    private final List<Character> sequenceCommands;
 
     private final Planet planet;
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
-        List<String> list1 = List.of("S");
-        List<String> list2 = Arrays.asList("D", "Z", "Z");
-        List<String> list3 = Arrays.asList("S", "D", "S");
-        List<String> list4 = Arrays.asList("D", "Z", "Z");
+        List<Character> list1 = List.of(MoveBackCommand);
+        List<Character> list2 = Arrays.asList(TurnRightCommand, MoveForwardCommand, MoveForwardCommand);
+        List<Character> list3 = Arrays.asList(MoveBackCommand, TurnRightCommand, MoveBackCommand);
+        List<Character> list4 = Arrays.asList(TurnRightCommand, MoveForwardCommand, MoveForwardCommand);
         // Rover part en x = 1 et y = 2
         return Arrays.asList(new Object[][]{
                 {1, 1, Direction.North, list1, new PlanetWithoutObstacles(5, 5) },
@@ -45,7 +45,7 @@ public class TestParametricRoverController {
         });
     }
 
-    public TestParametricRoverController(int xFinal, int yFinal, Direction directionFinal, List<String> sequenceCommands, Planet planet) {
+    public TestParametricRoverController(int xFinal, int yFinal, Direction directionFinal, List<Character> sequenceCommands, Planet planet) {
         this.xFinal = xFinal;
         this.yFinal = yFinal;
         this.directionFinal = directionFinal;
@@ -56,9 +56,8 @@ public class TestParametricRoverController {
     @Test
     public void sequence() {
         Rover rover = new RoverBuilder().looking(Direction.North).onPlanet(planet).build();
-        RoverController roverController = new RoverController(rover);
 
-        rover = roverController.processSequence(sequenceCommands);
+        rover = execute(rover, sequenceCommands);
 
         assertEquals(xFinal, rover.getCurrentCoordinates().x());
         assertEquals(yFinal, rover.getCurrentCoordinates().y());
