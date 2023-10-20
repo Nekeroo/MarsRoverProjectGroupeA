@@ -23,10 +23,6 @@ public record Direction(String name, int xVector, int yVector) {
         return getNextDirectionFromClockwise().getNextDirectionFromClockwise().getNextDirectionFromClockwise();
     }
 
-    public Direction getCounterDirection() {
-        return this.getNextDirectionFromClockwise().getNextDirectionFromClockwise();
-    }
-
     @Override
     public String toString()
     {
