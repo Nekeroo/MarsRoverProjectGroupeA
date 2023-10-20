@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Objet Valeur
-public enum RoverCommands {
+public enum RoverCommands
+{
     Z("Z"),
     Q("Q"),
     S("S"),

@@ -2,5 +2,4 @@ package org.marsrover.records;
 
 
 // Objet Valeur
-public record Obstacle(Coordinates coordinates) {
-}
+public record Obstacle(Coordinates coordinates) {}

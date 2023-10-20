@@ -8,14 +8,15 @@ import org.marsrover.records.Direction;
 import java.util.List;
 
 // Service
-public class RoverController {
+public class RoverController
+{
     private Rover rover;
-    
+
     public RoverController(Rover rover)
     {
             this.rover = rover;
     }
-    
+
     public Rover processSequence(List<String> sequenceOfStrings)
     {
         List<RoverCommands> commands = RoverCommands.getCommandsFromStrings(sequenceOfStrings);

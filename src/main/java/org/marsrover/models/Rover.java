@@ -6,14 +6,14 @@ import org.marsrover.records.Direction;
 import org.marsrover.records.Position;
 
 // Objet Valeur
-public final class Rover {
-
+public final class Rover
+{
     private final Position position;
     private final Planet planet;
 
     public Rover(Coordinates coordinates, Direction direction, Planet planet)
     {
-        Coordinates canonisedCoordinates = planet.canonise(coordinates.x(), coordinates.y());
+        Coordinates canonisedCoordinates = planet.canonise(coordinates);
         this.position = new Position(canonisedCoordinates, direction);
         this.planet = planet;
         System.out.printf("Coordonnées : " + this.getCurrentCoordinates());
@@ -43,7 +43,8 @@ public final class Rover {
     {
 
         Coordinates coordinates = this.getCurrentCoordinates().addCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
-        if (planet.isObstaclesAt(coordinates)) {
+        if (planet.isObstaclesAt(coordinates))
+        {
             System.out.println("Obstacle found");
             return this;
         }
@@ -54,12 +55,12 @@ public final class Rover {
     public Rover moveBack()
     {
         Coordinates coordinates = this.getCurrentCoordinates().subCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
-        if (planet.isObstaclesAt(coordinates)) {
+        if (planet.isObstaclesAt(coordinates))
+        {
             System.out.println("Obstacle found");
             return this;
         }
         Coordinates newCoordinates = new Coordinates(coordinates.x(), coordinates.y());
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
-
 }
