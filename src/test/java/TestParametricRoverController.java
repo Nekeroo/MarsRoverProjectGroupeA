@@ -3,7 +3,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.marsrover.abstract_class.Planet;
 import org.marsrover.models.PlanetWithObstacle;
-import org.marsrover.models.PlanetWithoutObstacles;
+import org.marsrover.models.PlanetWithoutObstacle;
 import org.marsrover.models.Rover;
 import org.marsrover.records.Coordinates;
 import org.marsrover.records.Direction;
@@ -38,10 +38,10 @@ public class TestParametricRoverController {
         List<Character> list4 = Arrays.asList(TurnRightCommand, MoveForwardCommand, MoveForwardCommand);
         // Rover part en x = 1 et y = 2
         return Arrays.asList(new Object[][]{
-                {1, 1, Direction.North, list1, new PlanetWithoutObstacles(5, 5) },
-                {3, 2, Direction.East, list2, new PlanetWithoutObstacles(5, 5)},
-                {0, 1, Direction.East, list3, new PlanetWithoutObstacles(5, 5)},
-                {1, 2, Direction.East, list4, new PlanetWithObstacle(new PlanetWithoutObstacles(5, 5), List.of(new Obstacle(new Coordinates(2, 2))))}
+                {1, 1, Direction.North, list1, new PlanetWithoutObstacle(5, 5) },
+                {3, 2, Direction.East, list2, new PlanetWithoutObstacle(5, 5)},
+                {0, 1, Direction.East, list3, new PlanetWithoutObstacle(5, 5)},
+                {1, 2, Direction.East, list4, new PlanetWithObstacle(new PlanetWithoutObstacle(5, 5), List.of(new Obstacle(new Coordinates(2, 2))))}
         });
     }
 

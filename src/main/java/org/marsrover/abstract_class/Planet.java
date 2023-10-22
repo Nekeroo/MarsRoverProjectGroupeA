@@ -28,7 +28,7 @@ public abstract class Planet
         return coordinates.moduloCoordinates(coordinates, height, width);
     }
 
-    public boolean isObstaclesAt(Coordinates coordinates)
+    public boolean isThereObstacle(Coordinates coordinates)
     {
         return false;
     }

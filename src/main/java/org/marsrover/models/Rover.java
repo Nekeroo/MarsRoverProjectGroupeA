@@ -11,7 +11,7 @@ public final class Rover {
     public Rover(Coordinates coordinates, Direction direction, Planet planet) {
         this.position = new Position(planet.canonise(coordinates), direction);
         this.planet = planet;
-        System.out.printf("Coordonnées : " + this.getCurrentCoordinates());
+        System.out.printf("Coordinates : " + this.getCurrentCoordinates());
     }
 
     public Direction getCurrentDirection() {
@@ -31,7 +31,7 @@ public final class Rover {
 
     public Rover moveForward() {
         Coordinates coordinates = this.getCurrentCoordinates().addCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
-        if (planet.isObstaclesAt(coordinates)) {
+        if (planet.isThereObstacle(coordinates)) {
             System.out.println("Obstacle found");
             return this;
         }
@@ -39,8 +39,8 @@ public final class Rover {
     }
 
     public Rover moveBack() {
-        Coordinates coordinates = this.getCurrentCoordinates().subCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
-        if (planet.isObstaclesAt(coordinates)) {
+        Coordinates coordinates = this.getCurrentCoordinates().subtractCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
+        if (planet.isThereObstacle(coordinates)) {
             System.out.println("Obstacle found");
             return this;
         }

@@ -15,7 +15,7 @@ public record Coordinates(int x, int y)
         return new Coordinates(x,y);
     }
 
-    public Coordinates subCoordinates(Coordinates coordinates, Direction direction) {
+    public Coordinates subtractCoordinates(Coordinates coordinates, Direction direction) {
         int x = coordinates.x() - direction.vector().vectorX();
         int y = coordinates.y() - direction.vector().vectorY();
         return new Coordinates(x,y);
