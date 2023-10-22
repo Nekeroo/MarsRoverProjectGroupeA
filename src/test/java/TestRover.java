@@ -13,7 +13,7 @@ public class TestRover {
     public void init()
     {
         PlanetWithoutObstacle planetWithoutObstacles = new PlanetWithoutObstacle(5, 5);
-        rover = new RoverBuilder().looking(Direction.North)
+        rover = new RoverBuilder().lookingDirection(Direction.North)
                         .onPlanet(planetWithoutObstacles)
                         .build();
     }
@@ -76,7 +76,7 @@ public class TestRover {
     public void testPlanetOne()
     {
         PlanetWithoutObstacle planetWithoutObstacle = new PlanetWithoutObstacle(1, 1);
-        rover = new RoverBuilder().looking(Direction.North)
+        rover = new RoverBuilder().lookingDirection(Direction.North)
                         .onPlanet(planetWithoutObstacle)
                         .onThisPosition(0, 0)
                         .build();

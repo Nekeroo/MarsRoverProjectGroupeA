@@ -12,7 +12,7 @@ public class RoverBuilder {
     private Planet planet = new PlanetWithoutObstacle(5, 5);
     private Coordinates coordinates = new Coordinates(1,2);
 
-    public RoverBuilder looking(Direction direction) {
+    public RoverBuilder lookingDirection(Direction direction) {
         this.direction = direction;
         return this;
     }

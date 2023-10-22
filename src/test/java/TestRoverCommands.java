@@ -21,7 +21,7 @@ public class TestRoverCommands {
     public void init()
     {
         planet = new PlanetWithoutObstacle(5, 5);
-        rover =  new RoverBuilder().looking(Direction.North)
+        rover =  new RoverBuilder().lookingDirection(Direction.North)
                         .onPlanet(planet)
                         .build();
     }

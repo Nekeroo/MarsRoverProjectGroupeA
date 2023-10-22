@@ -55,7 +55,7 @@ public class TestParametricRoverController {
 
     @Test
     public void sequence() {
-        Rover rover = new RoverBuilder().looking(Direction.North).onPlanet(planet).build();
+        Rover rover = new RoverBuilder().lookingDirection(Direction.North).onPlanet(planet).build();
 
         rover = execute(rover, sequenceCommands);
 
