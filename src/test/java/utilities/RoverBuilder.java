@@ -1,7 +1,7 @@
 package utilities;
 
 import org.marsrover.abstract_class.Planet;
-import org.marsrover.models.PlanetWithoutObstacles;
+import org.marsrover.models.PlanetWithoutObstacle;
 import org.marsrover.models.Rover;
 import org.marsrover.records.Coordinates;
 import org.marsrover.records.Direction;
@@ -9,10 +9,10 @@ import org.marsrover.records.Direction;
 public class RoverBuilder {
 
     private Direction direction = Direction.North;
-    private Planet planet = new PlanetWithoutObstacles(5, 5);
+    private Planet planet = new PlanetWithoutObstacle(5, 5);
     private Coordinates coordinates = new Coordinates(1,2);
 
-    public RoverBuilder looking(Direction direction) {
+    public RoverBuilder lookingDirection(Direction direction) {
         this.direction = direction;
         return this;
     }

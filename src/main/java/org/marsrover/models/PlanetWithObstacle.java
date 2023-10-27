@@ -19,7 +19,7 @@ public final class PlanetWithObstacle extends PlanetDecorator
     }
 
     @Override
-    public boolean isObstaclesAt(Coordinates coordinates) {
+    public boolean isThereObstacle(Coordinates coordinates) {
         return obstacles.stream().anyMatch(obstacle -> obstacle.coordinates().equals(coordinates));
     }
 }
