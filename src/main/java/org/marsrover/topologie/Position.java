@@ -1,4 +1,4 @@
-package org.marsrover.localization;
+package org.marsrover.location;
 
 
 // Objet Valeur

@@ -1,4 +1,4 @@
-package org.marsrover.localization;
+package org.marsrover.location;
 
 public record Direction(String name, int xVector, int yVector)
 {
