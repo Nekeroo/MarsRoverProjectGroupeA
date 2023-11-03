@@ -28,4 +28,22 @@ public record Direction(String name, int xVector, int yVector)
     {
         return this.name;
     }
+
+    public static Direction getDirectionFormString(String direction) {
+        switch (direction) {
+            case "N" -> {
+                return North;
+            }
+            case "S" -> {
+                return South;
+            }
+            case "E" -> {
+                return East;
+            }
+            case "W" -> {
+                return West;
+            }
+        }
+        return null;
+    }
 }

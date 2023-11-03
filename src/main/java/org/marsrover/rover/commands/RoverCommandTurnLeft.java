@@ -11,4 +11,9 @@ public class RoverCommandTurnLeft implements IRoverCommand {
             rover = rover.turnLeft();
             return rover;
         }
+
+    @Override
+    public String getCommand() {
+        return COMMAND;
+    }
 }

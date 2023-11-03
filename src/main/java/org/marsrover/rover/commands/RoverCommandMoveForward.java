@@ -13,4 +13,9 @@ public class RoverCommandMoveForward implements IRoverCommand {
         rover = rover.moveForward();
         return rover;
     }
+
+    @Override
+    public String getCommand() {
+        return COMMAND;
+    }
 }

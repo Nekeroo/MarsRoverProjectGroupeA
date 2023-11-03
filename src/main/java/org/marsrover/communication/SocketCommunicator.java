@@ -1,37 +1,16 @@
 package org.marsrover.communication;
 
-import java.io.IOException;
+import org.marsrover.rover.IRover;
+import org.marsrover.rover.commands.IRoverCommand;
 
-public class SocketCommunicator extends Communicator implements ICommandSender, ICommandListener{
+public class SocketCommunicator extends Communicator{
 
+    /**
+     * Cette classe a pour but de simplement réaliser des communications par Socket basiques
+     * Envoi / Récepetion d'informations sans réel traitement.
+     */
     public SocketCommunicator() {
         super();
     }
-
-   /* @Override
-    public IRover sendAnswer(IRover rover) {
-        try {
-            Socket socket = new Socket("localhost", port);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-
-            String positionX = String.valueOf(rover.getCurrentCoordinates().x());
-            String positionY = String.valueOf(rover.getCurrentCoordinates().y());
-            String direction = rover.getCurrentDirection().toString();
-
-            String roverInfo = positionX + "," + positionY + "," + direction;
-
-            out.write(roverInfo);
-            out.newLine(); // Ajoute une nouvelle ligne pour indiquer la fin de la commande
-            out.flush(); // Assurez-vous que les données sont envoyées
-            socket.close();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return rover;
-    }*/
-
-
 
 }

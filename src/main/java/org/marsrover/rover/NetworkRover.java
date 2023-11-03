@@ -16,32 +16,32 @@ public class NetworkRover implements IRover {
 
     @Override
     public IRover moveForward() {
-        return communicator.sendCommand("Z");
+        return communicator.decryptInfos(communicator.sendAnswer(this));
     }
 
     @Override
     public IRover moveBack() {
-        return communicator.sendCommand("S");
+        return communicator.decryptInfos(communicator.sendAnswer(this))
     }
 
     @Override
     public IRover turnLeft() {
-        return communicator.sendCommand("Q");
+        return communicator.decryptInfos(communicator.sendAnswer(this));
     }
 
     @Override
     public IRover turnRight() {
-        return communicator.sendCommand("D");
+        return communicator.decryptInfos(communicator.sendAnswer(this))
     }
 
     @Override
     public Direction getCurrentDirection() {
-        return null;
+        return communicator.sendCommand("Direction");
     }
 
     @Override
     public Coordinates getCurrentCoordinates() {
-        return null;
+        return communicator.sendCommand("Coordinates");
     }
 
     public static void main(String[] args) {
