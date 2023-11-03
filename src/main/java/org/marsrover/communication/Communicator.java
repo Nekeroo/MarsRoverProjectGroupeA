@@ -9,6 +9,7 @@ import org.marsrover.topologie.Direction;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLOutput;
 
 public class Communicator implements ICommandSender, ICommandListener {
 
@@ -38,12 +39,13 @@ public class Communicator implements ICommandSender, ICommandListener {
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 command = in.readLine();
                 clientSocket.close();
+                return command;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return command;
+        return null;
     }
 
     public String sendAnswer(IRover rover) {

@@ -81,21 +81,20 @@ public final class LocalRover implements IRover
         Communicator communicator = new Communicator();
         Interpreter interpreter = new Interpreter();
 
+        String command = communicator.startListening(rover);
+        LocalRover roverResult = null;
+
         // On lance l'écoute
-        new Thread(() -> {
-            LocalRover roverResult = null;
-            try {
-                String command = communicator.startListening(rover);
-                System.out.println("Input received : " + command);
-                if (interpreter.mapStringToCommand(command) != null) {
-                    roverResult = (LocalRover) interpreter.mapStringToCommand(command).execute(rover);
-                    communicator.sendAnswer(roverResult);
-                }
+        while (true) {
+            if (interpreter.mapStringToCommand(command) != null) {
+                roverResult = (LocalRover) interpreter.mapStringToCommand("Z").execute(rover);
                 communicator.sendAnswer(roverResult);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
-        }).start();
+
+            if (roverResult != null) {
+                communicator.sendAnswer(roverResult);
+            }
+        }
 
     }
 
