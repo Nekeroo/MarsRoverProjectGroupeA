@@ -22,7 +22,7 @@ public final class LocalRover implements IRover
         Coordinates canonisedCoordinates = planet.canonise(coordinates);
         this.position = new Position(canonisedCoordinates, direction);
         this.planet = planet;
-        System.out.printf("Coordonnées : " + this.getCurrentCoordinates());
+        System.out.printf("Coordonnées : " + this.getCurrentCoordinates() + " / Direction : " + this.getCurrentDirection() + "\n");
     }
 
     public Direction getCurrentDirection()
@@ -74,28 +74,23 @@ public final class LocalRover implements IRover
         return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // Déclaration des variables utiles
         PlanetWithoutObstacles planet = new PlanetWithoutObstacles(10, 10);
         LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, planet);
-        Communicator communicator = new Communicator();
+        Communicator communicator = new Communicator(8080, 8081);
         Interpreter interpreter = new Interpreter();
-
-        String command = communicator.startListening(rover);
         LocalRover roverResult = null;
-
-        // On lance l'écoute
-        while (true) {
+        String command = communicator.startListening(rover);
+        while(true) {
             if (interpreter.mapStringToCommand(command) != null) {
-                roverResult = (LocalRover) interpreter.mapStringToCommand("Z").execute(rover);
-                communicator.sendAnswer(roverResult);
+                roverResult = (LocalRover) interpreter.mapStringToCommand(command).execute(rover);
             }
 
             if (roverResult != null) {
                 communicator.sendAnswer(roverResult);
             }
         }
-
     }
 
 }

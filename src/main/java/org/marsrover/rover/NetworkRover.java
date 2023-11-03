@@ -14,8 +14,8 @@ public class NetworkRover implements IRover {
 
     private Position position;
 
-    public NetworkRover(Position position) {
-        this.communicator = new Communicator();
+    public NetworkRover(Position position, Communicator communicator) {
+        this.communicator = communicator;
         this.position = position;
         this.interpreter = new Interpreter();
     }
@@ -23,28 +23,28 @@ public class NetworkRover implements IRover {
     @Override
     public NetworkRover moveForward() {
         String status = communicator.sendCommand("Z");
-        NetworkRover rover = interpreter.mapRoverFromString(status);
+        NetworkRover rover = interpreter.mapRoverFromString(status, communicator);
         return rover;
     }
 
     @Override
     public NetworkRover moveBack() {
         String status = communicator.sendCommand("S");
-        NetworkRover rover = interpreter.mapRoverFromString(status);
+        NetworkRover rover = interpreter.mapRoverFromString(status, communicator);
         return rover;
     }
 
     @Override
     public NetworkRover turnLeft() {
         String status = communicator.sendCommand("Q");
-        NetworkRover rover = interpreter.mapRoverFromString(status);
+        NetworkRover rover = interpreter.mapRoverFromString(status, communicator);
         return rover;
     }
 
     @Override
     public NetworkRover turnRight() {
         String status = communicator.sendCommand("D");
-        NetworkRover rover = interpreter.mapRoverFromString(status);
+        NetworkRover rover = interpreter.mapRoverFromString(status, communicator);
         return rover;
     }
 

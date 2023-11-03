@@ -18,21 +18,21 @@ public class Communicator implements ICommandSender, ICommandListener {
      * Ainsi que d'interpréter le message reçu pour le transformer en commande
      * voir même transformer le message en Rover et inversement
      */
-    private static final int port = 8080;
+    private final int portEcoute;
 
-    public Communicator() { }
+    private final int portEnvoi;
 
-    public int getPort() {
-        return port;
+    public Communicator(int portEcoute, int portEnvoi) {
+        this.portEcoute = portEcoute;
+        this.portEnvoi = portEnvoi;
     }
 
-
     @Override
-    public String startListening(IRover rover) throws IOException {
+    public String startListening(IRover rover) {
         String command = "";
         try {
-            ServerSocket serverSocket = new ServerSocket(port);
-            System.out.println("Rover is listening on port " + this.getPort());
+            ServerSocket serverSocket = new ServerSocket(portEcoute);
+            System.out.println("Rover is listening on port " + portEcoute);
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
@@ -51,7 +51,7 @@ public class Communicator implements ICommandSender, ICommandListener {
     public String sendAnswer(IRover rover) {
         String roverInfo = "";
         try {
-            Socket socket = new Socket("localhost", port);
+            Socket socket = new Socket("toMissionControl", portEnvoi);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             String positionX = String.valueOf(rover.getCurrentCoordinates().x());
@@ -75,7 +75,7 @@ public class Communicator implements ICommandSender, ICommandListener {
     @Override
     public String sendCommand(String data) {
         try {
-            Socket socket = new Socket("localhost", port);
+            Socket socket = new Socket("toRover", portEnvoi);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             out.write(data);
@@ -83,7 +83,6 @@ public class Communicator implements ICommandSender, ICommandListener {
             out.flush();
 
             socket.close();
-
             return data;
         } catch (IOException e) {
             e.printStackTrace();
