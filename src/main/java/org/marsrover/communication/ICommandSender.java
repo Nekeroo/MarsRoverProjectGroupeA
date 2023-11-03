@@ -1,4 +1,4 @@
-package org.marsrover.abstractCommunications;
+package org.marsrover.communication;
 
 public interface ICommandSender {
 

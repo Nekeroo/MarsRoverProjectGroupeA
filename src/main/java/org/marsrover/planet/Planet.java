@@ -1,6 +1,6 @@
-package org.marsrover.abstract_class;
+package org.marsrover.planet;
 
-import org.marsrover.records.Coordinates;
+import org.marsrover.topologie.Coordinates;
 
 public abstract class Planet
 {

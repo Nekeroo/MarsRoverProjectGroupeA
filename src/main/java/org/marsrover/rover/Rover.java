@@ -1,20 +1,19 @@
-package org.marsrover.models;
+package org.marsrover.rover;
 
-import org.marsrover.abstractCommunications.ICommandListener;
-import org.marsrover.abstract_class.Planet;
-import org.marsrover.records.Coordinates;
-import org.marsrover.records.Direction;
-import org.marsrover.records.Position;
+import org.marsrover.communication.SocketCommunicator;
+import org.marsrover.planet.Planet;
+import org.marsrover.planet.PlanetWithoutObstacles;
+import org.marsrover.topologie.Coordinates;
+import org.marsrover.topologie.Direction;
+import org.marsrover.topologie.Position;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 // Objet Valeur
-public final class Rover implements ICommandListener
+public final class Rover implements IRover
 {
+
+    private SocketCommunicator socketCommunicator = new SocketCommunicator();
     private final Position position;
     private final Planet planet;
 
@@ -26,26 +25,35 @@ public final class Rover implements ICommandListener
         System.out.printf("Coordonnées : " + this.getCurrentCoordinates());
     }
 
+    @Override
     public Direction getCurrentDirection()
     {
         return position.direction();
     }
 
+    @Override
     public Coordinates getCurrentCoordinates()
     {
         return position.coordinates();
     }
 
+    public SocketCommunicator getSocketCommunicator() {
+        return socketCommunicator;
+    }
+
+    @Override
     public Rover turnRight()
     {
         return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionFromClockwise(), this.planet) ;
     }
 
+    @Override
     public Rover turnLeft()
     {
         return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionCounterClockwise(), this.planet) ;
     }
 
+    @Override
     public Rover moveForward()
     {
 
@@ -59,6 +67,7 @@ public final class Rover implements ICommandListener
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
+    @Override
     public Rover moveBack()
     {
         Coordinates coordinates = this.getCurrentCoordinates().subCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
@@ -71,30 +80,14 @@ public final class Rover implements ICommandListener
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
-    @Override
-    public void read(String data) throws IOException {
-        System.out.println("Rover received: " + data);
-    }
-
-    public void startListening() {
-        try {
-            ServerSocket serverSocket = new ServerSocket(8080);
-            System.out.println("Rover is listening on port " + 8080);
-
-            while (true) {
-                Socket clientSocket = serverSocket.accept();
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                String data = in.readLine();
-                read(data);
-                clientSocket.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) {
         Rover rover = new Rover(new Coordinates(1,2), Direction.North, new PlanetWithoutObstacles(5,5));
-        new Thread(() -> rover.startListening()).start();
+        new Thread(() -> {
+            try {
+                rover.socketCommunicator.startListening();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
     }
 }

@@ -1,4 +1,4 @@
-package org.marsrover.records;
+package org.marsrover.topologie;
 
 
 // Objet Valeur

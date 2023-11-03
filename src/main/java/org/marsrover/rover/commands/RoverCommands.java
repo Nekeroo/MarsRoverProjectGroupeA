@@ -1,4 +1,4 @@
-package org.marsrover.enums;
+package org.marsrover.rover.commands;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,5 +38,18 @@ public enum RoverCommands
                 sequence.add(Q);
         }
         return sequence;
+    }
+
+    public static RoverCommands getCommandFromString(String command)
+    {
+        if (command.equals(Z.getCommand()))
+            return Z;
+        else if (command.equals(S.getCommand()))
+            return S;
+        else if (command.equals(D.getCommand()))
+            return D;
+        else if (command.equals(Q.getCommand()))
+            return Q;
+        return null;
     }
 }

@@ -1,9 +1,6 @@
-package org.marsrover.models;
+package org.marsrover.planet;
 
-import org.marsrover.abstract_class.PlanetDecorator;
-import org.marsrover.abstract_class.Planet;
-import org.marsrover.records.Coordinates;
-import org.marsrover.records.Obstacle;
+import org.marsrover.topologie.Coordinates;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
 package utilities;
 
-import org.marsrover.abstract_class.Planet;
-import org.marsrover.models.PlanetWithoutObstacles;
-import org.marsrover.models.Rover;
-import org.marsrover.records.Coordinates;
-import org.marsrover.records.Direction;
+import org.marsrover.planet.Planet;
+import org.marsrover.planet.PlanetWithoutObstacles;
+import org.marsrover.rover.Rover;
+import org.marsrover.topologie.Coordinates;
+import org.marsrover.topologie.Direction;
 
 public class RoverBuilder {
 

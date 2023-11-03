@@ -1,6 +1,4 @@
-package org.marsrover.models;
-
-import org.marsrover.abstract_class.Planet;
+package org.marsrover.planet;
 
 // Objet Valeur
 public final class PlanetWithoutObstacles extends Planet

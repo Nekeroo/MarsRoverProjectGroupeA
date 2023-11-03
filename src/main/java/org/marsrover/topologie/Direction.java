@@ -1,4 +1,4 @@
-package org.marsrover.records;
+package org.marsrover.topologie;
 
 public record Direction(String name, int xVector, int yVector)
 {
