@@ -2,6 +2,9 @@ package org.marsrover.controlMission;
 
 import org.marsrover.communication.SocketCommunicator;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 public class MissionControl {
 
     private SocketCommunicator socketCommunicator;
@@ -12,7 +15,9 @@ public class MissionControl {
         MissionControl missionControl = new MissionControl();
 
         while (true) {
-            String command = missionControl.socketCommunicator.send();
+            Scanner console = new Scanner(System.in);
+            String nextCommand = console.nextLine();
+            String command = missionControl.socketCommunicator.sendCommand(nextCommand);
             System.out.println("Sent command: " + command);
         }
     }

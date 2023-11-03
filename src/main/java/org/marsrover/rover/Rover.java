@@ -13,7 +13,6 @@ import java.io.IOException;
 public final class Rover implements IRover
 {
 
-    private SocketCommunicator socketCommunicator = new SocketCommunicator();
     private final Position position;
     private final Planet planet;
 
@@ -35,10 +34,6 @@ public final class Rover implements IRover
     public Coordinates getCurrentCoordinates()
     {
         return position.coordinates();
-    }
-
-    public SocketCommunicator getSocketCommunicator() {
-        return socketCommunicator;
     }
 
     @Override
@@ -80,14 +75,4 @@ public final class Rover implements IRover
         return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
-    public static void main(String[] args) {
-        Rover rover = new Rover(new Coordinates(1,2), Direction.North, new PlanetWithoutObstacles(5,5));
-        new Thread(() -> {
-            try {
-                rover.socketCommunicator.startListening();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
-    }
 }

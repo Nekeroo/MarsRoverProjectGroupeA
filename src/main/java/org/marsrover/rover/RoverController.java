@@ -1,9 +1,7 @@
 package org.marsrover.rover;
 
 import org.marsrover.planet.PlanetWithoutObstacles;
-import org.marsrover.rover.commands.IRoverCommand;
-import org.marsrover.rover.commands.RoverCommandMoveForward;
-import org.marsrover.rover.commands.RoverCommands;
+import org.marsrover.rover.commands.*;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 
@@ -38,9 +36,9 @@ public class RoverController
             coordinates = rover.getCurrentCoordinates();
             switch (command) {
                 case Z -> rover = new RoverCommandMoveForward().execute(rover);
-                case S -> rover = rover.moveBack();
-                case D -> rover = rover.turnRight();
-                case Q -> rover = rover.turnLeft();
+                case S -> rover = new RoverCommandMoveBack().execute(rover);
+                case D -> rover = new RoverCommandTurnRight().execute(rover);
+                case Q -> rover = new RoverCommandTurnLeft().execute(rover);
             }
 
             if (rover.getCurrentCoordinates().equals(coordinates) && rover.getCurrentDirection().equals(direction))
@@ -52,16 +50,4 @@ public class RoverController
         return rover;
     }
 
-    /*public static void main(String[] args) {
-        Rover rover = new Rover(new Coordinates(1,2), Direction.North, new PlanetWithoutObstacles(5,5));
-        RoverController rc = new RoverController(rover);
-        new Thread(() -> {
-            try {
-                rc.rover.getSocketCommunicator().startListening();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
-    }
-*/
 }
