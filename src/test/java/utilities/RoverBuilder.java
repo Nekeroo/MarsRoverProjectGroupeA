@@ -8,7 +8,7 @@ import org.marsrover.records.Direction;
 
 public class RoverBuilder {
 
-    private Direction direction = Direction.North;
+    private Direction direction = TestConstants.North;
     private Planet planet = new PlanetWithoutObstacle(5, 5);
     private Coordinates coordinates = new Coordinates(1,2);
 
