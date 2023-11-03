@@ -7,6 +7,6 @@ import java.io.IOException;
 public interface ICommandListener {
 
     // TODO : Ajouter paramètre de la méthode.
-    public void startListening(IRover rover) throws IOException;
+    public String startListening(IRover rover) throws IOException;
 
 }

@@ -1,71 +1,61 @@
 package org.marsrover.rover;
 
 import org.marsrover.communication.Communicator;
+import org.marsrover.communication.Interpreter;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import org.marsrover.topologie.Position;
 
-import java.io.IOException;
-
 public class NetworkRover implements IRover {
 
     private Communicator communicator;
+
+    private Interpreter interpreter;
 
     private Position position;
 
     public NetworkRover(Position position) {
         this.communicator = new Communicator();
         this.position = position;
+        this.interpreter = new Interpreter();
     }
-
-
 
     @Override
     public NetworkRover moveForward() {
-        communicator.sendCommand("Z");
-
-
-        Direction direction =
-        Position position = new Position(new Coordinates(x, y), direction);
-        return NetworkRover()
+        String status = communicator.sendCommand("Z");
+        NetworkRover rover = interpreter.mapRoverFromString(status);
+        return rover;
     }
 
     @Override
     public NetworkRover moveBack() {
-        return communicator.decryptInfos(communicator.sendAnswer(this));
+        String status = communicator.sendCommand("S");
+        NetworkRover rover = interpreter.mapRoverFromString(status);
+        return rover;
     }
 
     @Override
     public NetworkRover turnLeft() {
-        return communicator.decryptInfos(communicator.sendAnswer(this));
+        String status = communicator.sendCommand("Q");
+        NetworkRover rover = interpreter.mapRoverFromString(status);
+        return rover;
     }
 
     @Override
     public NetworkRover turnRight() {
         String status = communicator.sendCommand("D");
-        String[] roverInfos = status.split(",");
-        int x = Integer.parseInt(roverInfos[0]);
-        int y = Integer.parseInt(roverInfos[1]);
-        Direction direction = Direction.getDirectionFromString(roverInfos[2]);
-
+        NetworkRover rover = interpreter.mapRoverFromString(status);
+        return rover;
     }
 
     @Override
     public Direction getCurrentDirection() {
-        return communicator.sendCommand("Direction");
+        return position.direction();
     }
 
     @Override
     public Coordinates getCurrentCoordinates() {
-        return communicator.sendCommand("Coordinates");
+        return position.coordinates();
     }
 
-    public static void main(String[] args) {
-        NetworkRover networkRover = new NetworkRover();
-        try {
-            networkRover.communicator.startListening(networkRover);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

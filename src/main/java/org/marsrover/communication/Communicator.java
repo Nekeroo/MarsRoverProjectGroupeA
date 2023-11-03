@@ -27,21 +27,23 @@ public class Communicator implements ICommandSender, ICommandListener {
 
 
     @Override
-    public void startListening(IRover rover) throws IOException {
+    public String startListening(IRover rover) throws IOException {
+        String command = "";
         try {
-            ServerSocket serverSocket = new ServerSocket();
+            ServerSocket serverSocket = new ServerSocket(port);
             System.out.println("Rover is listening on port " + this.getPort());
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                String command = in.readLine();
-                System.out.println(command);
+                command = in.readLine();
                 clientSocket.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return command;
     }
 
     public String sendAnswer(IRover rover) {
@@ -71,7 +73,7 @@ public class Communicator implements ICommandSender, ICommandListener {
     @Override
     public String sendCommand(String data) {
         try {
-            Socket socket = new Socket("localhost", this.getPort());
+            Socket socket = new Socket("localhost", port);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             out.write(data);

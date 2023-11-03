@@ -1,12 +1,13 @@
 package org.marsrover.communication;
 
 import org.marsrover.rover.IRover;
-import org.marsrover.rover.LocalRover;
+import org.marsrover.rover.NetworkRover;
 import org.marsrover.rover.commands.*;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
+import org.marsrover.topologie.Position;
 
-public class Intepreter {
+public class Interpreter {
 
     public IRover decryptInfos(String data) {
         return mapRoverFromString(data);
@@ -50,12 +51,12 @@ public class Intepreter {
      */
 
     // TODO : Voir pour la planète
-    public IRover mapRoverFromString(String data){
+    public NetworkRover mapRoverFromString(String data){
         String[] roverInfos = data.split(",");
         int positionX = Integer.parseInt(roverInfos[0]);
         int positionY = Integer.parseInt(roverInfos[1]);
         Direction direction = Direction.getDirectionFromString(roverInfos[2]);
-        return new LocalRover(new Coordinates(positionX, positionY), direction, null);
+        return new NetworkRover(new Position(new Coordinates(positionX, positionY), direction));
     }
 
 }
