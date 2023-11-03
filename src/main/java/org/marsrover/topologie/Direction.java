@@ -29,7 +29,7 @@ public record Direction(String name, int xVector, int yVector)
         return this.name;
     }
 
-    public static Direction getDirectionFormString(String direction) {
+    public static Direction getDirectionFromString(String direction) {
         switch (direction) {
             case "N" -> {
                 return North;

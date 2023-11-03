@@ -6,7 +6,6 @@ import org.marsrover.rover.IRover;
 import org.marsrover.rover.RoverController;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.planet.PlanetWithObstacle;
-import org.marsrover.rover.Rover;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import org.marsrover.planet.Obstacle;
@@ -19,7 +18,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class TestParametricRoverController {
+public class TestParametricLocalRoverController {
 
     private final int xFinal;
 
@@ -42,7 +41,7 @@ public class TestParametricRoverController {
         });
     }
 
-    public TestParametricRoverController(int xFinal, int yFinal, Direction directionFinal, String sequenceCommands, Planet planet) {
+    public TestParametricLocalRoverController(int xFinal, int yFinal, Direction directionFinal, String sequenceCommands, Planet planet) {
         this.xFinal = xFinal;
         this.yFinal = yFinal;
         this.directionFinal = directionFinal;

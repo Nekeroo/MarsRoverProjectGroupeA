@@ -3,6 +3,7 @@ package org.marsrover.rover;
 import org.marsrover.communication.Communicator;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
+import org.marsrover.topologie.Position;
 
 import java.io.IOException;
 
@@ -10,28 +11,43 @@ public class NetworkRover implements IRover {
 
     private Communicator communicator;
 
-    public NetworkRover() {
+    private Position position;
+
+    public NetworkRover(Position position) {
         this.communicator = new Communicator();
+        this.position = position;
+    }
+
+
+
+    @Override
+    public NetworkRover moveForward() {
+        communicator.sendCommand("Z");
+
+
+        Direction direction =
+        Position position = new Position(new Coordinates(x, y), direction);
+        return NetworkRover()
     }
 
     @Override
-    public IRover moveForward() {
+    public NetworkRover moveBack() {
         return communicator.decryptInfos(communicator.sendAnswer(this));
     }
 
     @Override
-    public IRover moveBack() {
-        return communicator.decryptInfos(communicator.sendAnswer(this))
-    }
-
-    @Override
-    public IRover turnLeft() {
+    public NetworkRover turnLeft() {
         return communicator.decryptInfos(communicator.sendAnswer(this));
     }
 
     @Override
-    public IRover turnRight() {
-        return communicator.decryptInfos(communicator.sendAnswer(this))
+    public NetworkRover turnRight() {
+        String status = communicator.sendCommand("D");
+        String[] roverInfos = status.split(",");
+        int x = Integer.parseInt(roverInfos[0]);
+        int y = Integer.parseInt(roverInfos[1]);
+        Direction direction = Direction.getDirectionFromString(roverInfos[2]);
+
     }
 
     @Override

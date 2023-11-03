@@ -1,22 +1,18 @@
 package org.marsrover.rover;
 
-import org.marsrover.communication.SocketCommunicator;
 import org.marsrover.planet.Planet;
-import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import org.marsrover.topologie.Position;
 
-import java.io.IOException;
-
 // Objet Valeur
-public final class Rover implements IRover
+public final class LocalRover implements IRover
 {
 
     private final Position position;
     private final Planet planet;
 
-    public Rover(Coordinates coordinates, Direction direction, Planet planet)
+    public LocalRover(Coordinates coordinates, Direction direction, Planet planet)
     {
         Coordinates canonisedCoordinates = planet.canonise(coordinates);
         this.position = new Position(canonisedCoordinates, direction);
@@ -37,19 +33,19 @@ public final class Rover implements IRover
     }
 
     @Override
-    public Rover turnRight()
+    public LocalRover turnRight()
     {
-        return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionFromClockwise(), this.planet) ;
+        return new LocalRover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionFromClockwise(), this.planet) ;
     }
 
     @Override
-    public Rover turnLeft()
+    public LocalRover turnLeft()
     {
-        return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionCounterClockwise(), this.planet) ;
+        return new LocalRover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionCounterClockwise(), this.planet) ;
     }
 
     @Override
-    public Rover moveForward()
+    public LocalRover moveForward()
     {
 
         Coordinates coordinates = this.getCurrentCoordinates().addCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
@@ -59,11 +55,11 @@ public final class Rover implements IRover
             return this;
         }
         Coordinates newCoordinates = new Coordinates(coordinates.x(), coordinates.y());
-        return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
+        return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
     @Override
-    public Rover moveBack()
+    public LocalRover moveBack()
     {
         Coordinates coordinates = this.getCurrentCoordinates().subCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
         if (planet.isObstaclesAt(coordinates))
@@ -72,7 +68,7 @@ public final class Rover implements IRover
             return this;
         }
         Coordinates newCoordinates = new Coordinates(coordinates.x(), coordinates.y());
-        return new Rover(newCoordinates, this.getCurrentDirection(), this.planet);
+        return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
 }

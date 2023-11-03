@@ -8,14 +8,14 @@ import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import org.marsrover.planet.Obstacle;
-import org.marsrover.rover.Rover;
+import org.marsrover.rover.LocalRover;
 import utilities.RoverBuilder;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestRoverController {
+public class TestLocalRoverController {
     private RoverController roverController;
     private IRover rover;
 
@@ -48,7 +48,7 @@ public class TestRoverController {
     {
         List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(2, 2)));
 
-        rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles));
+        rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles));
         RoverController roverControllerTest = new RoverController(rover);
 
         rover = roverControllerTest.processSequence("DZZ");
@@ -100,7 +100,7 @@ public class TestRoverController {
     public void testObstacleBackward() {
         List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(1, 1)));
 
-        rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles));
+        rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles));
         RoverController roverControllerTest = new RoverController(rover);
         rover = roverControllerTest.processSequence("S");
 

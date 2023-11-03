@@ -2,7 +2,7 @@ package utilities;
 
 import org.marsrover.planet.Planet;
 import org.marsrover.planet.PlanetWithoutObstacles;
-import org.marsrover.rover.Rover;
+import org.marsrover.rover.LocalRover;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 
@@ -27,7 +27,7 @@ public class RoverBuilder {
         return this;
     }
 
-    public Rover build() {
-        return new Rover(coordinates, direction, planet);
+    public LocalRover build() {
+        return new LocalRover(coordinates, direction, planet);
     }
 }
