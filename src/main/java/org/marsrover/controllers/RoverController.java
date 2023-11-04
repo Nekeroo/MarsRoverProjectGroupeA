@@ -10,10 +10,10 @@ import java.util.function.Function;
 // Service
 public final class RoverController
 {
-    private static final char MoveForwardCommand = 'A';
-    private static final char MoveBackCommand = 'R';
-    private static final char TurnRightCommand = 'D';
-    private static final char TurnLeftCommand = 'G';
+    private static final Character MoveForwardCommand = 'A';
+    private static final Character MoveBackCommand = 'R';
+    private static final Character TurnRightCommand = 'D';
+    private static final Character TurnLeftCommand = 'G';
 
     private static final Map<Character, Function<Rover, Rover>> commands = new HashMap<>();
 
@@ -25,13 +25,13 @@ public final class RoverController
     }
 
     public static Rover execute(Rover rover, List<Character> commandList) {
-        for (char command : commandList) {
+        for (Character command : commandList) {
             rover = execute(rover, command);
         }
         return rover;
     }
 
-    public static Rover execute(Rover rover, char command) {
+    public static Rover execute(Rover rover, Character command) {
         return commands.get(command).apply(rover);
     }
 }

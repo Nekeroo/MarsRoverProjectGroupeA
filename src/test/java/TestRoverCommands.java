@@ -38,8 +38,8 @@ public class TestRoverCommands {
 
         rover = execute(rover, sequence);
 
-        assertEquals(0, rover.getCurrentCoordinates().x());
-        assertEquals(4, rover.getCurrentCoordinates().y());
+        assertEquals(Integer.valueOf(0), rover.getCurrentCoordinates().x());
+        assertEquals(Integer.valueOf(4), rover.getCurrentCoordinates().y());
         assertEquals(TestConstants.North, rover.getCurrentDirection());
     }
 
@@ -57,8 +57,8 @@ public class TestRoverCommands {
 
         rover = execute(rover, sequence);
 
-        assertEquals(1, rover.getCurrentCoordinates().x());
-        assertEquals(2, rover.getCurrentCoordinates().y());
+        assertEquals(Integer.valueOf(1), rover.getCurrentCoordinates().x());
+        assertEquals(Integer.valueOf(2), rover.getCurrentCoordinates().y());
         assertEquals(TestConstants.East, rover.getCurrentDirection());
     }
 
@@ -70,8 +70,8 @@ public class TestRoverCommands {
 
         rover = execute(rover, sequence);
 
-        assertEquals(1, rover.getCurrentCoordinates().x());
-        assertEquals(3, rover.getCurrentCoordinates().y());
+        assertEquals(Integer.valueOf(1), rover.getCurrentCoordinates().x());
+        assertEquals(Integer.valueOf(3), rover.getCurrentCoordinates().y());
         assertEquals(TestConstants.North, rover.getCurrentDirection());
     }
 
@@ -83,8 +83,8 @@ public class TestRoverCommands {
 
         rover = execute(rover, sequence);
 
-        assertEquals(1, rover.getCurrentCoordinates().x());
-        assertEquals(1, rover.getCurrentCoordinates().y());
+        assertEquals(Integer.valueOf(1), rover.getCurrentCoordinates().x());
+        assertEquals(Integer.valueOf(1), rover.getCurrentCoordinates().y());
         assertEquals(TestConstants.North, rover.getCurrentDirection());
     }
 
@@ -120,8 +120,8 @@ public class TestRoverCommands {
 
         rover = execute(rover, sequence);
 
-        assertEquals(1, rover.getCurrentCoordinates().x());
-        assertEquals(2, rover.getCurrentCoordinates().y());
+        assertEquals(Integer.valueOf(1), rover.getCurrentCoordinates().x());
+        assertEquals(Integer.valueOf(2), rover.getCurrentCoordinates().y());
         assertEquals(TestConstants.North, rover.getCurrentDirection());
     }
 }

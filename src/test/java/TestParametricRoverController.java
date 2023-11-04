@@ -20,8 +20,8 @@ import static org.marsrover.controllers.RoverController.*;
 
 @RunWith(Parameterized.class)
 public class TestParametricRoverController {
-    private final int xFinal;
-    private final int yFinal;
+    private final Integer xFinal;
+    private final Integer yFinal;
     private final Direction directionFinal;
     private final List<Character> sequenceCommands;
     private final Planet planet;
@@ -41,7 +41,7 @@ public class TestParametricRoverController {
         });
     }
 
-    public TestParametricRoverController(int xFinal, int yFinal, Direction directionFinal, List<Character> sequenceCommands, Planet planet) {
+    public TestParametricRoverController(Integer xFinal, Integer yFinal, Direction directionFinal, List<Character> sequenceCommands, Planet planet) {
         this.xFinal = xFinal;
         this.yFinal = yFinal;
         this.directionFinal = directionFinal;

@@ -4,6 +4,8 @@ import org.marsrover.models.*;
 import utilities.RoverBuilder;
 import utilities.TestConstants;
 
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
 
 public class TestRover {
@@ -22,8 +24,8 @@ public class TestRover {
     public void testMoveForward()
     {
         rover = rover.moveForward();
-        assertEquals(1, rover.getCurrentCoordinates().x());
-        assertEquals(3, rover.getCurrentCoordinates().y());
+        assertEquals(Integer.valueOf(1), rover.getCurrentCoordinates().x());
+        assertEquals(Integer.valueOf(3), rover.getCurrentCoordinates().y());
         assertEquals(TestConstants.North, rover.getCurrentDirection());
     }
 
@@ -31,8 +33,8 @@ public class TestRover {
     public void testMoveBack()
     {
         rover = rover.moveBack();
-        assertEquals(1, rover.getCurrentCoordinates().x());
-        assertEquals(1, rover.getCurrentCoordinates().y());
+        assertEquals(Integer.valueOf(1), rover.getCurrentCoordinates().x());
+        assertEquals(Integer.valueOf(1), rover.getCurrentCoordinates().y());
         assertEquals(TestConstants.North, rover.getCurrentDirection());
     }
 
@@ -56,8 +58,8 @@ public class TestRover {
         for (int i = 0; i < 2; i++){
             rover = rover.moveBack();
         }
-        assertEquals(1, rover.getCurrentCoordinates().x());
-        assertEquals(0, rover.getCurrentCoordinates().y());
+        assertEquals(Integer.valueOf(1), rover.getCurrentCoordinates().x());
+        assertEquals(Integer.valueOf(0), rover.getCurrentCoordinates().y());
         assertEquals(TestConstants.North, rover.getCurrentDirection());
     }
 
@@ -67,8 +69,8 @@ public class TestRover {
         for (int i = 0; i < 3; i++){
             rover = rover.moveBack();
         }
-        assertEquals(1, rover.getCurrentCoordinates().x());
-        assertEquals(4, rover.getCurrentCoordinates().y());
+        assertEquals(Integer.valueOf(1), rover.getCurrentCoordinates().x());
+        assertEquals(Integer.valueOf(4), rover.getCurrentCoordinates().y());
         assertEquals(TestConstants.North, rover.getCurrentDirection());
     }
 
@@ -81,8 +83,8 @@ public class TestRover {
                         .onThisPosition(0, 0)
                         .build();
         rover = rover.moveForward();
-        assertEquals(0, rover.getCurrentCoordinates().x());
-        assertEquals(0, rover.getCurrentCoordinates().y());
+        assertEquals(Integer.valueOf(0), rover.getCurrentCoordinates().x());
+        assertEquals(Integer.valueOf(0), rover.getCurrentCoordinates().y());
         assertEquals(TestConstants.North, rover.getCurrentDirection());
     }
 }
