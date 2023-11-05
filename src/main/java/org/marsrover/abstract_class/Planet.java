@@ -4,21 +4,21 @@ import org.marsrover.records.Coordinates;
 
 public abstract class Planet
 {
-    private final int height;
-    private final int width;
+    private final Integer height;
+    private final Integer width;
 
-    protected Planet(int height, int width)
+    protected Planet(Integer height, Integer width)
     {
         this.height = height;
         this.width = width;
     }
 
-    protected int getHeight()
+    protected Integer getHeight()
     {
         return height;
     }
 
-    protected int getWidth()
+    protected Integer getWidth()
     {
         return width;
     }

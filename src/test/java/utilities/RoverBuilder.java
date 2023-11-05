@@ -17,7 +17,7 @@ public class RoverBuilder {
         return this;
     }
 
-    public RoverBuilder onThisPosition(int x, int y) {
+    public RoverBuilder onThisPosition(Integer x, Integer y) {
         this.coordinates = new Coordinates(x, y);
         return this;
     }
