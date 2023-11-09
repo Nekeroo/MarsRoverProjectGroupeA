@@ -20,7 +20,7 @@ public class TestRoverCommands {
     @Before
     public void init()
     {
-        planet = new PlanetWithoutObstacle(5, 5);
+        planet = new PlanetWithoutObstacle(new Height(5), new Width(5));
         rover =  new RoverBuilder().lookingDirection(TestConstants.North)
                         .onPlanet(planet)
                         .build();

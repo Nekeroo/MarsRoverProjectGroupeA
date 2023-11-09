@@ -1,24 +1,26 @@
 package org.marsrover.abstract_class;
 
 import org.marsrover.records.Coordinates;
+import org.marsrover.models.Height;
+import org.marsrover.models.Width;
 
 public abstract class Planet
 {
-    private final Integer height;
-    private final Integer width;
+    private final Height height;
+    private final Width width;
 
-    protected Planet(Integer height, Integer width)
+    protected Planet(Height height, Width width)
     {
         this.height = height;
         this.width = width;
     }
 
-    protected Integer getHeight()
+    protected Height getHeight()
     {
         return height;
     }
 
-    protected Integer getWidth()
+    protected Width getWidth()
     {
         return width;
     }
