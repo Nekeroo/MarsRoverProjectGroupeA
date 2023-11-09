@@ -10,9 +10,12 @@ public class Server implements IMessageServer {
 
     private ServerSocket server;
 
+    private Socket socketClient;
+
     public Server() {
         try {
             this.server = new ServerSocket(Configuration.PORT);
+            this.socketClient = null;
         }
         catch (IOException e) {
             throw new RuntimeException(e);
@@ -23,8 +26,9 @@ public class Server implements IMessageServer {
     @Override
     public String listenAndSendResponse() {
         try {
-            Socket clientSocket = server.accept();
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            if (socketClient == null)
+                socketClient = server.accept();
+            BufferedReader in = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
             String command = in.readLine();
             System.out.println(command);
             return command;
