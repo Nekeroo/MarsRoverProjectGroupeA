@@ -8,6 +8,9 @@ import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import org.marsrover.topologie.Position;
 
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 // Objet Valeur
 public final class LocalRover implements IRover
 {
@@ -72,11 +75,16 @@ public final class LocalRover implements IRover
         return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
-    public static void main(String[] args) {
+    public static void startRover(Predicate<Void> predicate){
+        LocalRover rover = new LocalRover(new Coordinates(1,2), Direction.North, new PlanetWithoutObstacles(5,5));
         Server server = new Server();
-        while (true) {
-            server.listenAndSendResponse();
+        while (predicate.test(null)) {
+            rover = (LocalRover) server.listenAndSendResponse(rover);
         }
+    }
+
+    public static void main(String[] args) {
+        startRover(value -> true);
     }
 
 }

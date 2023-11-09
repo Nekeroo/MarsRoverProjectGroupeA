@@ -1,7 +1,9 @@
 package org.marsrover.communication;
 
+import org.marsrover.rover.IRover;
+
 public interface IMessageClient {
 
-    String SendAndWaitForResponse(String message);
+    IRover SendAndWaitForResponse(String message);
 
 }

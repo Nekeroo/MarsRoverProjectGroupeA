@@ -1,8 +1,9 @@
 package org.marsrover.communication;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import org.marsrover.rover.IRover;
+import org.marsrover.rover.NetworkRover;
+
+import java.io.*;
 import java.net.Socket;
 
 public class Client implements IMessageClient{
@@ -19,15 +20,30 @@ public class Client implements IMessageClient{
 
 
     @Override
-    public String SendAndWaitForResponse(String message) {
+    public IRover SendAndWaitForResponse(String message) {
         try {
+            String roverResult = "";
+            NetworkRover networkRover = null;
+            Interpreter interpreter = new Interpreter();
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 
             out.write(message);
             out.newLine();
             out.flush();
 
-            return "Message sent : " + message;
+            System.out.println("Message sent : " + message);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+
+            String response = in.readLine();
+
+            if (response != null && !response.isEmpty()) {
+                roverResult = response;
+                networkRover = interpreter.mapRoverFromString(roverResult);
+                System.out.println("New Rover : " + networkRover.toString());
+            }
+
+            return networkRover;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

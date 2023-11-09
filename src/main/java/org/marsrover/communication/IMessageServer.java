@@ -1,7 +1,10 @@
 package org.marsrover.communication;
 
+import org.marsrover.rover.IRover;
+import org.marsrover.rover.LocalRover;
+
 public interface IMessageServer {
 
-    String listenAndSendResponse();
+    IRover listenAndSendResponse(LocalRover rover);
 
 }

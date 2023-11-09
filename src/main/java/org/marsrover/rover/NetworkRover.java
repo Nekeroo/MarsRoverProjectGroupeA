@@ -7,16 +7,10 @@ import org.marsrover.topologie.Position;
 
 public class NetworkRover implements IRover {
 
-//    private Communicator communicator;
-
-    private Interpreter interpreter;
-
     private Position position;
 
     public NetworkRover(Position position) {
-//        this.communicator = communicator;
         this.position = position;
-        this.interpreter = new Interpreter();
     }
 
     @Override
@@ -49,4 +43,8 @@ public class NetworkRover implements IRover {
         return position.coordinates();
     }
 
+    @Override
+    public String toString() {
+        return "x :" + getCurrentCoordinates().x() + "/ y : " + getCurrentCoordinates().y() + "/ direction : " + getCurrentDirection();
+    }
 }
