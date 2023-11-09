@@ -22,7 +22,7 @@ public class Client implements IMessageClient{
     @Override
     public IRover SendAndWaitForResponse(String message) {
         try {
-            String roverResult = "";
+            String roverResult;
             NetworkRover networkRover = null;
             Interpreter interpreter = new Interpreter();
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
@@ -37,7 +37,7 @@ public class Client implements IMessageClient{
 
             String response = in.readLine();
 
-            if (response != null && !response.isEmpty()) {
+            if (response != null && !response.isEmpty() && !response.equals("X")) {
                 roverResult = response;
                 networkRover = interpreter.mapRoverFromString(roverResult);
                 System.out.println("New Rover : " + networkRover.toString());

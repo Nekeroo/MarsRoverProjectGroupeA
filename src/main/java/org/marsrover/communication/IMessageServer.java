@@ -3,8 +3,8 @@ package org.marsrover.communication;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.LocalRover;
 
+import java.util.concurrent.CompletableFuture;
+
 public interface IMessageServer {
-
-    IRover listenAndSendResponse(LocalRover rover);
-
+    CompletableFuture<IRover> listenAndSendResponse(LocalRover rover);
 }

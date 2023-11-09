@@ -10,18 +10,15 @@ public class MissionControl {
         Client client = new Client();
         Scanner console = new Scanner(System.in);
 
-        /*
         boolean canContinue = true;
-         */
-        while (true){
+
+        while (canContinue){
             String message = console.nextLine();
-            if (message != "")
+            if (!message.isEmpty())
                 client.SendAndWaitForResponse(message);
-        }
-        /*
-            if (message == "ERROR") ou if (message == "Obstacle Found")
+            if (message.equals("E"))
                 canContinue = false;
-         */
+        }
     }
 
 }
