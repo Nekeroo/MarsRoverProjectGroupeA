@@ -21,15 +21,15 @@ public class TestParametricRoverController {
     private final Integer xFinal;
     private final Integer yFinal;
     private final Direction directionFinal;
-    private final List<Character> sequenceCommands;
+    private final List<Command> sequenceCommands;
     private final Planet planet;
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
-        List<Character> list1 = List.of('R');
-        List<Character> list2 = Arrays.asList(TestConstants.TurnRightCommand, TestConstants.MoveForwardCommand, TestConstants.MoveForwardCommand);
-        List<Character> list3 = Arrays.asList(TestConstants.MoveBackCommand, TestConstants.TurnRightCommand, TestConstants.MoveBackCommand);
-        List<Character> list4 = Arrays.asList(TestConstants.TurnRightCommand, TestConstants.MoveForwardCommand, TestConstants.MoveForwardCommand);
+        List<Command> list1 = List.of(new Command('R'));
+        List<Command> list2 = Arrays.asList(TestConstants.TurnRightCommand, TestConstants.MoveForwardCommand, TestConstants.MoveForwardCommand);
+        List<Command> list3 = Arrays.asList(TestConstants.MoveBackCommand, TestConstants.TurnRightCommand, TestConstants.MoveBackCommand);
+        List<Command> list4 = Arrays.asList(TestConstants.TurnRightCommand, TestConstants.MoveForwardCommand, TestConstants.MoveForwardCommand);
         // Rover part en x = 1 et y = 2
         return Arrays.asList(new Object[][]{
                 {1, 1, TestConstants.North, list1, new PlanetWithoutObstacle(new Height(5), new Width(5)) },
@@ -39,7 +39,7 @@ public class TestParametricRoverController {
         });
     }
 
-    public TestParametricRoverController(Integer xFinal, Integer yFinal, Direction directionFinal, List<Character> sequenceCommands, Planet planet) {
+    public TestParametricRoverController(Integer xFinal, Integer yFinal, Direction directionFinal, List<Command> sequenceCommands, Planet planet) {
         this.xFinal = xFinal;
         this.yFinal = yFinal;
         this.directionFinal = directionFinal;

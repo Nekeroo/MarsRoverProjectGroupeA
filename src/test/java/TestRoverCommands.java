@@ -29,12 +29,14 @@ public class TestRoverCommands {
     @Test
     public void testSequenceNoObstacle()
     {
-        List<Character> sequence = new ArrayList<>();
+        List<Command> sequence = new ArrayList<>();
         sequence.add(TestConstants.MoveForwardCommand);
         sequence.add(TestConstants.TurnRightCommand);
         sequence.add(TestConstants.MoveBackCommand);
         sequence.add(TestConstants.TurnLeftCommand);
         sequence.add(TestConstants.MoveForwardCommand);
+
+        System.out.println(sequence);
 
         rover = execute(rover, sequence);
 
@@ -50,7 +52,7 @@ public class TestRoverCommands {
 
         rover = new Rover(new Coordinates(1, 2), TestConstants.North, new PlanetWithObstacle(planet,obstacles));
 
-        List<Character> sequence = new ArrayList<>();
+        List<Command> sequence = new ArrayList<>();
         sequence.add(TestConstants.TurnRightCommand);
         sequence.add(TestConstants.MoveForwardCommand);
         sequence.add(TestConstants.MoveForwardCommand);
@@ -65,7 +67,7 @@ public class TestRoverCommands {
     @Test
     public void testMoveForward()
     {
-        List<Character> sequence = new ArrayList<>();
+        List<Command> sequence = new ArrayList<>();
         sequence.add(TestConstants.MoveForwardCommand);
 
         rover = execute(rover, sequence);
@@ -78,7 +80,7 @@ public class TestRoverCommands {
     @Test
     public void testMoveBack()
     {
-        List<Character> sequence = new ArrayList<>();
+        List<Command> sequence = new ArrayList<>();
         sequence.add(TestConstants.MoveBackCommand);
 
         rover = execute(rover, sequence);
@@ -91,7 +93,7 @@ public class TestRoverCommands {
     @Test
     public void testTurnRight()
     {
-        List<Character> sequence = new ArrayList<>();
+        List<Command> sequence = new ArrayList<>();
         sequence.add(TestConstants.TurnRightCommand);
 
         rover = execute(rover, sequence);
@@ -102,7 +104,7 @@ public class TestRoverCommands {
     @Test
     public void testTurnLeft()
     {
-        List<Character> sequence = new ArrayList<>();
+        List<Command> sequence = new ArrayList<>();
         sequence.add(TestConstants.TurnLeftCommand);
 
         rover = execute(rover, sequence);
@@ -115,7 +117,7 @@ public class TestRoverCommands {
         List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(1, 1)));
 
         rover = new Rover(new Coordinates(1, 2), TestConstants.North, new PlanetWithObstacle(planet,obstacles));
-        List<Character> sequence = new ArrayList<>();
+        List<Command> sequence = new ArrayList<>();
         sequence.add(TestConstants.MoveBackCommand);
 
         rover = execute(rover, sequence);

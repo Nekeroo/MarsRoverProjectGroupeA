@@ -4,8 +4,6 @@ import org.marsrover.models.*;
 import utilities.RoverBuilder;
 import utilities.TestConstants;
 
-import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
 
 public class TestRover {
