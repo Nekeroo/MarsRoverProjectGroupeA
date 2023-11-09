@@ -1,14 +1,12 @@
 package org.marsrover.rover;
 
-import org.marsrover.communication.Communicator;
 import org.marsrover.communication.Interpreter;
+import org.marsrover.communication.Server;
 import org.marsrover.planet.Planet;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import org.marsrover.topologie.Position;
-
-import java.io.IOException;
 
 // Objet Valeur
 public final class LocalRover implements IRover
@@ -75,21 +73,9 @@ public final class LocalRover implements IRover
     }
 
     public static void main(String[] args) {
-        // Déclaration des variables utiles
-        PlanetWithoutObstacles planet = new PlanetWithoutObstacles(10, 10);
-        LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, planet);
-        Communicator communicator = new Communicator(8080, 8081);
-        Interpreter interpreter = new Interpreter();
-        LocalRover roverResult = null;
-        String command = communicator.startListening(rover);
-        while(true) {
-            if (interpreter.mapStringToCommand(command) != null) {
-                roverResult = (LocalRover) interpreter.mapStringToCommand(command).execute(rover);
-            }
-
-            if (roverResult != null) {
-                communicator.sendAnswer(roverResult);
-            }
+        Server server = new Server();
+        while (true) {
+            server.listenAndSendResponse();
         }
     }
 

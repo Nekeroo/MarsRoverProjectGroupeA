@@ -47,12 +47,12 @@ public class Interpreter {
      */
 
     // TODO : Voir pour la planète
-    public NetworkRover mapRoverFromString(String data, Communicator communicator) {
-        String[] roverInfos = data.split(",");
-        int positionX = Integer.parseInt(roverInfos[0]);
-        int positionY = Integer.parseInt(roverInfos[1]);
-        Direction direction = Direction.getDirectionFromString(roverInfos[2]);
-        return new NetworkRover(new Position(new Coordinates(positionX, positionY), direction), communicator);
-    }
+//    public NetworkRover mapRoverFromString(String data, Communicator communicator) {
+//        String[] roverInfos = data.split(",");
+//        int positionX = Integer.parseInt(roverInfos[0]);
+//        int positionY = Integer.parseInt(roverInfos[1]);
+//        Direction direction = Direction.getDirectionFromString(roverInfos[2]);
+//        return new NetworkRover(new Position(new Coordinates(positionX, positionY), direction), communicator);
+//    }
 
 }
