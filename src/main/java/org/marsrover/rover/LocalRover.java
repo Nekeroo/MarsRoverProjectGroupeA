@@ -74,8 +74,7 @@ public final class LocalRover implements IRover
         return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
-    public static void startRover(CancellationToken token) throws ExecutionException, InterruptedException {
-        LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5));
+    public static void startRover(CancellationToken token, LocalRover rover) throws ExecutionException, InterruptedException {
         Server server = new Server();
         while (!token.isCancellationRequested()) {
             if (token.isCancellationRequested()) {
@@ -88,7 +87,8 @@ public final class LocalRover implements IRover
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CancellationToken token = new CancellationToken();
-        startRover(token);
+        LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5));
+        startRover(token, rover);
     }
 
     @Override
