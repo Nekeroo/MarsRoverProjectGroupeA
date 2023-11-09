@@ -104,13 +104,11 @@ public final class LocalRover implements IRover
 
     @Override
     public boolean equals(Object o){
-        if (o == null)
+        if (!(o instanceof LocalRover roverToCompare))
             return false;
 
-        LocalRover roverToCompare = (LocalRover) o;
-
-        return roverToCompare.getCurrentCoordinates().x() != getCurrentCoordinates().x()
-                || roverToCompare.getCurrentCoordinates().y() != getCurrentCoordinates().y()
-                || roverToCompare.getCurrentDirection() != getCurrentDirection();
+        return roverToCompare.getCurrentCoordinates().x() == getCurrentCoordinates().x()
+                && roverToCompare.getCurrentCoordinates().y() == getCurrentCoordinates().y()
+                && roverToCompare.getCurrentDirection() == getCurrentDirection();
     }
 }
