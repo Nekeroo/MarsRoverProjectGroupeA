@@ -8,10 +8,7 @@ import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import org.marsrover.topologie.Position;
 
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 // Objet Valeur
 public final class LocalRover implements IRover
@@ -77,29 +74,21 @@ public final class LocalRover implements IRover
         return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
-    public static void startRover(CancellationToken token, LocalRover rover) throws ExecutionException, InterruptedException {
+    public static void startRover(CancellationToken token) throws ExecutionException, InterruptedException {
+        LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5));
         Server server = new Server();
-
         while (!token.isCancellationRequested()) {
             if (token.isCancellationRequested()) {
                 break;
             }
 
-            CompletableFuture<IRover> future = server.listenAndSendResponse(rover);
-
-            // Wait for the future with a timeout to periodically check for cancellation
-            try {
-                rover = (LocalRover) future.get(500, TimeUnit.MILLISECONDS);
-            } catch (TimeoutException ignored) {
-
-            }
+            rover = (LocalRover) server.listenAndSendResponse(rover).get();
         }
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CancellationToken token = new CancellationToken();
-        LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5));
-        startRover(token, rover);
+        startRover(token);
     }
 
     @Override
@@ -107,8 +96,8 @@ public final class LocalRover implements IRover
         if (!(o instanceof LocalRover roverToCompare))
             return false;
 
-        return roverToCompare.getCurrentCoordinates().x() == getCurrentCoordinates().x()
-                && roverToCompare.getCurrentCoordinates().y() == getCurrentCoordinates().y()
-                && roverToCompare.getCurrentDirection() == getCurrentDirection();
+        return roverToCompare.getCurrentCoordinates().x() != getCurrentCoordinates().x()
+                || roverToCompare.getCurrentCoordinates().y() != getCurrentCoordinates().y()
+                || roverToCompare.getCurrentDirection() != getCurrentDirection();
     }
 }
