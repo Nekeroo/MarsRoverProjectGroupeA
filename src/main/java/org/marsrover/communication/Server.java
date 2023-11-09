@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 
 public class Server implements IMessageServer {
 
-    private ServerSocket server;
+    private final ServerSocket server;
 
     private Socket socketClient;
     private final ExecutorService executorService;

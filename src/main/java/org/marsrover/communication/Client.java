@@ -8,7 +8,7 @@ import java.net.Socket;
 
 public class Client implements IMessageClient{
 
-    private Socket client;
+    private final Socket client;
 
     public Client() {
         try {

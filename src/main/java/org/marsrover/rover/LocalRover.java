@@ -109,8 +109,8 @@ public final class LocalRover implements IRover
 
         LocalRover roverToCompare = (LocalRover) o;
 
-        return roverToCompare.getCurrentCoordinates().x() == getCurrentCoordinates().x()
-                && roverToCompare.getCurrentCoordinates().y() == getCurrentCoordinates().y()
-                && roverToCompare.getCurrentDirection() == getCurrentDirection();
+        return roverToCompare.getCurrentCoordinates().x() != getCurrentCoordinates().x()
+                || roverToCompare.getCurrentCoordinates().y() != getCurrentCoordinates().y()
+                || roverToCompare.getCurrentDirection() != getCurrentDirection();
     }
 }

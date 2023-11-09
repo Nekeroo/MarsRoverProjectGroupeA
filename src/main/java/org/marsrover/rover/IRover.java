@@ -1,6 +1,5 @@
 package org.marsrover.rover;
 
-import org.marsrover.planet.Planet;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 

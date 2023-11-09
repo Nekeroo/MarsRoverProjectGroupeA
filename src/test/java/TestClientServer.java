@@ -25,7 +25,7 @@ public class TestClientServer {
             }
         }).start();
 
-        Thread.sleep(100000);
+        Thread.sleep(1000);
         token.cancel();
 
         Client client = new Client();

@@ -1,13 +1,12 @@
 package org.marsrover.rover;
 
-import org.marsrover.communication.Interpreter;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import org.marsrover.topologie.Position;
 
 public class NetworkRover implements IRover {
 
-    private Position position;
+    private final Position position;
 
     public NetworkRover(Position position) {
         this.position = position;

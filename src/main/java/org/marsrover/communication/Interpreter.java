@@ -1,6 +1,5 @@
 package org.marsrover.communication;
 
-import org.marsrover.rover.IRover;
 import org.marsrover.rover.NetworkRover;
 import org.marsrover.rover.commands.*;
 import org.marsrover.topologie.Coordinates;
@@ -11,26 +10,19 @@ public class Interpreter {
 
     /**
      * Permet de mappuer une chaine de caractère sous forme de RoverCommand
-     * @param data
-     * @return
      */
     public IRoverCommand mapStringToCommand(String data) {
-        switch (data) {
-            case RoverCommandMoveForward.COMMAND:
-                return new RoverCommandMoveForward();
-            case RoverCommandMoveBack.COMMAND:
-                return new RoverCommandMoveBack();
-            case RoverCommandTurnLeft.COMMAND:
-                return new RoverCommandTurnLeft();
-            case RoverCommandTurnRight.COMMAND:
-                return new RoverCommandTurnRight();
-        }
-        return null;
+        return switch (data) {
+            case RoverCommandMoveForward.COMMAND -> new RoverCommandMoveForward();
+            case RoverCommandMoveBack.COMMAND -> new RoverCommandMoveBack();
+            case RoverCommandTurnLeft.COMMAND -> new RoverCommandTurnLeft();
+            case RoverCommandTurnRight.COMMAND -> new RoverCommandTurnRight();
+            default -> null;
+        };
     }
 
     /**
      * Permet de mapper une commande au format String
-     * @param command
      * @return
      * Exemple : La commande RoverCommandMoveForward ==> "Z"
      */
@@ -40,7 +32,6 @@ public class Interpreter {
 
     /**
      * Permet de mapper une chaîne de caractère en Rover
-     * @param data
      * @return
      * Exemple : "1,2,N" => Rover(1,2,N)
      * Où x = 1, y = 2 et Direction = Direction.NORTH

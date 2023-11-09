@@ -1,11 +1,9 @@
 package org.marsrover.rover;
 
-import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.commands.*;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
