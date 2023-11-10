@@ -1,15 +1,16 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.marsrover.communication.Interpreter;
 import org.marsrover.console.Logger;
+import org.marsrover.planet.Obstacle;
 import org.marsrover.planet.Planet;
-import org.marsrover.rover.IRover;
-import org.marsrover.rover.RoverController;
 import org.marsrover.planet.PlanetWithObstacle;
 import org.marsrover.planet.PlanetWithoutObstacles;
+import org.marsrover.rover.IRover;
+import org.marsrover.rover.LocalRover;
+import org.marsrover.rover.commands.IRoverCommand;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
-import org.marsrover.planet.Obstacle;
-import org.marsrover.rover.LocalRover;
 import utilities.RoverBuilder;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class TestLocalRoverController {
-    private RoverController roverController;
+    private Interpreter interpreter;
     private IRover rover;
 
     private Planet planet;
@@ -28,15 +29,16 @@ public class TestLocalRoverController {
         rover =  new RoverBuilder().looking(Direction.North)
                         .onPlanet(planet)
                         .build();
-        roverController = new RoverController(rover);
+        interpreter = new Interpreter();
     }
 
 
     @Test
     public void testSequenceNoObstacle() {
-
-        rover = roverController.processSequence("ZDSQZ");
-
+        List<IRoverCommand> commands = interpreter.mapStringToCommandList("ZDSQZ");
+        for (IRoverCommand command : commands){
+            rover = command.execute(rover);
+        }
         assertEquals(0, rover.getCurrentCoordinates().x());
         assertEquals(4, rover.getCurrentCoordinates().y());
         assertEquals(Direction.North, rover.getCurrentDirection());
@@ -47,9 +49,12 @@ public class TestLocalRoverController {
         List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(2, 2)));
 
         rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles), new Logger());
-        RoverController roverControllerTest = new RoverController(rover);
+        Interpreter interpreter = new Interpreter();
 
-        rover = roverControllerTest.processSequence("DZZ");
+        List<IRoverCommand> commands = interpreter.mapStringToCommandList("DZZ");
+        for (IRoverCommand command : commands){
+            rover = command.execute(rover);
+        }
 
         assertEquals(1, rover.getCurrentCoordinates().x());
         assertEquals(2, rover.getCurrentCoordinates().y());
@@ -58,7 +63,8 @@ public class TestLocalRoverController {
 
     @Test
     public void testMoveForward() {
-        rover = roverController.processSequence("Z");
+        IRoverCommand command = interpreter.mapStringToCommand("Z");
+        rover = command.execute(rover);
 
         assertEquals(1, rover.getCurrentCoordinates().x());
         assertEquals(3, rover.getCurrentCoordinates().y());
@@ -68,7 +74,8 @@ public class TestLocalRoverController {
     @Test
     public void testMoveBack() {
 
-        rover = roverController.processSequence("S");
+        IRoverCommand command = interpreter.mapStringToCommand("S");
+        rover = command.execute(rover);
 
         assertEquals(1, rover.getCurrentCoordinates().x());
         assertEquals(1, rover.getCurrentCoordinates().y());
@@ -77,26 +84,27 @@ public class TestLocalRoverController {
 
     @Test
     public void testTurnRight() {
-        rover = roverController.processSequence("D");
-
+        IRoverCommand command = interpreter.mapStringToCommand("D");
+        rover = command.execute(rover);
         assertEquals(Direction.East, rover.getCurrentDirection());
     }
 
     @Test
     public void testTurnLeft() {
 
-        rover = roverController.processSequence("Q");
-
+        IRoverCommand command = interpreter.mapStringToCommand("Q");
+        rover = command.execute(rover);
         assertEquals(Direction.West, rover.getCurrentDirection());
     }
 
     @Test
     public void testObstacleBackward() {
         List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(1, 1)));
-
         rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles), new Logger());
-        RoverController roverControllerTest = new RoverController(rover);
-        rover = roverControllerTest.processSequence("S");
+        Interpreter interpreter = new Interpreter();
+        IRoverCommand command = interpreter.mapStringToCommand("S");
+
+        rover = command.execute(rover);
 
         assertEquals(1, rover.getCurrentCoordinates().x());
         assertEquals(2, rover.getCurrentCoordinates().y());

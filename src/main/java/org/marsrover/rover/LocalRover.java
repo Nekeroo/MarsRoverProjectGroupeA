@@ -96,7 +96,6 @@ public final class LocalRover implements IRover
             if (token.isCancellationRequested()) {
                 break;
             }
-
             rover = (LocalRover) server.listenAndSendResponse(rover).get();
         }
     }

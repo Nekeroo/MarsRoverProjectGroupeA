@@ -5,10 +5,12 @@ import org.marsrover.console.Logger;
 import org.marsrover.console.SocketConsole;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.LocalRover;
+import org.marsrover.rover.commands.IRoverCommand;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -40,16 +42,26 @@ public class Server implements IMessageServer {
     public CompletableFuture<IRover> listenAndSendResponse(LocalRover rover) {
         return CompletableFuture.supplyAsync(() -> {
             try {
+                LocalRover tmpRover = rover;
                 LocalRover roverResult;
                 acceptClientSocketIfNull();
 
-                String command = console.readline();
-                console.log("Server read: " + command);
+                String data = console.readline();
+                console.log("Server read: " + data);
 
                 Interpreter interpreter = new Interpreter();
                 roverResult = null;
-                if (interpreter.mapStringToCommand(command) != null) {
-                    roverResult = (LocalRover) interpreter.mapStringToCommand(command).execute(rover);
+
+                if (data.length() > 1){
+                    List<IRoverCommand> commands = interpreter.mapStringToCommandList(data);
+                    for (IRoverCommand command : commands){
+                        console.log("Commande exécutée : " + interpreter.mapCommandToString(command));
+                        roverResult = (LocalRover) command.execute(tmpRover);
+                        tmpRover = roverResult;
+                    }
+                }
+                else if (interpreter.mapStringToCommand(data) != null) {
+                    roverResult = (LocalRover) interpreter.mapStringToCommand(data).execute(tmpRover);
                 }
 
                 if (!rover.equals(roverResult))
