@@ -1,6 +1,5 @@
 package org.marsrover.records;
 
-
 import org.marsrover.models.Height;
 import org.marsrover.models.Width;
 
@@ -13,14 +12,14 @@ public record Coordinates(Integer x, Integer y)
     }
 
     public Coordinates addCoordinates(Coordinates coordinates, Direction direction) {
-        Integer x = coordinates.x() + direction.vector().vectorX();
-        Integer y = coordinates.y() + direction.vector().vectorY();
+        Integer x = coordinates.x() + direction.vectorX();
+        Integer y = coordinates.y() + direction.vectorY();
         return new Coordinates(x,y);
     }
 
     public Coordinates subtractCoordinates(Coordinates coordinates, Direction direction) {
-        Integer x = coordinates.x() - direction.vector().vectorX();
-        Integer y = coordinates.y() - direction.vector().vectorY();
+        Integer x = coordinates.x() - direction.vectorX();
+        Integer y = coordinates.y() - direction.vectorY();
         return new Coordinates(x,y);
     }
 
