@@ -4,6 +4,10 @@ import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import org.marsrover.topologie.Position;
 
+/**
+ * NetworkRover est une classe utilisée côté Client afin de transformer les informations reçus d'un LocalRover sous la forma
+ * de String par le réseau en objet NetworkRover
+ */
 public class NetworkRover implements IRover {
 
     private final Position position;

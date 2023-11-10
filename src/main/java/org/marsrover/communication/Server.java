@@ -10,6 +10,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Classe Server permettant de d'héberger un ServerSocket et de communiquer avec le Client
+ */
 public class Server implements IMessageServer {
 
     private final ServerSocket server;

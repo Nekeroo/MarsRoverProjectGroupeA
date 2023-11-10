@@ -3,6 +3,9 @@ package org.marsrover.rover;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 
+/**
+ * Interface IRover est implémentée dans LocalRover et NetworkRover.
+ */
 public interface IRover {
 
     IRover moveForward();

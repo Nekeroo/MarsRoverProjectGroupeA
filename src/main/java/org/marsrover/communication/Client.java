@@ -6,6 +6,9 @@ import org.marsrover.rover.NetworkRover;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ * Classe Client permettant de créer un Socket Client et de communiquer avec le Server
+ */
 public class Client implements IMessageClient{
 
     private final Socket client;
@@ -42,6 +45,8 @@ public class Client implements IMessageClient{
                 networkRover = interpreter.mapRoverFromString(roverResult);
                 System.out.println("New Rover : " + networkRover.toString());
             }
+
+
 
             return networkRover;
         } catch (IOException e) {

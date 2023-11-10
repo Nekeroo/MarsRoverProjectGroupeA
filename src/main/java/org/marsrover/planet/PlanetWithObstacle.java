@@ -4,7 +4,9 @@ import org.marsrover.topologie.Coordinates;
 
 import java.util.List;
 
-// Objet Valeur
+/**
+ * PlanetWithObstacle hérite de PlanetDecorator.
+ */
 public final class PlanetWithObstacle extends PlanetDecorator
 {
     private final List<Obstacle> obstacles;

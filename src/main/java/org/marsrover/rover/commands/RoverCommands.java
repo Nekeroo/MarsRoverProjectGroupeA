@@ -3,7 +3,9 @@ package org.marsrover.rover.commands;
 import java.util.ArrayList;
 import java.util.List;
 
-// Objet Valeur
+/**
+ * RoverCommands est l'ancien objet utilisé pour regroupé les commandes.
+ */
 public enum RoverCommands
 {
     Z("Z"),

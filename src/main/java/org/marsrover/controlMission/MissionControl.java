@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class MissionControl {
 
+    /**
+     * Méthode principale pour exécuter le programme (Côté Client)
+     */
     public static void main(String[] args) {
         Client client = new Client();
         Scanner console = new Scanner(System.in);

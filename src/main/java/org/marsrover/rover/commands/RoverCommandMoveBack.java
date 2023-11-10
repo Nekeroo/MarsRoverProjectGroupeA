@@ -2,6 +2,10 @@ package org.marsrover.rover.commands;
 
 import org.marsrover.rover.IRover;
 
+/**
+ * RoverCommandMoveBack implémente IRoverCommand.
+ * Regroupe le nom de la commande et l'exécution à réaliser sur un objet IRover
+ */
 public class RoverCommandMoveBack implements IRoverCommand {
 
     public final static String COMMAND = "S";

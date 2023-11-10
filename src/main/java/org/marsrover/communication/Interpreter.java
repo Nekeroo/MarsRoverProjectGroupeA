@@ -9,7 +9,7 @@ import org.marsrover.topologie.Position;
 public class Interpreter {
 
     /**
-     * Permet de mappuer une chaine de caractère sous forme de RoverCommand
+     * Permet de mapper une chaine de caractère sous forme de RoverCommand
      */
     public IRoverCommand mapStringToCommand(String data) {
         return switch (data) {
@@ -42,7 +42,7 @@ public class Interpreter {
         String[] roverInfos = data.split(",");
         int positionX = Integer.parseInt(roverInfos[0]);
         int positionY = Integer.parseInt(roverInfos[1]);
-        Direction direction = Direction.getDirectionFromString(roverInfos[2]);
+        Direction direction = Direction.mapDirectionFromString(roverInfos[2]);
         return new NetworkRover(new Position(new Coordinates(positionX, positionY), direction));
     }
 

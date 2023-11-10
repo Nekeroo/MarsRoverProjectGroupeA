@@ -35,18 +35,30 @@ public final class LocalRover implements IRover
         return position.coordinates();
     }
 
+    /**
+     * Méthode de déplacement (Tourner Droite) pour le rover
+     * @return une nouvelle installe de LocalRover
+     */
     @Override
     public LocalRover turnRight()
     {
         return new LocalRover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionFromClockwise(), this.planet) ;
     }
 
+    /**
+     * Méthode de déplacement (Tourner Gauche) pour le rover
+     * @return une nouvelle installe de LocalRover
+     */
     @Override
     public LocalRover turnLeft()
     {
         return new LocalRover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionCounterClockwise(), this.planet) ;
     }
 
+    /**
+     * Méthode de déplacement (Avancer) pour le rover
+     * @return une nouvelle installe de LocalRover
+     */
     @Override
     public LocalRover moveForward()
     {
@@ -61,6 +73,10 @@ public final class LocalRover implements IRover
         return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
+    /**
+     * Méthode de déplacement (Reculer) pour le rover
+     * @return une nouvelle installe de LocalRover
+     */
     @Override
     public LocalRover moveBack()
     {
@@ -74,6 +90,9 @@ public final class LocalRover implements IRover
         return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet);
     }
 
+    /**
+     * Méthode pour lancer la connexion serveur
+     */
     public static void startRover(CancellationToken token, LocalRover rover) throws ExecutionException, InterruptedException {
         Server server = new Server();
         while (!token.isCancellationRequested()) {
@@ -85,6 +104,9 @@ public final class LocalRover implements IRover
         }
     }
 
+    /**
+     * Méthode principale pour exécuter le programme (Côté Serveur)
+     */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CancellationToken token = new CancellationToken();
         LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5));

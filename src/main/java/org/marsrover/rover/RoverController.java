@@ -7,7 +7,10 @@ import org.marsrover.topologie.Direction;
 import java.util.ArrayList;
 import java.util.List;
 
-// Service
+/**
+ * RoverController est un controller permettant d'ordonner au Rover d'exécuter une commande selon une entrée en String.
+ * Cette classe n'est plus utilisée dans notre code actuel.
+ */
 public class RoverController
 {
     private IRover rover;

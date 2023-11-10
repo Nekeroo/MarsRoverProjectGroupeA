@@ -1,5 +1,8 @@
 package org.marsrover.communication;
 
+/**
+ * Classe de Configuration contenant le nom de l'Hôte et le port de communication
+ */
 public class Configuration {
 
     public final static String HOST = "localhost";
