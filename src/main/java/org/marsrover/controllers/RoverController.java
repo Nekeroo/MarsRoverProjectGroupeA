@@ -1,5 +1,6 @@
 package org.marsrover.controllers;
 
+import org.marsrover.collections.CommandCollection;
 import org.marsrover.models.Command;
 import org.marsrover.models.Rover;
 
@@ -16,13 +17,13 @@ public final class RoverController
     private static final Command TurnRightCommand = new Command('D');
     private static final Command TurnLeftCommand = new Command('G');
 
-    private static final Map<Character, Function<Rover, Rover>> commands = new HashMap<>();
+    private static final CommandCollection commandCollection = new CommandCollection();
 
     static {
-        commands.put(MoveForwardCommand.getValue(), Rover::moveForward);
-        commands.put(MoveBackCommand.getValue(), Rover::moveBack);
-        commands.put(TurnRightCommand.getValue(), Rover::turnRight);
-        commands.put(TurnLeftCommand.getValue(), Rover::turnLeft);
+        commandCollection.addCommand(MoveForwardCommand, Rover::moveForward);
+        commandCollection.addCommand(MoveBackCommand, Rover::moveBack);
+        commandCollection.addCommand(TurnRightCommand, Rover::turnRight);
+        commandCollection.addCommand(TurnLeftCommand, Rover::turnLeft);
     }
 
     public static Rover execute(Rover rover, List<Command> commandList) {
@@ -33,6 +34,6 @@ public final class RoverController
     }
 
     public static Rover execute(Rover rover, Command command) {
-        return commands.get(command.getValue()).apply(rover);
+        return commandCollection.getCommandFunction(command).apply(rover);
     }
 }
