@@ -37,10 +37,13 @@ public class Client implements IMessageClient{
 
         String response = console.readline();
 
-        if (response != null && !response.isEmpty() && !response.equals("X")) {
+        if (!response.equals("X")) {
             roverResult = response;
             networkRover = interpreter.mapRoverFromString(roverResult);
             console.log("New Rover : " + networkRover.toString());
+        }
+        else {
+            console.log("Commande inconnue trouvée dans la séquence");
         }
 
         return networkRover;
