@@ -34,10 +34,10 @@ public class Client implements IMessageClient{
 
         console.log("Message sent : " + message);
 
-
         String response = console.readline();
 
-        if (!response.equals("X")) {
+        if (!response.isEmpty() && !response.equals("X")) {
+            System.out.println(response);
             roverResult = response;
             networkRover = interpreter.mapRoverFromString(roverResult);
             console.log("New Rover : " + networkRover.toString());
