@@ -1,7 +1,11 @@
-package org.marsrover.records;
+package org.marsrover.topologie;
 
 
-// Objet Valeur
+/**
+ * Classe Coordinates regroupent deux entiers (x et y) et possèdent des méthodes d'opérations mathématique (+, -, %)
+ * @param x
+ * @param y
+ */
 public record Coordinates(int x, int y)
 {
     @Override

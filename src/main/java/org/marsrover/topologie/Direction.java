@@ -1,5 +1,11 @@
-package org.marsrover.records;
+package org.marsrover.topologie;
 
+/**
+ * Classe de Direction avec 4 constantes (North, South, East, West) utilisées pour la direction du LocalRover
+ * @param name
+ * @param xVector
+ * @param yVector
+ */
 public record Direction(String name, int xVector, int yVector)
 {
     public static final Direction North = new Direction("N", 0, 1);
@@ -27,5 +33,23 @@ public record Direction(String name, int xVector, int yVector)
     public String toString()
     {
         return this.name;
+    }
+
+    public static Direction mapDirectionFromString(String direction) {
+        switch (direction) {
+            case "N" -> {
+                return North;
+            }
+            case "S" -> {
+                return South;
+            }
+            case "E" -> {
+                return East;
+            }
+            case "W" -> {
+                return West;
+            }
+        }
+        return null;
     }
 }

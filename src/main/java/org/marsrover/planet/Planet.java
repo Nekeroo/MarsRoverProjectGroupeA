@@ -1,7 +1,10 @@
-package org.marsrover.abstract_class;
+package org.marsrover.planet;
 
-import org.marsrover.records.Coordinates;
+import org.marsrover.topologie.Coordinates;
 
+/**
+ * Classe Abstraite Planet regroupe toutes les types de planètes (With / Without Obstacle)
+ */
 public abstract class Planet
 {
     private final int height;
@@ -23,6 +26,14 @@ public abstract class Planet
         return width;
     }
 
+    /**
+     * Retourne des coordonnées par rapport à la taille de la Planète
+     * Exemple :
+     *            SI Coordinates x = 4 et y = 2
+     *            ET Planete height = 5 et y = 5
+     *            ALORS Coordinates x = 0 et y = 2
+     * NB : On compte de 0,1,2,3,4
+     */
     public Coordinates canonise(Coordinates coordinates)
     {
         return coordinates.moduloCoordinates(coordinates, height, width);

@@ -1,4 +1,4 @@
-package org.marsrover.abstract_class;
+package org.marsrover.planet;
 
 public abstract class PlanetDecorator extends Planet
 {

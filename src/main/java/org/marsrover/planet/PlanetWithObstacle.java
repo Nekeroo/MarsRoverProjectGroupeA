@@ -1,13 +1,12 @@
-package org.marsrover.models;
+package org.marsrover.planet;
 
-import org.marsrover.abstract_class.PlanetDecorator;
-import org.marsrover.abstract_class.Planet;
-import org.marsrover.records.Coordinates;
-import org.marsrover.records.Obstacle;
+import org.marsrover.topologie.Coordinates;
 
 import java.util.List;
 
-// Objet Valeur
+/**
+ * PlanetWithObstacle hérite de PlanetDecorator.
+ */
 public final class PlanetWithObstacle extends PlanetDecorator
 {
     private final List<Obstacle> obstacles;

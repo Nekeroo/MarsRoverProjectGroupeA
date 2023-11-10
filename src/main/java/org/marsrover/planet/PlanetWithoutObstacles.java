@@ -1,8 +1,8 @@
-package org.marsrover.models;
+package org.marsrover.planet;
 
-import org.marsrover.abstract_class.Planet;
-
-// Objet Valeur
+/**
+ * PlanetWithoutObstacles hérite de Planet
+ */
 public final class PlanetWithoutObstacles extends Planet
 {
     public PlanetWithoutObstacles(int height, int width)
