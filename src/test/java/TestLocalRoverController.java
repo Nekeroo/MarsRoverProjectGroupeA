@@ -1,6 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.marsrover.communication.Logger;
+import org.marsrover.console.Logger;
 import org.marsrover.planet.Planet;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.RoverController;

@@ -1,6 +1,6 @@
 package utilities;
 
-import org.marsrover.communication.Logger;
+import org.marsrover.console.Logger;
 import org.marsrover.planet.Planet;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.LocalRover;

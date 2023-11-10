@@ -1,4 +1,4 @@
-package org.marsrover.communication;
+package org.marsrover.config;
 
 /**
  * Classe de Configuration contenant le nom de l'Hôte et le port de communication

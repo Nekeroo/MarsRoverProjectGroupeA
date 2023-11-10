@@ -1,5 +1,8 @@
 package org.marsrover.communication;
 
+import org.marsrover.console.IConsole;
+import org.marsrover.console.Logger;
+
 import java.io.*;
 import java.net.Socket;
 

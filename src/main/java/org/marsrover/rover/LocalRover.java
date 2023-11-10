@@ -1,7 +1,7 @@
 package org.marsrover.rover;
 
-import org.marsrover.communication.CancellationToken;
-import org.marsrover.communication.Logger;
+import org.marsrover.config.CancellationToken;
+import org.marsrover.console.Logger;
 import org.marsrover.communication.Server;
 import org.marsrover.planet.Planet;
 import org.marsrover.planet.PlanetWithoutObstacles;

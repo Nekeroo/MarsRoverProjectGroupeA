@@ -1,4 +1,4 @@
-package org.marsrover.communication;
+package org.marsrover.config;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

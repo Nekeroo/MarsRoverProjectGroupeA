@@ -1,7 +1,7 @@
 import org.junit.Test;
-import org.marsrover.communication.CancellationToken;
+import org.marsrover.config.CancellationToken;
 import org.marsrover.communication.Client;
-import org.marsrover.communication.Logger;
+import org.marsrover.console.Logger;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.LocalRover;
 import org.marsrover.rover.NetworkRover;
