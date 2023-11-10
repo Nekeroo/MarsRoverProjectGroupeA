@@ -13,14 +13,10 @@ public class MissionControl {
         Client client = new Client();
         Scanner console = new Scanner(System.in);
 
-        boolean canContinue = true;
-
-        while (canContinue){
+        while (true){
             String message = console.nextLine();
             if (!message.isEmpty())
                 client.SendAndWaitForResponse(message);
-            if (message.equals("E"))
-                canContinue = false;
         }
     }
 }

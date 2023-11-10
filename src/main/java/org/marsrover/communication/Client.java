@@ -16,7 +16,7 @@ public class Client implements IMessageClient{
     private final SocketConsole console;
     public Client() {
         try {
-            Socket client = new Socket(Configuration.HOST, Configuration.PORT);
+            Socket client = new Socket(Configuration.HOST, Configuration.PORT_CLIENT);
             this.console = new SocketConsole(client, new Logger());
         } catch (IOException e) {
             throw new RuntimeException(e);

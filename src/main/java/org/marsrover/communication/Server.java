@@ -28,7 +28,7 @@ public class Server implements IMessageServer {
 
     public Server(Logger logger) {
         try {
-            this.server = new ServerSocket(Configuration.PORT);
+            this.server = new ServerSocket(Configuration.PORT_SERVER);
             this.socketClient = null;
             this.executorService = Executors.newFixedThreadPool(5);
             this.logger = logger;
