@@ -2,6 +2,7 @@ package org.marsrover.communication;
 
 import org.marsrover.config.Configuration;
 import org.marsrover.console.Logger;
+import org.marsrover.console.SocketConsole;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.LocalRover;
 

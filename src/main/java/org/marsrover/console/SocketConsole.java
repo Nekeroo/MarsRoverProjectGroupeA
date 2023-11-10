@@ -1,4 +1,4 @@
-package org.marsrover.communication;
+package org.marsrover.console;
 
 import org.marsrover.console.IConsole;
 import org.marsrover.console.Logger;
