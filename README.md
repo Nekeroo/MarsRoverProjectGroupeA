@@ -43,3 +43,9 @@ Si vous souhaitez testé notre application, vous avez deux possibilités :
 * La deuxième, simplement exécuter les tests présents dans le package test de notre application. Ils possèdent des tests unitaires pour tester les méthodes de Rover, le retour sur une coordonnée exacte par rapport à une planète ou bien encore tester lorsqu'un Obstacle est en face du Rover
 
 ![Tests](src/main/resources/tests.png)
+
+Pour ceux qui ne souhaitent pas ouvrir le projet mais simplement utilisé une commande, vous pouvez exécuter la commande suivante 
+
+```bash
+mvn clean install test
+```
