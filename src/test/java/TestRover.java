@@ -4,8 +4,6 @@ import org.marsrover.models.*;
 import utilities.RoverBuilder;
 import utilities.TestConstants;
 
-import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
 
 public class TestRover {
@@ -14,7 +12,7 @@ public class TestRover {
     @Before
     public void init()
     {
-        PlanetWithoutObstacle planetWithoutObstacles = new PlanetWithoutObstacle(5, 5);
+        PlanetWithoutObstacle planetWithoutObstacles = new PlanetWithoutObstacle(new Height(5), new Width(5));
         rover = new RoverBuilder().lookingDirection(TestConstants.North)
                         .onPlanet(planetWithoutObstacles)
                         .build();
@@ -77,7 +75,7 @@ public class TestRover {
     @Test
     public void testPlanetOne()
     {
-        PlanetWithoutObstacle planetWithoutObstacle = new PlanetWithoutObstacle(1, 1);
+        PlanetWithoutObstacle planetWithoutObstacle = new PlanetWithoutObstacle(new Height(1), new Width(1));
         rover = new RoverBuilder().lookingDirection(TestConstants.North)
                         .onPlanet(planetWithoutObstacle)
                         .onThisPosition(0, 0)

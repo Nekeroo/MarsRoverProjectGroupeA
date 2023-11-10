@@ -1,5 +1,6 @@
 package org.marsrover.controllers;
 
+import org.marsrover.models.Command;
 import org.marsrover.models.Rover;
 
 import java.util.HashMap;
@@ -10,28 +11,28 @@ import java.util.function.Function;
 // Service
 public final class RoverController
 {
-    private static final Character MoveForwardCommand = 'A';
-    private static final Character MoveBackCommand = 'R';
-    private static final Character TurnRightCommand = 'D';
-    private static final Character TurnLeftCommand = 'G';
+    private static final Command MoveForwardCommand = new Command('A');
+    private static final Command MoveBackCommand = new Command('R');
+    private static final Command TurnRightCommand = new Command('D');
+    private static final Command TurnLeftCommand = new Command('G');
 
     private static final Map<Character, Function<Rover, Rover>> commands = new HashMap<>();
 
     static {
-        commands.put(MoveForwardCommand, Rover::moveForward);
-        commands.put(MoveBackCommand, Rover::moveBack);
-        commands.put(TurnRightCommand, Rover::turnRight);
-        commands.put(TurnLeftCommand, Rover::turnLeft);
+        commands.put(MoveForwardCommand.getValue(), Rover::moveForward);
+        commands.put(MoveBackCommand.getValue(), Rover::moveBack);
+        commands.put(TurnRightCommand.getValue(), Rover::turnRight);
+        commands.put(TurnLeftCommand.getValue(), Rover::turnLeft);
     }
 
-    public static Rover execute(Rover rover, List<Character> commandList) {
-        for (Character command : commandList) {
+    public static Rover execute(Rover rover, List<Command> commandList) {
+        for (Command command : commandList) {
             rover = execute(rover, command);
         }
         return rover;
     }
 
-    public static Rover execute(Rover rover, Character command) {
-        return commands.get(command).apply(rover);
+    public static Rover execute(Rover rover, Command command) {
+        return commands.get(command.getValue()).apply(rover);
     }
 }

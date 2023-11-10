@@ -1,6 +1,9 @@
 package org.marsrover.records;
 
 
+import org.marsrover.models.Height;
+import org.marsrover.models.Width;
+
 // Objet Valeur
 public record Coordinates(Integer x, Integer y)
 {
@@ -21,9 +24,9 @@ public record Coordinates(Integer x, Integer y)
         return new Coordinates(x,y);
     }
 
-    public Coordinates moduloCoordinates(Coordinates coordinates, Integer height, Integer width) {
-        Integer x = (((coordinates.x() % width) + width) % width);
-        Integer y = (((coordinates.y() % height) + height) % height);
+    public Coordinates moduloCoordinates(Coordinates coordinates, Height height, Width width) {
+        Integer x = (((coordinates.x() % width.getValue()) + width.getValue()) % width.getValue());
+        Integer y = (((coordinates.y() % height.getValue()) + height.getValue()) % height.getValue());
         return new Coordinates(x,y);
     }
 }
