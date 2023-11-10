@@ -11,8 +11,7 @@ public class TestLocalRover {
     private LocalRover localRover;
 
     @Before
-    public void init()
-    {
+    public void init() {
         PlanetWithoutObstacles planetWithoutObstacles = new PlanetWithoutObstacles(5, 5);
         localRover = new RoverBuilder().looking(Direction.North)
                         .onPlanet(planetWithoutObstacles)
@@ -20,8 +19,7 @@ public class TestLocalRover {
     }
 
     @Test
-    public void testMoveForward()
-    {
+    public void testMoveForward() {
         localRover = localRover.moveForward();
         assertEquals(1, localRover.getCurrentCoordinates().x());
         assertEquals(3, localRover.getCurrentCoordinates().y());
@@ -29,8 +27,7 @@ public class TestLocalRover {
     }
 
     @Test
-    public void testMoveBack()
-    {
+    public void testMoveBack() {
         localRover = localRover.moveBack();
         assertEquals(1, localRover.getCurrentCoordinates().x());
         assertEquals(1, localRover.getCurrentCoordinates().y());
@@ -38,22 +35,19 @@ public class TestLocalRover {
     }
 
     @Test
-    public void testTurnRight()
-    {
+    public void testTurnRight() {
         localRover = localRover.turnRight();
         assertEquals(Direction.East, localRover.getCurrentDirection());
     }
 
     @Test
-    public void testTurnLeft()
-    {
+    public void testTurnLeft() {
         localRover = localRover.turnLeft();
         assertEquals(Direction.West, localRover.getCurrentDirection());
     }
 
     @Test
-    public void testPath()
-    {
+    public void testPath() {
         for (int i = 0; i < 2; i++){
             localRover = localRover.moveBack();
         }
@@ -63,8 +57,7 @@ public class TestLocalRover {
     }
 
     @Test
-    public void testPath2()
-    {
+    public void testPath2() {
         for (int i = 0; i < 3; i++){
             localRover = localRover.moveBack();
         }
@@ -74,8 +67,7 @@ public class TestLocalRover {
     }
 
     @Test
-    public void testPlanetOne()
-    {
+    public void testPlanetOne() {
         PlanetWithoutObstacles planetWithoutObstacles = new PlanetWithoutObstacles(1, 1);
         localRover = new RoverBuilder().looking(Direction.North)
                         .onPlanet(planetWithoutObstacles)

@@ -1,6 +1,7 @@
 import org.junit.Test;
 import org.marsrover.communication.CancellationToken;
 import org.marsrover.communication.Client;
+import org.marsrover.communication.Logger;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.LocalRover;
 import org.marsrover.rover.NetworkRover;
@@ -16,11 +17,11 @@ public class TestClientServer {
     @Test
     public void moveForward() throws InterruptedException {
         CancellationToken token = new CancellationToken();
-        LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5));
+        LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5), new Logger());
 
         new Thread(() -> {
             try {
-                LocalRover.startRover(token, rover);
+                rover.startRover(token, rover);
             } catch (ExecutionException | InterruptedException ignored) {
             }
         }).start();

@@ -23,5 +23,4 @@ public class MissionControl {
                 canContinue = false;
         }
     }
-
 }

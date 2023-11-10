@@ -1,5 +1,6 @@
 package utilities;
 
+import org.marsrover.communication.Logger;
 import org.marsrover.planet.Planet;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.LocalRover;
@@ -11,6 +12,7 @@ public class RoverBuilder {
     private Direction direction = Direction.North;
     private Planet planet = new PlanetWithoutObstacles(5, 5);
     private Coordinates coordinates = new Coordinates(1,2);
+    private final Logger logger = new Logger();
 
     public RoverBuilder looking(Direction direction) {
         this.direction = direction;
@@ -27,7 +29,8 @@ public class RoverBuilder {
         return this;
     }
 
+
     public LocalRover build() {
-        return new LocalRover(coordinates, direction, planet);
+        return new LocalRover(coordinates, direction, planet, logger);
     }
 }

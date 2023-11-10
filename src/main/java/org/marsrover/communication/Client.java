@@ -10,12 +10,11 @@ import java.net.Socket;
  * Classe Client permettant de créer un Socket Client et de communiquer avec le Server
  */
 public class Client implements IMessageClient{
-
-    private final Socket client;
-
+    private final SocketConsole console;
     public Client() {
         try {
-            this.client = new Socket(Configuration.HOST, Configuration.PORT);
+            Socket client = new Socket(Configuration.HOST, Configuration.PORT);
+            this.console = new SocketConsole(client, new Logger());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -24,33 +23,23 @@ public class Client implements IMessageClient{
 
     @Override
     public IRover SendAndWaitForResponse(String message) {
-        try {
-            String roverResult;
-            NetworkRover networkRover = null;
-            Interpreter interpreter = new Interpreter();
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+        String roverResult;
+        NetworkRover networkRover = null;
+        Interpreter interpreter = new Interpreter();
 
-            out.write(message);
-            out.newLine();
-            out.flush();
+        console.writeLine(message);
 
-            System.out.println("Message sent : " + message);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-
-            String response = in.readLine();
-
-            if (response != null && !response.isEmpty() && !response.equals("X")) {
-                roverResult = response;
-                networkRover = interpreter.mapRoverFromString(roverResult);
-                System.out.println("New Rover : " + networkRover.toString());
-            }
+        console.log("Message sent : " + message);
 
 
+        String response = console.readline();
 
-            return networkRover;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (response != null && !response.isEmpty() && !response.equals("X")) {
+            roverResult = response;
+            networkRover = interpreter.mapRoverFromString(roverResult);
+            console.log("New Rover : " + networkRover.toString());
         }
+
+        return networkRover;
     }
 }

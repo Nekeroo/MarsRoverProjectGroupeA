@@ -1,14 +1,14 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.marsrover.planet.Obstacle;
 import org.marsrover.planet.Planet;
+import org.marsrover.planet.PlanetWithObstacle;
+import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.RoverController;
-import org.marsrover.planet.PlanetWithoutObstacles;
-import org.marsrover.planet.PlanetWithObstacle;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
-import org.marsrover.planet.Obstacle;
 import utilities.RoverBuilder;
 
 import java.util.Arrays;

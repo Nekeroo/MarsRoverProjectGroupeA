@@ -20,8 +20,7 @@ public class RoverController
             this.rover = rover;
     }
 
-    public IRover processSequence(String commandSequence)
-    {
+    public IRover processSequence(String commandSequence) {
         List<RoverCommands> commands = new ArrayList<>();
         if (commandSequence.length() > 1) {
             commands = RoverCommands.getCommandsFromStrings(List.of(commandSequence.split("")));
