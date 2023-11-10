@@ -3,10 +3,7 @@ package org.marsrover.controllers;
 import org.marsrover.collections.CommandCollection;
 import org.marsrover.models.Command;
 import org.marsrover.models.Rover;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 
 // Service
@@ -34,6 +31,7 @@ public final class RoverController
     }
 
     public static Rover execute(Rover rover, Command command) {
-        return commandCollection.getCommandFunction(command).apply(rover);
+        Function<Rover, Rover> commandFunction = commandCollection.getCommandFunction(command);
+        return commandFunction.apply(rover);
     }
 }

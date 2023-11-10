@@ -1,31 +1,29 @@
 package org.marsrover.records;
 
+import org.marsrover.collections.DirectionCollection;
+
 public record Direction(String name, Vector vector)
 {
-    private static final Direction North = new Direction("N", new Vector(0, 1));
-    private static final Direction South = new Direction("S", new Vector(0, -1));
-    private static final Direction East = new Direction("E", new Vector(1, 0));
-    private static final Direction West = new Direction("W", new Vector(-1, 0));
+    private static final DirectionCollection directionCollection = new DirectionCollection();
 
-    public Direction getNextDirectionFromClockwise()
-    {
-        if (this.equals(North))
-            return East;
-        if (this.equals(East))
-            return South;
-        if (this.equals(South))
-            return West;
-        return North;
+    public Direction getNextDirectionFromClockwise() {
+        return directionCollection.getNextDirectionFromClockwise(this);
     }
 
-    public Direction getNextDirectionCounterClockwise()
-    {
-        return getNextDirectionFromClockwise().getNextDirectionFromClockwise().getNextDirectionFromClockwise();
+    public Direction getNextDirectionCounterClockwise() {
+        return directionCollection.getNextDirectionCounterClockwise(this);
+    }
+
+    public Integer vectorX() {
+        return vector.vectorX();
+    }
+
+    public Integer vectorY() {
+        return vector.vectorY();
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.name;
     }
 }
