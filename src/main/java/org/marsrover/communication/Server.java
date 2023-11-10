@@ -46,7 +46,7 @@ public class Server implements IMessageServer {
                 LocalRover roverResult;
                 acceptClientSocketIfNull();
 
-                String data = console.readline();
+                String data = console.readLine();
                 console.log("Server read: " + data);
 
                 Interpreter interpreter = new Interpreter();

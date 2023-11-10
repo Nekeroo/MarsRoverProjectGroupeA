@@ -34,7 +34,7 @@ public class Client implements IMessageClient{
 
         console.log("Message sent : " + message);
 
-        String response = console.readline();
+        String response = console.readLine();
 
         if (!response.isEmpty() && !response.equals("X")) {
             System.out.println(response);

@@ -42,7 +42,7 @@ public class Repeater {
                 // Créez un thread pour gérer la communication du client au serveur
                 Thread clientToServerThread = new Thread(() -> {
                     try {
-                        relayDataForServer(clientSocket.getInputStream());
+                        relayData(consoleServer);
                     } catch (IOException e) {
                         consoleClient.log(e.getMessage());
                     }
@@ -51,7 +51,7 @@ public class Repeater {
                 // Créez un thread pour gérer la communication du serveur au client
                 Thread serverToClientThread = new Thread(() -> {
                     try {
-                        relayDataForClient(socketServer.getInputStream());
+                        relayData(consoleClient);
                     } catch (IOException e) {
                         consoleClient.log(e.getMessage());
                     }
@@ -66,25 +66,12 @@ public class Repeater {
         }
     }
 
-    private void relayDataForClient(InputStream in) throws IOException {
-        // Utilisez BufferedReader pour lire des chaînes de caractères
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
+    private void relayData(SocketConsole console) throws IOException {
         String line;
-        while ((line = reader.readLine()) != null) {
-            consoleClient.writeLine(line);
-            consoleClient.log("Client : " +line);
-        }
-    }
-
-    private void relayDataForServer(InputStream in) throws IOException {
-        // Utilisez BufferedReader pour lire des chaînes de caractères
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-        String line;
-        while ((line = reader.readLine()) != null) {
-            consoleServer.writeLine(line);
-            consoleServer.log("Server : "+line);
+        while ((line = console.readLine()) != null) {
+            console.writeLine(line);
+            console.log(line);
         }
     }
 

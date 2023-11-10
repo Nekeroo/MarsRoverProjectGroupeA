@@ -15,7 +15,7 @@ public class SocketConsole implements IConsole {
     }
 
     @Override
-    public String readline() {
+    public String readLine() {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             return in.readLine();
