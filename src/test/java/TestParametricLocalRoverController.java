@@ -1,12 +1,13 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.marsrover.communication.Interpreter;
 import org.marsrover.planet.Obstacle;
 import org.marsrover.planet.Planet;
 import org.marsrover.planet.PlanetWithObstacle;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.IRover;
-import org.marsrover.rover.RoverController;
+import org.marsrover.rover.commands.IRoverCommand;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import utilities.RoverBuilder;
@@ -16,7 +17,6 @@ import java.util.Collection;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 @RunWith(Parameterized.class)
 public class TestParametricLocalRoverController {
@@ -53,10 +53,12 @@ public class TestParametricLocalRoverController {
     @Test
     public void sequence() {
         IRover rover = new RoverBuilder().looking(Direction.North).onPlanet(planet).build();
-        RoverController roverController = new RoverController(rover);
+        Interpreter interpreter = new Interpreter();
 
-        rover = roverController.processSequence(sequenceCommands);
-
+        List<IRoverCommand> commands = interpreter.mapStringToCommandList(sequenceCommands);
+        for (IRoverCommand command : commands){
+            rover = command.execute(rover);
+        }
         assertEquals(xFinal, rover.getCurrentCoordinates().x());
         assertEquals(yFinal, rover.getCurrentCoordinates().y());
         assertEquals(directionFinal, rover.getCurrentDirection());

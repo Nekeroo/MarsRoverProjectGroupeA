@@ -6,6 +6,9 @@ import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import org.marsrover.topologie.Position;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Interpreter {
 
     /**
@@ -19,6 +22,23 @@ public class Interpreter {
             case RoverCommandTurnRight.COMMAND -> new RoverCommandTurnRight();
             default -> null;
         };
+    }
+
+    /**
+     * Permet de mapper une chaine de caractère sous forme de List<IRoverCommand>
+     */
+    public List<IRoverCommand> mapStringToCommandList(String data) {
+        List<IRoverCommand> commandsToExecute = new ArrayList<>();
+        List<String> commandsString = List.of(data.split(""));
+        for (String commandString : commandsString){
+            switch (commandString) {
+                case RoverCommandMoveForward.COMMAND -> commandsToExecute.add(new RoverCommandMoveForward());
+                case RoverCommandMoveBack.COMMAND -> commandsToExecute.add(new RoverCommandMoveBack());
+                case RoverCommandTurnLeft.COMMAND -> commandsToExecute.add(new RoverCommandTurnLeft());
+                case RoverCommandTurnRight.COMMAND -> commandsToExecute.add(new RoverCommandTurnRight());
+            }
+        }
+        return commandsToExecute;
     }
 
     /**
