@@ -32,6 +32,10 @@ En effet, le MissionControl envoie un information (Donc la commande souhaitée) 
 
 Les principes d'Architecture Logicielle ont essayé d'être respecté au Maximum afin de répondre aux critères de Notation de notre Intervenant.
 
+Voici un schéma de fonctionnement entre nos différents Main :
+
+![Diagrammme entre les classes](src/main/resources/DiagrammeExécution.png)
+
 ## Exécution
 
 Si vous souhaitez testé notre application, vous avez deux possibilités :
