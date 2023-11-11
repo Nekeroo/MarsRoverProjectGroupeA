@@ -16,7 +16,7 @@ public class Client implements IMessageClient{
     private final SocketConsole console;
     public Client() {
         try {
-            Socket client = new Socket(Configuration.HOST, Configuration.PORT);
+            Socket client = new Socket(Configuration.HOST, Configuration.PORT_CLIENT);
             this.console = new SocketConsole(client, new Logger());
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -34,13 +34,16 @@ public class Client implements IMessageClient{
 
         console.log("Message sent : " + message);
 
-
         String response = console.readline();
 
-        if (response != null && !response.isEmpty() && !response.equals("X")) {
+        if (!response.isEmpty() && !response.equals("X")) {
+            System.out.println(response);
             roverResult = response;
             networkRover = interpreter.mapRoverFromString(roverResult);
             console.log("New Rover : " + networkRover.toString());
+        }
+        else {
+            console.log("Commande inconnue trouvée dans la séquence");
         }
 
         return networkRover;

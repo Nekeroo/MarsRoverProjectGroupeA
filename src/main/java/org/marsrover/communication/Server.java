@@ -28,7 +28,7 @@ public class Server implements IMessageServer {
 
     public Server(Logger logger) {
         try {
-            this.server = new ServerSocket(Configuration.PORT);
+            this.server = new ServerSocket(Configuration.PORT_SERVER);
             this.socketClient = null;
             this.executorService = Executors.newFixedThreadPool(5);
             this.logger = logger;
@@ -53,22 +53,27 @@ public class Server implements IMessageServer {
                 roverResult = null;
 
                 if (data.length() > 1){
-                    List<IRoverCommand> commands = interpreter.mapStringToCommandList(data);
-                    for (IRoverCommand command : commands){
-                        console.log("Commande exécutée : " + interpreter.mapCommandToString(command));
-                        roverResult = (LocalRover) command.execute(tmpRover);
-                        tmpRover = roverResult;
+                    if (interpreter.isSequenceValid(List.of(data.split("")))){
+                        List<IRoverCommand> commands = interpreter.mapStringToCommandList(data);
+                        for (IRoverCommand command : commands){
+                                console.log("Commande exécutée : " + interpreter.mapCommandToString(command));
+                                roverResult = (LocalRover) command.execute(tmpRover);
+                                tmpRover = roverResult;
+                        }
                     }
                 }
-                else if (interpreter.mapStringToCommand(data) != null) {
+                else if (interpreter.isSequenceValid(List.of(data))) {
                     roverResult = (LocalRover) interpreter.mapStringToCommand(data).execute(tmpRover);
+                }
+                else {
+                    console.log("Commande inconnue trouvée dans la séquence");
                 }
 
                 if (!rover.equals(roverResult))
                     sendErrorToClient();
                 else
                     sendResponseToClient(roverResult);
-                return roverResult;
+                return roverResult == null ? rover : roverResult;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -11,6 +11,8 @@ import java.util.List;
 
 public class Interpreter {
 
+    public static final List<String> validChar = List.of("Z", "D", "S", "Q");
+
     /**
      * Permet de mapper une chaine de caractère sous forme de RoverCommand
      */
@@ -20,7 +22,7 @@ public class Interpreter {
             case RoverCommandMoveBack.COMMAND -> new RoverCommandMoveBack();
             case RoverCommandTurnLeft.COMMAND -> new RoverCommandTurnLeft();
             case RoverCommandTurnRight.COMMAND -> new RoverCommandTurnRight();
-            default -> null;
+            default -> new UnknownCommand();
         };
     }
 
@@ -36,6 +38,7 @@ public class Interpreter {
                 case RoverCommandMoveBack.COMMAND -> commandsToExecute.add(new RoverCommandMoveBack());
                 case RoverCommandTurnLeft.COMMAND -> commandsToExecute.add(new RoverCommandTurnLeft());
                 case RoverCommandTurnRight.COMMAND -> commandsToExecute.add(new RoverCommandTurnRight());
+                default -> commandsToExecute.add(new UnknownCommand());
             }
         }
         return commandsToExecute;
@@ -66,4 +69,12 @@ public class Interpreter {
         return new NetworkRover(new Position(new Coordinates(positionX, positionY), direction));
     }
 
+    public boolean isSequenceValid(List<String> sequence)
+    {
+        for (String command : sequence){
+            if (!validChar.contains(command))
+                return false;
+        }
+        return true;
+    }
 }

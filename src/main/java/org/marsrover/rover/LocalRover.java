@@ -42,7 +42,7 @@ public final class LocalRover implements IRover
      */
     @Override
     public LocalRover turnRight() {
-        return new LocalRover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionFromClockwise(), this.planet, logger) ;
+        return new LocalRover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionFromClockwise(), this.planet, this.logger) ;
     }
 
     /**
@@ -51,7 +51,7 @@ public final class LocalRover implements IRover
      */
     @Override
     public LocalRover turnLeft() {
-        return new LocalRover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionCounterClockwise(), this.planet, logger) ;
+        return new LocalRover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionCounterClockwise(), this.planet, this.logger) ;
     }
 
     /**
@@ -68,7 +68,7 @@ public final class LocalRover implements IRover
             return this;
         }
         Coordinates newCoordinates = new Coordinates(coordinates.x(), coordinates.y());
-        return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet, logger);
+        return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet, this.logger);
     }
 
     /**
@@ -84,7 +84,7 @@ public final class LocalRover implements IRover
             return this;
         }
         Coordinates newCoordinates = new Coordinates(coordinates.x(), coordinates.y());
-        return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet, logger);
+        return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet, this.logger);
     }
 
     /**
