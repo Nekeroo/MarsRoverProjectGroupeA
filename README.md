@@ -53,3 +53,5 @@ Pour ceux qui ne souhaitent pas ouvrir le projet mais simplement utilisé une co
 ```bash
 mvn clean install test
 ```
+
+PS : Pour des raisons de conflits entre les ports, etc. Je vous invite à lancer les tests manuellement depuis un IDE un par un pour la partie Client / Server. En lançant directement la classe, cela provoquera une erreur. 
