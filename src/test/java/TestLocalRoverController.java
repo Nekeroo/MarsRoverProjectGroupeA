@@ -8,7 +8,7 @@ import org.marsrover.planet.PlanetWithObstacle;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.LocalRover;
-import org.marsrover.rover.commands.IRoverCommand;
+import org.marsrover.rover.roverCommands.IRoverCommand;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import utilities.RoverBuilder;

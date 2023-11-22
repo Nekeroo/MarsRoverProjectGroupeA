@@ -1,4 +1,4 @@
-package org.marsrover.controlMission;
+package org.marsrover.missionControl;
 
 import org.marsrover.communication.Client;
 

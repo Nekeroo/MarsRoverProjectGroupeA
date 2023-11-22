@@ -1,7 +1,7 @@
 package org.marsrover.communication;
 
 import org.marsrover.rover.NetworkRover;
-import org.marsrover.rover.commands.*;
+import org.marsrover.rover.roverCommands.*;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import org.marsrover.topologie.Position;

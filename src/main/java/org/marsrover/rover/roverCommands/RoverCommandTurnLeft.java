@@ -1,4 +1,4 @@
-package org.marsrover.rover.commands;
+package org.marsrover.rover.roverCommands;
 
 import org.marsrover.rover.IRover;
 
