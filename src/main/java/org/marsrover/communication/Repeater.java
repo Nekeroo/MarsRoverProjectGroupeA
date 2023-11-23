@@ -27,17 +27,9 @@ public class Repeater {
             while (true) {
                 // Attendez la connexion du client
 
-                if (clientSocket == null) {
-                    clientSocket = serverSocketForClient.accept();
-                    consoleClient = new SocketConsole(clientSocket, new Logger());
-                    consoleClient.log("Connexion Client OK");
-                }
+                acceptClientSocketIfNull(serverSocketForClient);
                 // Connexion au serveur
-                if (socketServer == null ){
-                    socketServer = new Socket(Configuration.HOST, portEnvoi);
-                    consoleServer = new SocketConsole(socketServer, new Logger());
-                    consoleClient.log("Connexion Server OK");
-                }
+                acceptServerSocketIfNull();
 
                 // Créez un thread pour gérer la communication du client au serveur
                 Thread clientToServerThread = new Thread(() -> {
@@ -66,6 +58,36 @@ public class Repeater {
         }
     }
 
+    /**
+     * Accepte la connexion client si ce n'est pas déjà fait
+     * @param serverSocketForClient
+     * @throws IOException
+     */
+    public void acceptClientSocketIfNull(ServerSocket serverSocketForClient) throws IOException {
+        if (clientSocket == null) {
+            clientSocket = serverSocketForClient.accept();
+            consoleClient = new SocketConsole(clientSocket, new Logger());
+            consoleClient.log("Connexion Client OK");
+        }
+    }
+
+    /**
+     * Accepte la connexion du serveur si ce n'est pas déjà fait
+     * @throws IOException
+     */
+    public void acceptServerSocketIfNull() throws IOException{
+        if (socketServer == null ){
+            socketServer = new Socket(Configuration.HOST, portEnvoi);
+            consoleServer = new SocketConsole(socketServer, new Logger());
+            consoleClient.log("Connexion Server OK");
+        }
+    }
+
+    /**
+     * Méthode de transfert des données au Client
+     * @param in
+     * @throws IOException
+     */
     private void relayDataForClient(InputStream in) throws IOException {
         // Utilisez BufferedReader pour lire des chaînes de caractères
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -77,6 +99,11 @@ public class Repeater {
         }
     }
 
+    /**
+     * Méthode de transfert des données au Server
+     * @param in
+     * @throws IOException
+     */
     private void relayDataForServer(InputStream in) throws IOException {
         // Utilisez BufferedReader pour lire des chaînes de caractères
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));

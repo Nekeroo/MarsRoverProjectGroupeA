@@ -61,7 +61,7 @@ public final class Rover implements IRover
     @Override
     public Rover moveForward() {
 
-        Coordinates coordinates = this.getCurrentCoordinates().addCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
+        Coordinates coordinates = this.position.callAddCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
         if (planet.isObstaclesAt(coordinates))
         {
             logger.log("Obstacle found");
@@ -77,7 +77,7 @@ public final class Rover implements IRover
      */
     @Override
     public Rover moveBack() {
-        Coordinates coordinates = this.getCurrentCoordinates().subCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
+        Coordinates coordinates = this.position.callSubCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
         if (planet.isObstaclesAt(coordinates))
         {
             logger.log("Obstacle found");
