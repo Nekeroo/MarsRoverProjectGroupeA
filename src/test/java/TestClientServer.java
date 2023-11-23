@@ -28,11 +28,6 @@ public class TestClientServer {
 
     private Rover roverSansReseau;
 
-    @After
-    public void tearDown() {
-
-    }
-
     @Test
     public void moveForward() throws InterruptedException {
         CancellationToken token = new CancellationToken();
