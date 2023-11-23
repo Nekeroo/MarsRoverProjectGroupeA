@@ -2,10 +2,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.marsrover.communication.Interpreter;
-import org.marsrover.planet.Obstacle;
-import org.marsrover.planet.Planet;
-import org.marsrover.planet.PlanetWithObstacle;
-import org.marsrover.planet.PlanetWithoutObstacles;
+import org.marsrover.planet.*;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.roverCommands.IRoverCommand;
 import org.marsrover.topology.Coordinates;
@@ -29,7 +26,7 @@ public class TestParametricRoverController {
 
     private final String sequenceCommands;
 
-    private final Planet planet;
+    private final IPlanet planet;
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
@@ -38,11 +35,11 @@ public class TestParametricRoverController {
                 {1, 1, Direction.North, "S", new PlanetWithoutObstacles(5, 5) },
                 {3, 2, Direction.East, "DZZ", new PlanetWithoutObstacles(5, 5)},
                 {0, 1, Direction.East, "SDS", new PlanetWithoutObstacles(5, 5)},
-                {1, 2, Direction.East, "DZZ", new PlanetWithObstacle(new PlanetWithoutObstacles(5, 5), List.of(new Obstacle(new Coordinates(2, 2))))}
+                {1, 2, Direction.East, "DZZ", new PlanetWithObstacle(5,5, List.of(new Obstacle(new Coordinates(2, 2))))}
         });
     }
 
-    public TestParametricRoverController(int xFinal, int yFinal, Direction directionFinal, String sequenceCommands, Planet planet) {
+    public TestParametricRoverController(int xFinal, int yFinal, Direction directionFinal, String sequenceCommands, IPlanet planet) {
         this.xFinal = xFinal;
         this.yFinal = yFinal;
         this.directionFinal = directionFinal;

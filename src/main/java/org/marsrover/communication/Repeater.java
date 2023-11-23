@@ -1,7 +1,7 @@
 package org.marsrover.communication;
 
 import org.marsrover.config.Configuration;
-import org.marsrover.console.Logger;
+import org.marsrover.console.LoggerConsole;
 import org.marsrover.console.SocketConsole;
 
 import java.io.*;
@@ -19,68 +19,49 @@ public class Repeater {
     private SocketConsole consoleClient;
     private SocketConsole consoleServer;
 
-    public void startRepeater() {
-        try {
-            // Crée un serveur pour accepter les connexions du client
-            ServerSocket serverSocketForClient = new ServerSocket(portEcoute);
+    private final ServerSocket serverSocketForClient;
 
-            while (true) {
-                // Attendez la connexion du client
+    public Repeater() throws IOException {
+        serverSocketForClient = new ServerSocket(portEcoute);
+        socketServer = new Socket(Configuration.HOST, portEnvoi);
+        consoleServer = new SocketConsole(socketServer, new LoggerConsole());
+        consoleServer.log("Connexion Server OK");
+    }
 
-                acceptClientSocketIfNull(serverSocketForClient);
-                // Connexion au serveur
-                acceptServerSocketIfNull();
+    public void startRepeater() throws IOException {
+        // Crée un serveur pour accepter les connexions du client
 
-                // Créez un thread pour gérer la communication du client au serveur
-                Thread clientToServerThread = new Thread(() -> {
-                    try {
-                        relayDataForServer(clientSocket.getInputStream());
-                    } catch (IOException e) {
-                        consoleClient.log(e.getMessage());
-                    }
-                });
+        while (!serverSocketForClient.isClosed()) {
 
-                // Créez un thread pour gérer la communication du serveur au client
-                Thread serverToClientThread = new Thread(() -> {
-                    try {
-                        relayDataForClient(socketServer.getInputStream());
-                    } catch (IOException e) {
-                        consoleClient.log(e.getMessage());
-                    }
-                });
+            acceptClientSocket();
+            // Créez un thread pour gérer la communication du client au serveur
+            Thread clientToServerThread = new Thread(() -> {
+                try {
+                    relayDataForServer(clientSocket.getInputStream());
+                } catch (IOException e) {
+                    consoleClient.log("1");
+                }
+            });
 
-                // Lancez les deux threads
-                serverToClientThread.start();
-                clientToServerThread.start();
-            }
-        } catch (IOException e) {
-            consoleClient.log(e.getMessage());
+            // Créez un thread pour gérer la communication du serveur au client
+            Thread serverToClientThread = new Thread(() -> {
+                try {
+                    relayDataForClient(socketServer.getInputStream());
+                } catch (IOException e) {
+                    consoleClient.log("2");
+                }
+            });
+
+            // Lancez les deux threads
+            serverToClientThread.start();
+            clientToServerThread.start();
         }
     }
 
-    /**
-     * Accepte la connexion client si ce n'est pas déjà fait
-     * @param serverSocketForClient
-     * @throws IOException
-     */
-    public void acceptClientSocketIfNull(ServerSocket serverSocketForClient) throws IOException {
-        if (clientSocket == null) {
-            clientSocket = serverSocketForClient.accept();
-            consoleClient = new SocketConsole(clientSocket, new Logger());
-            consoleClient.log("Connexion Client OK");
-        }
-    }
-
-    /**
-     * Accepte la connexion du serveur si ce n'est pas déjà fait
-     * @throws IOException
-     */
-    public void acceptServerSocketIfNull() throws IOException{
-        if (socketServer == null ){
-            socketServer = new Socket(Configuration.HOST, portEnvoi);
-            consoleServer = new SocketConsole(socketServer, new Logger());
-            consoleClient.log("Connexion Server OK");
-        }
+    private void acceptClientSocket() throws IOException {
+        clientSocket = serverSocketForClient.accept();
+        consoleClient = new SocketConsole(clientSocket, new LoggerConsole());
+        consoleClient.log("Connexion Client OK");
     }
 
     /**
@@ -115,7 +96,17 @@ public class Repeater {
         }
     }
 
-    public static void main(String[] args) {
+    public void shutDown() throws IOException {
+        consoleClient = null;
+        consoleServer = null;
+        clientSocket.close();
+        socketServer.close();
+        serverSocketForClient.close();
+        socketServer = null;
+        clientSocket = null;
+    }
+
+    public static void main(String[] args) throws IOException {
         Repeater repeater = new Repeater();
         repeater.startRepeater();
     }

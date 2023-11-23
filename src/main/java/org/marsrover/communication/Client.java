@@ -1,7 +1,7 @@
 package org.marsrover.communication;
 
 import org.marsrover.config.Configuration;
-import org.marsrover.console.Logger;
+import org.marsrover.console.LoggerConsole;
 import org.marsrover.console.SocketConsole;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.NetworkRover;
@@ -17,7 +17,7 @@ public class Client implements IMessageClient{
     public Client() {
         try {
             Socket client = new Socket(Configuration.HOST, Configuration.PORT_CLIENT);
-            this.console = new SocketConsole(client, new Logger());
+            this.console = new SocketConsole(client, new LoggerConsole());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

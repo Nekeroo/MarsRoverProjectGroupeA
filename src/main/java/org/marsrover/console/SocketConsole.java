@@ -1,17 +1,14 @@
 package org.marsrover.console;
 
-import org.marsrover.console.IConsole;
-import org.marsrover.console.Logger;
-
 import java.io.*;
 import java.net.Socket;
 
 public class SocketConsole implements IConsole {
     private final Socket socket;
-    private final Logger logger;
-    public SocketConsole(Socket socket, Logger logger) {
+    private final LoggerConsole loggerConsole;
+    public SocketConsole(Socket socket, LoggerConsole loggerConsole) {
         this.socket = socket;
-        this.logger = logger;
+        this.loggerConsole = loggerConsole;
     }
 
     @Override
@@ -38,6 +35,6 @@ public class SocketConsole implements IConsole {
 
     @Override
     public void log(String message) {
-        logger.log(message);
+        loggerConsole.log(message);
     }
 }

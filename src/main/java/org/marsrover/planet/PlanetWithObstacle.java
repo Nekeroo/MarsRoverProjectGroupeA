@@ -7,14 +7,27 @@ import java.util.List;
 /**
  * PlanetWithObstacle hérite de PlanetDecorator.
  */
-public final class PlanetWithObstacle extends PlanetDecorator
+public final class PlanetWithObstacle implements IPlanet
 {
+
+    private final int height;
+
+    private final int width;
+
     private final List<Obstacle> obstacles;
 
-    public PlanetWithObstacle(Planet planet, List<Obstacle> obstacles)
+    public PlanetWithObstacle(int height, int width, List<Obstacle> obstacles)
     {
-        super(planet);
+        this.height = height;
+        this.width = width;
         this.obstacles = obstacles;
+    }
+
+
+    @Override
+    public Coordinates canonise(Coordinates coordinates)
+    {
+        return coordinates.moduloCoordinates(coordinates, height, width);
     }
 
     @Override

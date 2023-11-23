@@ -1,29 +1,32 @@
 package org.marsrover.rover;
 
 import org.marsrover.config.CancellationToken;
-import org.marsrover.console.Logger;
+import org.marsrover.console.LoggerConsole;
 import org.marsrover.communication.Server;
-import org.marsrover.planet.Planet;
+import org.marsrover.planet.IPlanet;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.topology.Coordinates;
 import org.marsrover.topology.Direction;
 import org.marsrover.topology.Position;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 // Objet Valeur
 public final class Rover implements IRover
 {
-    private final Logger logger;
+    private final LoggerConsole loggerConsole;
     private final Position position;
-    private final Planet planet;
+    private final IPlanet planet;
 
-    public Rover(Coordinates coordinates, Direction direction, Planet planet, Logger logger) {
+    private Server server;
+
+    public Rover(Coordinates coordinates, Direction direction, IPlanet planet, LoggerConsole loggerConsole) {
         Coordinates canonisedCoordinates = planet.canonise(coordinates);
         this.position = new Position(canonisedCoordinates, direction);
         this.planet = planet;
-        this.logger = logger;
-        logger.log("Coordonnées : " + this.getCurrentCoordinates() + " / Direction : " + this.getCurrentDirection() + "\n");
+        this.loggerConsole = loggerConsole;
+        loggerConsole.log("Coordonnées : " + this.getCurrentCoordinates() + " / Direction : " + this.getCurrentDirection() + "\n");
     }
 
     public Direction getCurrentDirection()
@@ -42,7 +45,7 @@ public final class Rover implements IRover
      */
     @Override
     public Rover turnRight() {
-        return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionFromClockwise(), this.planet, logger) ;
+        return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionFromClockwise(), this.planet, loggerConsole) ;
     }
 
     /**
@@ -51,7 +54,7 @@ public final class Rover implements IRover
      */
     @Override
     public Rover turnLeft() {
-        return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionCounterClockwise(), this.planet, logger) ;
+        return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionCounterClockwise(), this.planet, loggerConsole) ;
     }
 
     /**
@@ -64,11 +67,11 @@ public final class Rover implements IRover
         Coordinates coordinates = this.position.callAddCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
         if (planet.isObstaclesAt(coordinates))
         {
-            logger.log("Obstacle found");
+            loggerConsole.log("Obstacle found");
             return this;
         }
         Coordinates newCoordinates = new Coordinates(coordinates.x(), coordinates.y());
-        return new Rover(newCoordinates, this.getCurrentDirection(), this.planet, logger);
+        return new Rover(newCoordinates, this.getCurrentDirection(), this.planet, loggerConsole);
     }
 
     /**
@@ -80,18 +83,18 @@ public final class Rover implements IRover
         Coordinates coordinates = this.position.callSubCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
         if (planet.isObstaclesAt(coordinates))
         {
-            logger.log("Obstacle found");
+            loggerConsole.log("Obstacle found");
             return this;
         }
         Coordinates newCoordinates = new Coordinates(coordinates.x(), coordinates.y());
-        return new Rover(newCoordinates, this.getCurrentDirection(), this.planet, logger);
+        return new Rover(newCoordinates, this.getCurrentDirection(), this.planet, loggerConsole);
     }
 
     /**
      * Méthode pour lancer la connexion serveur
      */
     public void startRover(CancellationToken token, Rover rover) throws ExecutionException, InterruptedException {
-        Server server = new Server(this.logger);
+        server = new Server(this.loggerConsole);
         while (!token.isCancellationRequested()) {
             if (token.isCancellationRequested()) {
                 break;
@@ -105,7 +108,7 @@ public final class Rover implements IRover
      */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CancellationToken token = new CancellationToken();
-        Rover rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5), new Logger());
+        Rover rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5), new LoggerConsole());
         rover.startRover(token, rover);
     }
 
@@ -117,5 +120,12 @@ public final class Rover implements IRover
         return roverToCompare.getCurrentCoordinates().x() != getCurrentCoordinates().x()
                 || roverToCompare.getCurrentCoordinates().y() != getCurrentCoordinates().y()
                 || roverToCompare.getCurrentDirection() != getCurrentDirection();
+    }
+
+    public void shutdown() throws IOException {
+
+        server.tearDown();
+        System.out.println("Close server");
+
     }
 }

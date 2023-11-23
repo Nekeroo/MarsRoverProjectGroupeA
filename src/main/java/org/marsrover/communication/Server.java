@@ -1,7 +1,7 @@
 package org.marsrover.communication;
 
 import org.marsrover.config.Configuration;
-import org.marsrover.console.Logger;
+import org.marsrover.console.LoggerConsole;
 import org.marsrover.console.SocketConsole;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.Rover;
@@ -21,17 +21,17 @@ import java.util.concurrent.Executors;
 public class Server implements IMessageServer {
 
     private final ServerSocket server;
-    private final Logger logger;
+    private final LoggerConsole loggerConsole;
     private SocketConsole console;
     private Socket socketClient;
     private final ExecutorService executorService;
 
-    public Server(Logger logger) {
+    public Server(LoggerConsole loggerConsole) {
         try {
             this.server = new ServerSocket(Configuration.PORT_SERVER);
             this.socketClient = null;
             this.executorService = Executors.newFixedThreadPool(5);
-            this.logger = logger;
+            this.loggerConsole = loggerConsole;
         }
         catch (IOException e) {
             throw new RuntimeException(e);
@@ -100,7 +100,7 @@ public class Server implements IMessageServer {
     private void acceptClientSocketIfNull() throws IOException {
         if (socketClient == null) {
             socketClient = server.accept();
-            this.console = new SocketConsole(socketClient, logger);
+            this.console = new SocketConsole(socketClient, loggerConsole);
         }
     }
 
@@ -119,5 +119,9 @@ public class Server implements IMessageServer {
         String message = "X";
         console.writeLine(message);
         console.log("Server sent " + message);
+    }
+
+    public void tearDown() throws IOException {
+        server.close();
     }
 }

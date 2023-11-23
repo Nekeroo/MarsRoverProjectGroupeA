@@ -1,11 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 import org.marsrover.communication.Interpreter;
-import org.marsrover.console.Logger;
-import org.marsrover.planet.Obstacle;
-import org.marsrover.planet.Planet;
-import org.marsrover.planet.PlanetWithObstacle;
-import org.marsrover.planet.PlanetWithoutObstacles;
+import org.marsrover.console.LoggerConsole;
+import org.marsrover.planet.*;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.Rover;
 import org.marsrover.rover.roverCommands.IRoverCommand;
@@ -21,11 +18,9 @@ public class TestRoverController {
     private Interpreter interpreter;
     private IRover rover;
 
-    private Planet planet;
-
     @Before
     public void init() {
-        planet = new PlanetWithoutObstacles(5, 5);
+        IPlanet planet = new PlanetWithoutObstacles(5, 5);
         rover =  new RoverBuilder().looking(Direction.North)
                         .onPlanet(planet)
                         .build();
@@ -48,7 +43,7 @@ public class TestRoverController {
     public void testObstacleStopSequence() {
         List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(2, 2)));
 
-        rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles), new Logger());
+        rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(5,5,obstacles), new LoggerConsole());
         Interpreter interpreter = new Interpreter();
 
         List<IRoverCommand> commands = interpreter.mapStringToCommandList("DZZ");
@@ -100,7 +95,7 @@ public class TestRoverController {
     @Test
     public void testObstacleBackward() {
         List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(1, 1)));
-        rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles), new Logger());
+        rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(5,5,obstacles), new LoggerConsole());
         Interpreter interpreter = new Interpreter();
         IRoverCommand command = interpreter.mapStringToCommand("S");
 
