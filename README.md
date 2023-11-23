@@ -32,6 +32,10 @@ En effet, le MissionControl envoie un information (Donc la commande souhaitée) 
 
 Les principes d'Architecture Logicielle ont essayé d'être respecté au Maximum afin de répondre aux critères de Notation de notre Intervenant.
 
+Voici un schéma de fonctionnement entre nos différents Main :
+
+![Diagrammme entre les classes](src/main/resources/DiagrammeExécution.png)
+
 ## Exécution
 
 Si vous souhaitez testé notre application, vous avez deux possibilités :
@@ -49,3 +53,5 @@ Pour ceux qui ne souhaitent pas ouvrir le projet mais simplement utilisé une co
 ```bash
 mvn clean install test
 ```
+
+PS : Pour des raisons de conflits entre les ports, etc. Je vous invite à lancer les tests manuellement depuis un IDE un par un pour la partie Client / Server. En lançant directement la classe, cela provoquera une erreur. 

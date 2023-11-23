@@ -1,13 +1,14 @@
 import org.junit.Test;
 import org.marsrover.communication.Client;
 import org.marsrover.communication.Interpreter;
+import org.marsrover.communication.Repeater;
 import org.marsrover.config.CancellationToken;
 import org.marsrover.console.Logger;
 import org.marsrover.planet.Planet;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.Rover;
 import org.marsrover.rover.NetworkRover;
-import org.marsrover.rover.commands.IRoverCommand;
+import org.marsrover.rover.roverCommands.IRoverCommand;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 import utilities.RoverBuilder;
@@ -17,6 +18,11 @@ import java.util.concurrent.ExecutionException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+
+/**
+ * Classe de test pour le client et le serveur
+ * PS : Chaque test est à exécuter un par un afin d'éviter les conflits de port
+ */
 public class TestClientServer {
 
     private Rover roverSansReseau;
@@ -40,6 +46,10 @@ public class TestClientServer {
             } catch (ExecutionException | InterruptedException ignored) {
             }
         }).start();
+
+        Repeater repeater = new Repeater();
+
+        new Thread(repeater::startRepeater).start();
 
         Thread.sleep(1000);
         token.cancel();
@@ -68,6 +78,10 @@ public class TestClientServer {
             } catch (ExecutionException | InterruptedException ignored) {
             }
         }).start();
+
+        Repeater repeater = new Repeater();
+
+        new Thread(repeater::startRepeater).start();
 
         Thread.sleep(1000);
         token.cancel();

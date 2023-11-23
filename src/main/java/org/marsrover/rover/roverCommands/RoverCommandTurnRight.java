@@ -1,18 +1,18 @@
-package org.marsrover.rover.commands;
+package org.marsrover.rover.roverCommands;
 
 import org.marsrover.rover.IRover;
 
 /**
- * RoverCommandMoveBack implémente IRoverCommand.
+ * RoverCommandTurnRight implémente IRoverCommand.
  * Regroupe le nom de la commande et l'exécution à réaliser sur un objet IRover
  */
-public class RoverCommandMoveBack implements IRoverCommand {
+public class RoverCommandTurnRight implements IRoverCommand {
 
-    public final static String COMMAND = "S";
+    public final static String COMMAND = "D";
 
     @Override
     public IRover execute(IRover rover) {
-        rover = rover.moveBack();
+        rover = rover.turnRight();
         return rover;
     }
 
