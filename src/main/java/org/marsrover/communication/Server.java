@@ -42,42 +42,59 @@ public class Server implements IMessageServer {
     public CompletableFuture<IRover> listenAndSendResponse(Rover rover) {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                Rover tmpRover = rover;
-                Rover roverResult;
                 acceptClientSocketIfNull();
 
                 String data = console.readline();
                 console.log("Server read: " + data);
-
-                Interpreter interpreter = new Interpreter();
-                roverResult = null;
-
-                if (data.length() > 1){
-                    if (interpreter.isSequenceValid(List.of(data.split("")))){
-                        List<IRoverCommand> commands = interpreter.mapStringToCommandList(data);
-                        for (IRoverCommand command : commands){
-                            console.log("Commande exécutée : " + interpreter.mapCommandToString(command));
-                            roverResult = (Rover) command.execute(tmpRover);
-                            tmpRover = roverResult;
-                        }
-                    }
-                }
-                else if (interpreter.isSequenceValid(List.of(data))) {
-                    roverResult = (Rover) interpreter.mapStringToCommand(data).execute(tmpRover);
-                }
-                else {
-                    console.log("Commande inconnue trouvée dans la séquence");
-                }
-
-                if (!rover.equals(roverResult))
-                    sendErrorToClient();
-                else
-                    sendResponseToClient(roverResult);
-                return roverResult == null ? rover : roverResult;
+                return processInputData(rover, data);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }, executorService);
+    }
+
+    private Rover processInputData(Rover rover, String data) throws IOException {
+        Rover tmpRover = rover;
+        Interpreter interpreter = new Interpreter();
+        Rover roverResult = null;
+
+        if (data.length() > 1)
+            roverResult = processCommandSequence(data, interpreter, roverResult, tmpRover);
+        else
+            roverResult = processSingleCommand(data, interpreter, roverResult, tmpRover);
+
+        SendMessageToClient(rover, roverResult);
+        return roverResult == null ? rover : roverResult;
+    }
+
+    private void SendMessageToClient(Rover rover, Rover roverResult) {
+        if (!rover.equals(roverResult))
+            sendErrorToClient();
+        else
+            sendResponseToClient(roverResult);
+    }
+
+    private Rover processCommandSequence(String data, Interpreter interpreter, Rover roverResult, Rover tmpRover) {
+        List<String> commandSequence = List.of(data.split(""));
+        if (interpreter.isSequenceValid(commandSequence)){
+            List<IRoverCommand> commands = interpreter.mapStringToCommandList(data);
+            for (IRoverCommand command : commands){
+                console.log("Commande exécutée : " + interpreter.mapCommandToString(command));
+                roverResult = (Rover) command.execute(tmpRover);
+                tmpRover = roverResult;
+            }
+        }
+        return roverResult;
+    }
+
+    private Rover processSingleCommand(String data, Interpreter interpreter, Rover roverResult, Rover tmpRover) {
+        if (interpreter.isSequenceValid(List.of(data))) {
+            roverResult = (Rover) interpreter.mapStringToCommand(data).execute(tmpRover);
+        }
+        else {
+            console.log("Commande inconnue trouvée dans la séquence");
+        }
+        return roverResult;
     }
 
     private void acceptClientSocketIfNull() throws IOException {
@@ -87,7 +104,7 @@ public class Server implements IMessageServer {
         }
     }
 
-    private void sendResponseToClient(IRover roverResult) throws IOException {
+    private void sendResponseToClient(IRover roverResult) {
         String x = String.valueOf(roverResult.getCurrentCoordinates().x());
         String y = String.valueOf(roverResult.getCurrentCoordinates().y());
         String direction = roverResult.getCurrentDirection().toString();
@@ -98,7 +115,7 @@ public class Server implements IMessageServer {
         console.log("Server sent " + message);
     }
 
-    private void sendErrorToClient() throws IOException {
+    private void sendErrorToClient() {
         String message = "X";
         console.writeLine(message);
         console.log("Server sent " + message);
