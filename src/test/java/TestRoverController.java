@@ -7,7 +7,7 @@ import org.marsrover.planet.Planet;
 import org.marsrover.planet.PlanetWithObstacle;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.IRover;
-import org.marsrover.rover.LocalRover;
+import org.marsrover.rover.Rover;
 import org.marsrover.rover.commands.IRoverCommand;
 import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
@@ -17,7 +17,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestLocalRoverController {
+public class TestRoverController {
     private Interpreter interpreter;
     private IRover rover;
 
@@ -48,7 +48,7 @@ public class TestLocalRoverController {
     public void testObstacleStopSequence() {
         List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(2, 2)));
 
-        rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles), new Logger());
+        rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles), new Logger());
         Interpreter interpreter = new Interpreter();
 
         List<IRoverCommand> commands = interpreter.mapStringToCommandList("DZZ");
@@ -100,7 +100,7 @@ public class TestLocalRoverController {
     @Test
     public void testObstacleBackward() {
         List<Obstacle> obstacles = List.of(new Obstacle(new Coordinates(1, 1)));
-        rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles), new Logger());
+        rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithObstacle(planet,obstacles), new Logger());
         Interpreter interpreter = new Interpreter();
         IRoverCommand command = interpreter.mapStringToCommand("S");
 

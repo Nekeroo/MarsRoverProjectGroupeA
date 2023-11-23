@@ -12,13 +12,13 @@ import org.marsrover.topologie.Position;
 import java.util.concurrent.ExecutionException;
 
 // Objet Valeur
-public final class LocalRover implements IRover
+public final class Rover implements IRover
 {
     private final Logger logger;
     private final Position position;
     private final Planet planet;
 
-    public LocalRover(Coordinates coordinates, Direction direction, Planet planet, Logger logger) {
+    public Rover(Coordinates coordinates, Direction direction, Planet planet, Logger logger) {
         Coordinates canonisedCoordinates = planet.canonise(coordinates);
         this.position = new Position(canonisedCoordinates, direction);
         this.planet = planet;
@@ -38,28 +38,28 @@ public final class LocalRover implements IRover
 
     /**
      * Méthode de déplacement (Tourner Droite) pour le rover
-     * @return une nouvelle installe de LocalRover
+     * @return une nouvelle installe de Rover
      */
     @Override
-    public LocalRover turnRight() {
-        return new LocalRover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionFromClockwise(), this.planet, logger) ;
+    public Rover turnRight() {
+        return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionFromClockwise(), this.planet, logger) ;
     }
 
     /**
      * Méthode de déplacement (Tourner Gauche) pour le rover
-     * @return une nouvelle installe de LocalRover
+     * @return une nouvelle installe de Rover
      */
     @Override
-    public LocalRover turnLeft() {
-        return new LocalRover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionCounterClockwise(), this.planet, logger) ;
+    public Rover turnLeft() {
+        return new Rover(this.getCurrentCoordinates(), this.getCurrentDirection().getNextDirectionCounterClockwise(), this.planet, logger) ;
     }
 
     /**
      * Méthode de déplacement (Avancer) pour le rover
-     * @return une nouvelle installe de LocalRover
+     * @return une nouvelle installe de Rover
      */
     @Override
-    public LocalRover moveForward() {
+    public Rover moveForward() {
 
         Coordinates coordinates = this.getCurrentCoordinates().addCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
         if (planet.isObstaclesAt(coordinates))
@@ -68,15 +68,15 @@ public final class LocalRover implements IRover
             return this;
         }
         Coordinates newCoordinates = new Coordinates(coordinates.x(), coordinates.y());
-        return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet, logger);
+        return new Rover(newCoordinates, this.getCurrentDirection(), this.planet, logger);
     }
 
     /**
      * Méthode de déplacement (Reculer) pour le rover
-     * @return une nouvelle installe de LocalRover
+     * @return une nouvelle installe de Rover
      */
     @Override
-    public LocalRover moveBack() {
+    public Rover moveBack() {
         Coordinates coordinates = this.getCurrentCoordinates().subCoordinates(this.getCurrentCoordinates(), this.getCurrentDirection());
         if (planet.isObstaclesAt(coordinates))
         {
@@ -84,19 +84,19 @@ public final class LocalRover implements IRover
             return this;
         }
         Coordinates newCoordinates = new Coordinates(coordinates.x(), coordinates.y());
-        return new LocalRover(newCoordinates, this.getCurrentDirection(), this.planet, logger);
+        return new Rover(newCoordinates, this.getCurrentDirection(), this.planet, logger);
     }
 
     /**
      * Méthode pour lancer la connexion serveur
      */
-    public void startRover(CancellationToken token, LocalRover rover) throws ExecutionException, InterruptedException {
+    public void startRover(CancellationToken token, Rover rover) throws ExecutionException, InterruptedException {
         Server server = new Server(this.logger);
         while (!token.isCancellationRequested()) {
             if (token.isCancellationRequested()) {
                 break;
             }
-            rover = (LocalRover) server.listenAndSendResponse(rover).get();
+            rover = (Rover) server.listenAndSendResponse(rover).get();
         }
     }
 
@@ -105,13 +105,13 @@ public final class LocalRover implements IRover
      */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CancellationToken token = new CancellationToken();
-        LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5), new Logger());
+        Rover rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5), new Logger());
         rover.startRover(token, rover);
     }
 
     @Override
     public boolean equals(Object o){
-        if (!(o instanceof LocalRover roverToCompare))
+        if (!(o instanceof Rover roverToCompare))
             return false;
 
         return roverToCompare.getCurrentCoordinates().x() != getCurrentCoordinates().x()

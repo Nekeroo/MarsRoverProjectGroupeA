@@ -2,7 +2,7 @@ package org.marsrover.topologie;
 
 
 /**
- * Classe Position prenant en paramètre un objet Coordinates et un objet Direction. Utilisé pour la création du LocalRover
+ * Classe Position prenant en paramètre un objet Coordinates et un objet Direction. Utilisé pour la création du Rover
  * @param coordinates
  * @param direction
  */

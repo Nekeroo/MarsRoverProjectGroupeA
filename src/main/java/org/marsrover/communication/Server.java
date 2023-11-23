@@ -4,7 +4,7 @@ import org.marsrover.config.Configuration;
 import org.marsrover.console.Logger;
 import org.marsrover.console.SocketConsole;
 import org.marsrover.rover.IRover;
-import org.marsrover.rover.LocalRover;
+import org.marsrover.rover.Rover;
 import org.marsrover.rover.commands.IRoverCommand;
 
 import java.io.*;
@@ -39,11 +39,11 @@ public class Server implements IMessageServer {
     }
 
     @Override
-    public CompletableFuture<IRover> listenAndSendResponse(LocalRover rover) {
+    public CompletableFuture<IRover> listenAndSendResponse(Rover rover) {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                LocalRover tmpRover = rover;
-                LocalRover roverResult;
+                Rover tmpRover = rover;
+                Rover roverResult;
                 acceptClientSocketIfNull();
 
                 String data = console.readline();
@@ -56,12 +56,12 @@ public class Server implements IMessageServer {
                     List<IRoverCommand> commands = interpreter.mapStringToCommandList(data);
                     for (IRoverCommand command : commands){
                         console.log("Commande exécutée : " + interpreter.mapCommandToString(command));
-                        roverResult = (LocalRover) command.execute(tmpRover);
+                        roverResult = (Rover) command.execute(tmpRover);
                         tmpRover = roverResult;
                     }
                 }
                 else if (interpreter.mapStringToCommand(data) != null) {
-                    roverResult = (LocalRover) interpreter.mapStringToCommand(data).execute(tmpRover);
+                    roverResult = (Rover) interpreter.mapStringToCommand(data).execute(tmpRover);
                 }
 
                 if (!rover.equals(roverResult))

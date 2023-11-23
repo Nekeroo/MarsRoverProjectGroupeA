@@ -19,7 +19,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class TestParametricLocalRoverController {
+public class TestParametricRoverController {
 
     private final int xFinal;
 
@@ -42,7 +42,7 @@ public class TestParametricLocalRoverController {
         });
     }
 
-    public TestParametricLocalRoverController(int xFinal, int yFinal, Direction directionFinal, String sequenceCommands, Planet planet) {
+    public TestParametricRoverController(int xFinal, int yFinal, Direction directionFinal, String sequenceCommands, Planet planet) {
         this.xFinal = xFinal;
         this.yFinal = yFinal;
         this.directionFinal = directionFinal;

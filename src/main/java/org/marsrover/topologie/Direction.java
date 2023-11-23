@@ -1,7 +1,7 @@
 package org.marsrover.topologie;
 
 /**
- * Classe de Direction avec 4 constantes (North, South, East, West) utilisées pour la direction du LocalRover
+ * Classe de Direction avec 4 constantes (North, South, East, West) utilisées pour la direction du Rover
  * @param name
  * @param xVector
  * @param yVector

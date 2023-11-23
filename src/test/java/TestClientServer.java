@@ -5,7 +5,7 @@ import org.marsrover.config.CancellationToken;
 import org.marsrover.console.Logger;
 import org.marsrover.planet.Planet;
 import org.marsrover.planet.PlanetWithoutObstacles;
-import org.marsrover.rover.LocalRover;
+import org.marsrover.rover.Rover;
 import org.marsrover.rover.NetworkRover;
 import org.marsrover.rover.commands.IRoverCommand;
 import org.marsrover.topologie.Coordinates;
@@ -19,12 +19,12 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class TestClientServer {
 
-    private LocalRover roverSansReseau;
+    private Rover roverSansReseau;
 
     @Test
     public void moveForward() throws InterruptedException {
         CancellationToken token = new CancellationToken();
-        LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5), new Logger());
+        Rover rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5), new Logger());
 
         Planet planet = new PlanetWithoutObstacles(5, 5);
         roverSansReseau = new RoverBuilder().looking(Direction.North)
@@ -32,7 +32,7 @@ public class TestClientServer {
                 .build();
         Interpreter interpreter = new Interpreter();
         IRoverCommand command = interpreter.mapStringToCommand("Z");
-        roverSansReseau = (LocalRover) command.execute(roverSansReseau);
+        roverSansReseau = (Rover) command.execute(roverSansReseau);
 
         new Thread(() -> {
             try {
@@ -60,7 +60,7 @@ public class TestClientServer {
     @Test
     public void moveSequence() throws InterruptedException {
         CancellationToken token = new CancellationToken();
-        LocalRover rover = new LocalRover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5), new Logger());
+        Rover rover = new Rover(new Coordinates(1, 2), Direction.North, new PlanetWithoutObstacles(5, 5), new Logger());
 
         new Thread(() -> {
             try {

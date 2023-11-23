@@ -4,7 +4,7 @@ import org.marsrover.topologie.Coordinates;
 import org.marsrover.topologie.Direction;
 
 /**
- * Interface IRover est implémentée dans LocalRover et NetworkRover.
+ * Interface IRover est implémentée dans Rover et NetworkRover.
  */
 public interface IRover {
 
