@@ -1,4 +1,4 @@
-package org.marsrover.topologie;
+package org.marsrover.topology;
 
 /**
  * Classe de Direction avec 4 constantes (North, South, East, West) utilisées pour la direction du Rover

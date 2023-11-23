@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import org.marsrover.planet.PlanetWithoutObstacles;
-import org.marsrover.topologie.Direction;
+import org.marsrover.topology.Direction;
 import org.marsrover.rover.Rover;
 import utilities.RoverBuilder;
 

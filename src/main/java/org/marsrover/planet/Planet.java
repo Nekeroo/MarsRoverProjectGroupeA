@@ -1,6 +1,6 @@
 package org.marsrover.planet;
 
-import org.marsrover.topologie.Coordinates;
+import org.marsrover.topology.Coordinates;
 
 /**
  * Classe Abstraite Planet regroupe toutes les types de planètes (With / Without Obstacle)

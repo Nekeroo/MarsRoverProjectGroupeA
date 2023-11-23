@@ -8,8 +8,8 @@ import org.marsrover.planet.PlanetWithObstacle;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.roverCommands.IRoverCommand;
-import org.marsrover.topologie.Coordinates;
-import org.marsrover.topologie.Direction;
+import org.marsrover.topology.Coordinates;
+import org.marsrover.topology.Direction;
 import utilities.RoverBuilder;
 
 import java.util.Arrays;

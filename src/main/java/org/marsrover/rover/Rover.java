@@ -5,9 +5,9 @@ import org.marsrover.console.Logger;
 import org.marsrover.communication.Server;
 import org.marsrover.planet.Planet;
 import org.marsrover.planet.PlanetWithoutObstacles;
-import org.marsrover.topologie.Coordinates;
-import org.marsrover.topologie.Direction;
-import org.marsrover.topologie.Position;
+import org.marsrover.topology.Coordinates;
+import org.marsrover.topology.Direction;
+import org.marsrover.topology.Position;
 
 import java.util.concurrent.ExecutionException;
 

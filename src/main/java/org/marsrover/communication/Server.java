@@ -5,7 +5,7 @@ import org.marsrover.console.Logger;
 import org.marsrover.console.SocketConsole;
 import org.marsrover.rover.IRover;
 import org.marsrover.rover.Rover;
-import org.marsrover.rover.commands.IRoverCommand;
+import org.marsrover.rover.roverCommands.IRoverCommand;
 
 import java.io.*;
 import java.net.ServerSocket;

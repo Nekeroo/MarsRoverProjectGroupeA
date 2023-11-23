@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Test;
 import org.marsrover.communication.Client;
 import org.marsrover.communication.Interpreter;
@@ -9,8 +10,8 @@ import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.Rover;
 import org.marsrover.rover.NetworkRover;
 import org.marsrover.rover.roverCommands.IRoverCommand;
-import org.marsrover.topologie.Coordinates;
-import org.marsrover.topologie.Direction;
+import org.marsrover.topology.Coordinates;
+import org.marsrover.topology.Direction;
 import utilities.RoverBuilder;
 
 import java.util.concurrent.ExecutionException;
@@ -26,6 +27,11 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class TestClientServer {
 
     private Rover roverSansReseau;
+
+    @After
+    public void tearDown() {
+
+    }
 
     @Test
     public void moveForward() throws InterruptedException {

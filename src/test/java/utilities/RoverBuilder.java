@@ -4,8 +4,8 @@ import org.marsrover.console.Logger;
 import org.marsrover.planet.Planet;
 import org.marsrover.planet.PlanetWithoutObstacles;
 import org.marsrover.rover.Rover;
-import org.marsrover.topologie.Coordinates;
-import org.marsrover.topologie.Direction;
+import org.marsrover.topology.Coordinates;
+import org.marsrover.topology.Direction;
 
 public class RoverBuilder {
 

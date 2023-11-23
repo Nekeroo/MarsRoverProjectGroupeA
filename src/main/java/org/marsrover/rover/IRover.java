@@ -1,7 +1,7 @@
 package org.marsrover.rover;
 
-import org.marsrover.topologie.Coordinates;
-import org.marsrover.topologie.Direction;
+import org.marsrover.topology.Coordinates;
+import org.marsrover.topology.Direction;
 
 /**
  * Interface IRover est implémentée dans Rover et NetworkRover.

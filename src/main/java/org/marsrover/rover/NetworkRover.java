@@ -1,8 +1,8 @@
 package org.marsrover.rover;
 
-import org.marsrover.topologie.Coordinates;
-import org.marsrover.topologie.Direction;
-import org.marsrover.topologie.Position;
+import org.marsrover.topology.Coordinates;
+import org.marsrover.topology.Direction;
+import org.marsrover.topology.Position;
 
 /**
  * NetworkRover est une classe utilisée côté Client afin de transformer les informations reçus d'un Rover sous la forma

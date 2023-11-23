@@ -1,6 +1,6 @@
 package org.marsrover.planet;
 
-import org.marsrover.topologie.Coordinates;
+import org.marsrover.topology.Coordinates;
 
 import java.util.List;
 

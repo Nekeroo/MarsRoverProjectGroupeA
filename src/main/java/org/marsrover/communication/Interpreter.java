@@ -2,9 +2,9 @@ package org.marsrover.communication;
 
 import org.marsrover.rover.NetworkRover;
 import org.marsrover.rover.roverCommands.*;
-import org.marsrover.topologie.Coordinates;
-import org.marsrover.topologie.Direction;
-import org.marsrover.topologie.Position;
+import org.marsrover.topology.Coordinates;
+import org.marsrover.topology.Direction;
+import org.marsrover.topology.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,4 +77,5 @@ public class Interpreter {
         }
         return true;
     }
+
 }
